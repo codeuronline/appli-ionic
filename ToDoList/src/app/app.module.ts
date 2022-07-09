@@ -8,9 +8,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAnTgbXLF9OMvNoV_wbnguvVnx2T-e3c2o",
   authDomain: "ionic-appli-project.firebaseapp.com",
+  databaseURL: "https://ionic-appli-project-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "ionic-appli-project",
   storageBucket: "ionic-appli-project.appspot.com",
   messagingSenderId: "386540319946",
