@@ -1,20 +1,51 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Accueil
+      <div class="ion-text-center">
+      Objets trouvés
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Objets trouvés</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content [fullscreen]="false">
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <div id="bubble">
+        <ion-icon name="chatbubbles-outline" color="primary"></ion-icon>
+    </div>
+    </ion-card>
+    <h2>Effectué une Déclaration</h2> 
+    <ion-card side="start">
+      <ion-item routerLink="/lost">
+        <div id="reverseRed">
+          <ion-button color="danger-outline" > J'ai perdu un objet</ion-button>
+        </div>
+      </ion-item>
+    </ion-card>
+    <ion-card side="start">
+      <ion-item routerLink="/found">
+      <div id="reverseGreen">
+        <ion-button color="success-outline"> J'ai trouvé un objet</ion-button>
+    </div>
+  </ion-item>
+    </ion-card>
+    <h2>Ou accédez aux liste d'objets</h2>
+    <ion-item>
+      <ion-card slot="start">
+        <ion-item routerLink="/lostlist">
+        <ion-button color="danger">
+          <ion-icon name="sad"></ion-icon> Objets perdus  
+        </ion-button>
+        </ion-item>
+      </ion-card>
+    <ion-card slot="end">
+      <ion-item routerLink="/foundlist">
+      <ion-button color="success">
+        <ion-icon name="happy"></ion-icon>Objet trouvés
+      </ion-button>
+      </ion-item>
+    </ion-card>
+    </ion-item>
   </div>
 </ion-content>

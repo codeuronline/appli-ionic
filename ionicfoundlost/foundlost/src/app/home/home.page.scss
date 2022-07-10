@@ -22,6 +22,28 @@
   margin: 0;
 }
 
+
 #container a {
   text-decoration: none;
+}
+
+#bubble ion-icon {
+  font-size: 240px; //Preferred size here
+}
+#reverseGreen ion-button {
+  padding:0px;
+  color: green;
+  text-transform: uppercase;
+  border: 2px solid green;
+  border-radius: 15px;
+}
+#reverseRed ion-button {
+  color: red;
+  text-transform:uppercase;
+  border: 2px solid red;
+  border-radius: 15px;
+}
+ion-button {
+  padding:2px 10px;
+  border-radius: 15px;
 }
