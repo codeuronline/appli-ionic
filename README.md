@@ -1,4 +1,4 @@
-# application mobile 
+# Application mobile 
 # plateforme developpement : Ionic
 # back : Server APACHE/MYSQL(foundlost) ET SERVER IONIC/FIREBASE(ToDoList)
 # API : PHP(foundlost) ET JAVASCRIPT (Navigation/ToDoList)
