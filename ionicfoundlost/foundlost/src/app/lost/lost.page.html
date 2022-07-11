@@ -1,14 +1,45 @@
-<ion-header>
+<ion-header [translucent]="false">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil"></ion-back-button>
     </ion-buttons>
-
     <ion-title>J'AI PERDU</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    
+    <ion-item lines="full">
+      <ion-label position="floating" >Descr.</ion-label>
+      <ion-input formControlName="description" type="text" required></ion-input>
+    </ion-item>
+    
+    <ion-item lines="full">
+      <ion-label position="floating">Date</ion-label>
+      <ion-datetime (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
+    </ion-item>
 
+    <ion-item lines="full">
+      <ion-label position="floating">Lieu</ion-label>
+      <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label name="email" position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">ENVOYER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

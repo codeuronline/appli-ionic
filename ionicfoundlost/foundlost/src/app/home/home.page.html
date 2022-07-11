@@ -15,7 +15,7 @@
         <ion-icon name="chatbubbles-outline" color="primary"></ion-icon>
     </div>
     </ion-card>
-    <h2>Effectué une Déclaration</h2> 
+    <ion-title class="ion-text-left">Effectué une Déclaration</ion-title> 
     <ion-card side="start">
       <ion-item routerLink="/lost">
         <div id="reverseRed">
@@ -30,18 +30,18 @@
     </div>
   </ion-item>
     </ion-card>
-    <h2>Ou accédez aux liste d'objets</h2>
+    <ion-title class="ion-text-left"> Ou accédez aux liste d'objets</ion-title>
     <ion-item>
-      <ion-card slot="start">
-        <ion-item routerLink="/lostlist">
-        <ion-button color="danger">
-          <ion-icon name="sad"></ion-icon> Objets perdus  
-        </ion-button>
+    <ion-card slot="start" class="ion-text-left">
+        <ion-item routerLink="/lostlist" class="ion-text-left">
+            <ion-button color="danger">
+              <ion-icon name="sad" class="ion-text-left"></ion-icon> Objets perdus  
+            </ion-button>
         </ion-item>
       </ion-card>
     <ion-card slot="end">
       <ion-item routerLink="/foundlist">
-      <ion-button color="success">
+      <ion-button color="success" >
         <ion-icon name="happy"></ion-icon>Objet trouvés
       </ion-button>
       </ion-item>

@@ -3,12 +3,73 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil"></ion-back-button>
     </ion-buttons>
-
     <ion-title>J'AI TROUVE</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <form >
+    <ion-item lines="full">
+      <ion-label position="floating" >Descr.</ion-label>
+      <ion-input formControlName="description" type="text" required placeholder="Description de l'objet"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Date</ion-label>
+      <ion-input formControlName="date" type="date" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Lieu</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
 
-</ion-content>
+    <ion-item lines="full">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block">ENVOYER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+<!-- </ion-content>
+<ion-card-content>
+      <ion-item>
+        <ion-label>Descr.</ion-label>
+        <ion-input [(ngModel)]="data.description" name="description" placeholder="Description de l'objet"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-input type="text" [(ngModel)]="data.date" name="date" placeholder="Date de perte"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lieu</ion-label>
+        <ion-input type="text" [(ngModel)]="data.location" name="location" placeholder="lieu de perte"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input type="text" [(ngModel)]="data.firstname" name="firstname" placeholder="Votre Prénom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input type="text" [(ngModel)]="data.lastname" name="lastname" placeholder="Votre nom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="data.email" name="email" placeholder="Votre Email"></ion-input>
+      </ion-item>
+      <ion-card expand="block">
+        <ion-button color="danger" (click)="submitForm(data)" type="submit" block>ENVOYER</ion-button>
+      </ion-card>
+</ion-card-content>
+ -->
