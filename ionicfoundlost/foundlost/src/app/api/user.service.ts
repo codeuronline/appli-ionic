@@ -8,6 +8,7 @@ export class UserService {
   // On définit une propriété de type HttpHeaders qui représente les options de configuration
   // d’un entête d'une requête http (la requête vers le serveur)
   headers: HttpHeaders;
+  create: 'http://localhost/ionicserver/manage-data.php?key=create';
   
   constructor(public http: HttpClient) {
     // On instancie le service
@@ -20,7 +21,7 @@ export class UserService {
   }
   // On définit la méthode qui envoie les données du formulaire au serveur backend.
   submitForm(data) {
-    return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data);
+    return this.http.post(this.create, data,{responseType: 'text'});
   }
 }
 
