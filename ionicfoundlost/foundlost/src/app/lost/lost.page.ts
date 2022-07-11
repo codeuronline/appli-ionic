@@ -26,8 +26,8 @@ export class LostPage implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       description: '',
-      location: '',
       status: 0,
+      location: '',
       date: '',
       firstname: '',
       lastname: '',
@@ -52,7 +52,8 @@ export class LostPage implements OnInit {
     //     );
    
     console.log(formObj);
-    this.apiService.submitForm(formObj).
+    console.log(serializedForm);
+    this.apiService.submitForm(serializedForm).
       subscribe(
         (res) => {console.log("SUCCES ===", res);
        
