@@ -6,21 +6,17 @@
     <ion-title>J'AI TROUVE</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>>
-    
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item lines="full">
       <ion-label position="floating" >Descr.</ion-label>
       <ion-input formControlName="description" type="text" required></ion-input>
     </ion-item>
-    
     <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
       <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
     </ion-item>
-
-    <ion-item lines="full">
+   <ion-item lines="full">
       <ion-label position="floating">Lieu</ion-label>
       <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
     </ion-item>
