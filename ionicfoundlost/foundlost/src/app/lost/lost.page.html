@@ -17,7 +17,7 @@
     
     <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
-      <ion-datetime (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
+      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">
