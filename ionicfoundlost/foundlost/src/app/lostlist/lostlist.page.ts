@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lostlist.page.scss'],
 })
 export class LostlistPage implements OnInit {
-
-  constructor() { }
+  // Créer deux propriétés
+  // URL du serveur backend
+  bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
+  // Un tableau
+  entryData = [];
+  constructor(public http: HttpClient) {
+    this.getEntry();
+  }
 
   ngOnInit() {
   }
-
+  getEntry() {
+    this.readAPI(this.bdUrl).subscribe(data => {
+      console.log(data);
+      data = JSON.parse(JSON.stringify(data))
+      for (let i = 0; i < Object.keys(data).length; i++) {
+        this.entryData[i] = {
+          "id": data[i].id_object,
+          "status": data[i].status,
+          "description": data[i].description,
+          "date": data[i].date,
+          "location": data[i].location,
+          "firstname": data[i].firstname,
+          "lastname": data[i].lastname,
+          "email": data[i].email
+        };
+      } // fin boucle for
+    }); // fin subscribe 
+  }
+  readAPI(URL: string) {
+    return this.http.get(URL);
+  }
+  see(data) { }
 }
