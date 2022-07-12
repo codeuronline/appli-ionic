@@ -5,9 +5,9 @@ import { LostPage } from './lost.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: LostPage
+    path: '', component: LostPage
   }
+  
 ];
 
 @NgModule({

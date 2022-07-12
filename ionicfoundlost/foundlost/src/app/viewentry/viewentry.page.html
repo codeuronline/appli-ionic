@@ -1,9 +1,62 @@
-<ion-header>
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>viewentry</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Accueil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>OBJET {{entityData.id_object}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-item side="start">
+      <h2>{{ entityData.description }}</h2>
+    </ion-item>
+    <ion-item side="end" class="success">
+      <ion-toggle *ngIf="entityData.status==1" >trouvé</ion-toggle>
+      <ion-toggle *ngIf="entityData.status==0" >perdu</ion-toggle>
 
+    </ion-item>
+
+  </ion-card>
+  <!-- <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    
+    <ion-item>
+      <ion-item lines="start">
+      <ion-label position="floating" >Descr.</ion-label>
+      <ion-input formControlName="description" type="text" required></ion-input>
+    </ion-item>
+    <ion-item line="status">
+      <ion-label>status</ion-label>
+      <ion-toggle *ngIf="entityData==1" color="success"></ion-toggle>
+      </ion-item>
+  </ion-item>
+    
+    <ion-item lines="full">
+      <ion-label position="floating">Date</ion-label>
+      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Lieu</ion-label>
+      <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label name="email" position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">ENVOYER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form> -->
 </ion-content>
