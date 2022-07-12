@@ -16,7 +16,7 @@ export class FoundPage implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       description: '',
-      status: this.defaultValue,
+      status: 1,
       location: '',
       date: '',
       firstname: '',

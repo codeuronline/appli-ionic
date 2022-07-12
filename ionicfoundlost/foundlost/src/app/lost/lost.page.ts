@@ -16,7 +16,7 @@ export class LostPage implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       description: '',
-      status: this.defaultValue,
+      status: 0,
       location: '',
       date: '',
       firstname: '',
