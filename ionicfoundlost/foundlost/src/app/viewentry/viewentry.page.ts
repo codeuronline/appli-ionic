@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute}from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
+import { NavController, NavParams } from '@ionic/angular';
 
 
 
@@ -13,13 +14,13 @@ import { ActivatedRoute}from '@angular/router'
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  id_object = this.activatedRouter.snapshot.paramMap.get('id_object');
+  id = this.activatedRouter.snapshot.paramMap.get('id');
 
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=id&id=";
   oneData = [];
   entryData = [];    
-  constructor(private activatedRouter: ActivatedRoute, public http: HttpClient) {
-    console.log(this.id_object);
+  constructor(private NavController: NavController,private NavParams: NavParams,private activatedRouter: ActivatedRoute, public http: HttpClient, r,) {
+    console.log(this.id);
     this.getEntry();
   }
   ngOnInit() {
@@ -50,7 +51,7 @@ export class ViewentryPage implements OnInit {
     }
 
     readAPI(URL: string) {
-      return this.http.get(URL + this.activatedRouter.snapshot.paramMap.get('id_object'));
+      return this.http.get(URL);
   }
 }
 
