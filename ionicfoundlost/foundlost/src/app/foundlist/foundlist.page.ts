@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class FoundlistPage implements OnInit {
 // Créer deux propriétés
   // URL du serveur backend
-  bdUrl = "http://localhost/ionicserver/retrieve-data?key=found";
+  bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=found";
   // Un tableau
   entryData = [];
   constructor(public http: HttpClient) {
