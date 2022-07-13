@@ -9,7 +9,7 @@ const routes: Routes = [
     component: LostlistPage
   },
   {
-    path: 'viewentry',
+    path: 'viewentry/:id',
     component: ViewentryPage
   }
 ];

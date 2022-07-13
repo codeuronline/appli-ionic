@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-lostlist',
   templateUrl: './lostlist.page.html',
@@ -12,7 +12,7 @@ export class LostlistPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   // Un tableau
   entryData = [];
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,private navCtrl: NavController) {
     this.getEntry();
   }
 
@@ -39,5 +39,7 @@ export class LostlistPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-  see(data) { }
+  goToObject() {
+    this.navCtrl.navigateForward("viewentry/10");
+  }
 }

@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: FoundlistPage
   }, {
-    path: 'viewentry',
+    path: 'viewentry/:id',
     component: ViewentryPage
   }
 ];

@@ -39,5 +39,6 @@ export class FoundlistPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-  see(data){}
+
+  goToObject(){}
 }
