@@ -3,15 +3,21 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/foundlist" text="Retour"></ion-back-button>
       <ion-back-button defaultHref="/lostlist" text="Retour"></ion-back-button>
+      <ion-button slot="end">
+        <ion-icon name="trash"></ion-icon> 
+      </ion-button>
     </ion-buttons>
-    <ion-title>OBJET N°:{{id_object}} </ion-title>
+    <ion-title>
+      OBJET N°:{{id_object}}
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form action="">
   <ion-card>
-    <ion-item *ngIf="" >
+    <ion-item>
       <ion-label (click)="mytoggle.checked = !mytoggle.checked">status</ion-label>
         <ion-toggle #mytoggle></ion-toggle>
        </ion-item><ion-item side="lines">
@@ -25,22 +31,18 @@
     <ion-item side="lines">
       <ion-label position="floating"></ion-label>
       <ion-input>Nom</ion-input>
-      <ion-item side="lines">
-        <ion-label position="floating"></ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item side="lines">
+    </ion-item>
+    <ion-item side="lines">
         <ion-label position="floating"></ion-label>
         <ion-input>Prénom</ion-input>
-      </ion-item>
-      <ion-item side="lines">
-        <ion-label position="floating"></ion-label>
-        <ion-input>Email</ion-input>
-      </ion-item>
-    </ion-item><ion-item side="lines">
-      <h2>hello</h2>
     </ion-item>
-    
+    <ion-item side="lines">
+      <ion-label position="floating"></ion-label>
+      <ion-input>Email</ion-input>
+    </ion-item>
+    <ion-item side="full">
+      <ion-button type="submit">Modifier</ion-button>
+    </ion-item>
   </ion-card>
 </form>
 </ion-content>
