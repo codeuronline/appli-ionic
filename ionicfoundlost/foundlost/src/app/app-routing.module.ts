@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,24 +13,35 @@ const routes: Routes = [
   },
   {
     path: 'found',
-    loadChildren: () => import('./found/found.module').then( m => m.FoundPageModule)
+    loadChildren: () => import('./found/found.module').then(m => m.FoundPageModule)
+
   },
   {
     path: 'lost',
-    loadChildren: () => import('./lost/lost.module').then( m => m.LostPageModule)
+    loadChildren: () => import('./lost/lost.module').then(m => m.LostPageModule)
   },
   {
-    path: 'viewentry',
-    loadChildren: () => import('./viewentry/viewentry.module').then( m => m.ViewentryPageModule)
+    path: 'viewentry/:id',
+    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
   },
   {
     path: 'foundlist',
-    loadChildren: () => import('./foundlist/foundlist.module').then( m => m.FoundlistPageModule)
+    loadChildren: () => import('./foundlist/foundlist.module').then(m => m.FoundlistPageModule)
   },
   {
     path: 'lostlist',
-    loadChildren: () => import('./lostlist/lostlist.module').then( m => m.LostlistPageModule)
+    loadChildren: () => import('./lostlist/lostlist.module').then(m => m.LostlistPageModule)
   },
+  // {
+  //   path: 'lostlist/viewentry/:id',
+  //   loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
+  //   pathMatch: 'prefix',
+  // },
+  // {
+  //   path: 'foundlist/viewentry/:id',
+  //   loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
+  //   pathMatch: 'prefix',
+  // },
 ];
 
 @NgModule({

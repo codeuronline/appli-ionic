@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./foundlist.page.scss'],
 })
 export class FoundlistPage implements OnInit {
+  id_object = null;
 // Créer deux propriétés
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=found";
@@ -24,7 +25,7 @@ export class FoundlistPage implements OnInit {
       data = JSON.parse(JSON.stringify(data));   
       for (let i = 0; i < Object.keys(data).length; i++) {
         this.entryData[i] = {
-          "id": data[i].id_object,
+          "id_object": data[i].id_object,
           "status": data[i].status,
           "description": data[i].description,
           "date": data[i].date,

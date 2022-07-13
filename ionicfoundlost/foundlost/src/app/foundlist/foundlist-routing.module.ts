@@ -4,12 +4,14 @@ import { ViewentryPage } from '../viewentry/viewentry.page';
 import { FoundlistPage } from './foundlist.page';
 
 const routes: Routes = [
+   {
+     path: '',
+     component: FoundlistPage
+   }, 
   {
-    path: '',
-    component: FoundlistPage
-  }, {
     path: 'viewentry/:id',
-    component: ViewentryPage
+    component: ViewentryPage,
+    pathMatch: 'prefix'
   }
 ];
 

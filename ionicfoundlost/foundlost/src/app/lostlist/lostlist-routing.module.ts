@@ -10,8 +10,10 @@ const routes: Routes = [
   },
   {
     path: 'viewentry/:id',
-    component: ViewentryPage
-  }
+    component: ViewentryPage,
+    pathMatch: 'prefix'
+  },
+  
 ];
 
 @NgModule({

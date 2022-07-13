@@ -12,7 +12,9 @@ export class LostlistPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   // Un tableau
   entryData = [];
-  constructor(public http: HttpClient,private navCtrl: NavController) {
+  onedata = [];
+
+  constructor(public http: HttpClient, private navCtrl: NavController) {
     this.getEntry();
   }
 
@@ -24,7 +26,7 @@ export class LostlistPage implements OnInit {
       data = JSON.parse(JSON.stringify(data))
       for (let i = 0; i < Object.keys(data).length; i++) {
         this.entryData[i] = {
-          "id": data[i].id_object,
+          "id_object": data[i].id_object,
           "status": data[i].status,
           "description": data[i].description,
           "date": data[i].date,
@@ -39,7 +41,5 @@ export class LostlistPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-  goToObject() {
-    this.navCtrl.navigateForward("viewentry/10");
-  }
+
 }

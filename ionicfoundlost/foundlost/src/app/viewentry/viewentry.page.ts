@@ -13,35 +13,44 @@ import { ActivatedRoute}from '@angular/router'
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  id_object= null;
-  bdUrl="http://localhost/ionicserver/retrieve-data.php?key=id&id=";
-  entrydata = {
-    "id_object": null,
-    "status": null,
-    "description": null,
-    "date": null,
-    "location": null,
-    "firstname": null,
-    "lastname": null,
-    "email": null
+  id_object = this.activatedRouter.snapshot.paramMap.get('id_object');
 
-  };
-    
-  constructor(private activatedRouter: ActivatedRoute,public http:HttpClient) {
-    let id_object = this.activatedRouter.snapshot.paramMap.get('id');
-    console.log(id_object);
-    this.id_object = id_object;
+  bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=id&id=";
+  oneData = [];
+  entryData = [];    
+  constructor(private activatedRouter: ActivatedRoute, public http: HttpClient) {
+    console.log(this.id_object);
     this.getEntry();
-}  
+  }
   ngOnInit() {
   }
   getEntry() {
-    this.readAPI(this.bdUrl+this.id_object).subscribe((data) => {
-      data = JSON.parse(JSON.stringify(data));   
-      console.log(data);    
-    }); // fin subscribe 
-}
-  readAPI(URL: string) {
-    return this.http.get(URL);
+    // this.oneData =
+    //   (this.lostlist.entryData.map(item => item[0].filter(item => item === this.id_object))) ?
+    //     this.lostlist.entryData.map(item => item[0].filter(item => item === this.id_object)) :
+    //     this.foundlist.entryData.map(item => item[0].filter(item => item === this.id_object));
+    // console.log(this.oneData)
+    this.readAPI(this.bdUrl).subscribe(data => {
+      console.log('data');
+        data = JSON.parse(JSON.stringify(data));
+        console.log(data);
+        for (let i = 0; i < Object.keys(data).length; i++) {
+          this.entryData[i] = {
+            "id_object": data[i].id_object,
+            "status": data[i].status,
+            "description": data[i].description,
+            "date": data[i].date,
+            "location": data[i].location,
+            "firstname": data[i].firstname,
+            "lastname": data[i].lastname,
+            "email": data[i].email
+          };
+        } // fin boucle for
+      }); // fin subscribe 
+    }
+
+    readAPI(URL: string) {
+      return this.http.get(URL + this.activatedRouter.snapshot.paramMap.get('id_object'));
   }
 }
+
