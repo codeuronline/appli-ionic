@@ -19,7 +19,7 @@ export class ViewentryPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=id&id=";
   oneData = [];
   entryData = [];    
-  constructor(private NavController: NavController,private NavParams: NavParams,private activatedRouter: ActivatedRoute, public http: HttpClient, r,) {
+  constructor(private NavController: NavController,private activatedRouter: ActivatedRoute, public http: HttpClient) {
     console.log(this.id);
     this.getEntry();
   }
