@@ -17,14 +17,14 @@
     </ion-card>
     <ion-title class="ion-text-left">Effectué une Déclaration</ion-title> 
     <ion-card side="start">
-      <ion-item routerLink="/lost">
+      <ion-item routerLink="/lost" routerDirection="forward">
         <div id="reverseRed">
           <ion-button color="danger-outline" > J'ai perdu un objet</ion-button>
         </div>
       </ion-item>
     </ion-card>
     <ion-card side="start">
-      <ion-item routerLink="/found">
+      <ion-item routerLink="/found" routerDirection="forward">
       <div id="reverseGreen">
         <ion-button color="success-outline"> J'ai trouvé un objet</ion-button>
     </div>
@@ -33,14 +33,14 @@
     <ion-title class="ion-text-left"> Ou accédez aux liste d'objets</ion-title>
     <ion-item>
     <ion-card slot="start" class="ion-text-left">
-        <ion-item routerLink="/lostlist" class="ion-text-left">
+        <ion-item routerLink="/lostlist" routerDirection="forward" class="ion-text-left">
             <ion-button color="danger">
               <ion-icon name="sad" class="ion-text-left"></ion-icon> Objets perdus  
             </ion-button>
         </ion-item>
       </ion-card>
-    <ion-card slot="end">
-      <ion-item routerLink="/foundlist">
+    <ion-card slot="end" class="ion-text-left">
+      <ion-item routerLink="/foundlist" routerDirection="forward">
       <ion-button color="success" >
         <ion-icon name="happy"></ion-icon>Objet trouvés
       </ion-button>

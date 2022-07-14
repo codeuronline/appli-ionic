@@ -21,10 +21,14 @@ const routes: Routes = [
     loadChildren: () => import('./lost/lost.module').then(m => m.LostPageModule)
   },
   {
-    path: 'viewentry/:id',
+    path: 'foundlist/:id',
     loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
   },
   {
+    path: 'lostlist/:id',
+    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
+  }
+  ,{
     path: 'foundlist',
     loadChildren: () => import('./foundlist/foundlist.module').then(m => m.FoundlistPageModule)
   },

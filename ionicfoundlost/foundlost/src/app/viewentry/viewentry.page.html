@@ -1,14 +1,13 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/foundlist" text="Retour"></ion-back-button>
-      <ion-back-button defaultHref="/lostlist" text="Retour"></ion-back-button>
-      <ion-button slot="end">
+      <ion-back-button text="Retour" routerDirection="back"></ion-back-button>
+      <ion-button (click)="delete()" slot="end">
         <ion-icon name="trash"></ion-icon> 
       </ion-button>
     </ion-buttons>
     <ion-title>
-      OBJET N°:{{id_object}}
+      OBJET N°: {{id_object}}
     </ion-title>
 
   </ion-toolbar>

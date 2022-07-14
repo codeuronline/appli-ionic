@@ -23,5 +23,11 @@ export class UserService {
   submitForm(data) {
     return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data,{responseType: 'text'});
   }
+  deleteObjet(number) {
+    return this.http.get('http://localhost/ionicserver/manage-data.php?key=delete=id_task', number);
+  }
+  // getObject(number) {
+  //   return this.http.get('http://localhost/ionicserver/retrieve-data.php?key=' + number,{responseType: 'text'});
+  // }
 }
 
