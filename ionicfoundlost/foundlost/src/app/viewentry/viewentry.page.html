@@ -1,34 +1,28 @@
-
 <ion-header [translucent]="false">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- <ion-back-button defaultHref="/foundlist" text="Retour"></ion-back-button> -->
-      <ion-back-button defaultHref="/lostlist" text="Retour" routerDirection="backward"></ion-back-button>
+      <ion-back-button defaultHref="/foundlist" text="Retour"></ion-back-button>
+      <ion-back-button defaultHref="/lostlist" text="Retour"></ion-back-button>
+      <ion-button slot="end">
+        <ion-icon name="trash"></ion-icon> 
+      </ion-button>
     </ion-buttons>
-    <ion-nav>
     <ion-title>
-      OBJET N°: {{data.id_object}}
+      OBJET N°:{{id_object}}
     </ion-title>
-  </ion-nav>
+
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <p>{{data.description}}</p>
   <form action="">
-  <ion-card >
-    <ion-row>
-      <ion-col>
-    <ion-button (ngSubmit)="onSubmit(this.delete)">
-      <ion-icon  name="trash"></ion-icon> 
-    </ion-button>
-  </ion-col>
-  </ion-row>
+  <ion-card>
     <ion-item>
       <ion-label (click)="mytoggle.checked = !mytoggle.checked">status</ion-label>
         <ion-toggle #mytoggle></ion-toggle>
        </ion-item><ion-item side="lines">
       <ion-label position="floating">Description</ion-label>
-      <ion-input type="text" [value]="{data}"></ion-input>
+      <ion-input></ion-input>
     </ion-item>
     <ion-item side="lines">
       <ion-label position="floating">Date</ion-label>
@@ -46,11 +40,9 @@
       <ion-label position="floating"></ion-label>
       <ion-input>Email</ion-input>
     </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button (ngSubmit)="onSubmit(this.update)"  color="danger" expand="block">ENVOYER</ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-item side="full">
+      <ion-button type="submit">Modifier</ion-button>
+    </ion-item>
   </ion-card>
 </form>
 </ion-content>
