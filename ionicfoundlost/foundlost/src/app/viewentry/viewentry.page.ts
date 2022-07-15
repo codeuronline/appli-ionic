@@ -14,15 +14,15 @@ export class ViewentryPage implements OnInit {
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   id_object;
-  status;
-  description;
-  location;
-  date;
-  firstname;
-  lastname;
-  email;
+  
   ionicForm: FormGroup;  
-  entryData = [];
+  entryData = {status:null,
+    description:null,
+    location: null,
+    date:null,
+    firstname:null,
+    lastname:null,
+    email:null};
   constructor(public userService: UserService, public http:HttpClient , public activatedRouter: ActivatedRoute,public formBuilder: FormBuilder) {}
   
   ngOnInit() {
@@ -30,7 +30,7 @@ export class ViewentryPage implements OnInit {
     this.getEntry();
     this.ionicForm = this.formBuilder.group({
       id_object: this.id,
-      status: this.entryData[0].status,
+      status: this.entryData.status,
       description: this.entryData[0].description,    
       location: this.entryData[0].location,
       date: this.entryData[0].date,
@@ -38,14 +38,14 @@ export class ViewentryPage implements OnInit {
       lastname: this.entryData[0].lastname,
       email: this.entryData[0].email,
     });
-    this.id_object = this.id;
-    this.status = this.entryData[0].status;
-    this.description = this.entryData[0].description;
-    this.location = this.entryData[0].location;
-    this.date = this.entryData[0].date;
-    this.firstname = this.entryData[0].firstname;
-    this.lastname = this.entryData[0].lastname;
-      this.email = this.entryData[0].email;
+    // this.id_object = this.id;
+    // this.status = this.entryData.status;
+    // this.description = this.entryData.description;
+    // this.location = this.entryData.location;
+    // this.date = this.entryData.date;
+    // this.firstname = this.entryData.firstname;
+    // this.lastname = this.entryData.lastname;
+    //   this.email = this.entryData.email;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -62,6 +62,7 @@ export class ViewentryPage implements OnInit {
         }
       };
       console.log("entrydata:", this.entryData);
+      
       // console.log('entrydata[0]:', this.entryData[0]);
     }); 
       // fin boucle for
