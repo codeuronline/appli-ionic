@@ -13,7 +13,7 @@
     <ion-card *ngFor="let data of entryData">
       <ion-item-sliding>
         <ion-item-options side="end">
-          <ion-item-option color="primary" routerLink="viewentry/{{data.id_object}}">
+          <ion-item-option color="primary" routerLink="viewentry/{{data.id_object}}" routerDirection="forward">
             <ion-button>
               <ion-icon name="eye" slot="icon-only"></ion-icon>
             </ion-button>

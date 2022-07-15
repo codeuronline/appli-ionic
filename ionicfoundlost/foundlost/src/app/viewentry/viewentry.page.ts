@@ -13,16 +13,17 @@ import { ActivatedRoute } from '@angular/router';
 export class ViewentryPage implements OnInit {
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
-  id_object;
-  description;
-  status;
-  location;
-  date;
-  firstname;
-  lastname;
-  email;
   ionicForm: FormGroup;  
-  entryData = [];
+  entryData = {
+    id_object:null,
+    status: null,
+    description: null,
+    date: null,
+    location: null,
+    firstname: null,
+    lastname: null,
+    email: null,
+  };
   constructor(public userService: UserService, public http:HttpClient , public activatedRouter: ActivatedRoute,public formBuilder: FormBuilder) {}
   
   ngOnInit() {
@@ -38,14 +39,6 @@ export class ViewentryPage implements OnInit {
       lastname: new String,
       email: new String,
     });
-    this.id_object = this.id;
-    this.description = this.entryData[0].description;
-    this.status = this.entryData[0].status;
-    this.location = this.entryData[0].location;
-    this.date = this.entryData[0].date;
-    this.firstname = this.entryData[0].firstname;
-    this.lastname = this.entryData[0].lastname;
-      this.email = this.entryData[0].email;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -58,17 +51,12 @@ export class ViewentryPage implements OnInit {
       console.log('data :', data);
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
-        this.entryData[i] = {
-          id_object: data[i].id_object,
-          status: data[i].status,
-          description: data[i].description,
-          date: data[i].date,
-          location: data[i].location,
-          firstname: data[i].firstname,
-          lastname: data[i].lastname,
-          email: data[i].email,
-        };
-      } // fin boucle for
+        if (data[i].id_object==this.id) {
+          this.entryData = data[i];
+        }
+        
+      }
+      console.log('entryData:', this.entryData); // fin boucle for
     });
   }
 
