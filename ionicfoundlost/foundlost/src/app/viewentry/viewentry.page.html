@@ -1,49 +1,49 @@
-<ion-header [translucent]="false">
+<!-- <ion-header [translucent]="false">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="Retour" routerDirection="back"></ion-back-button>
-      <!-- <ion-button slot="end">
+      <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
+       <ion-button slot="end">
         <ion-icon name="trash"></ion-icon>
-      </ion-button> -->
+      </ion-button>
     </ion-buttons>
     <ion-title>
       OBJET N°: {{id}}
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
-  <form [formGroup]="ionicForm" (ngSubmit)="submit()" novalidate>
+<!-- <ion-content>
+  <form  (ngSubmit)="submit()" novalidate>
 
     <ion-item lines="full">
       <ion-label position="floating">Descr.</ion-label>
-      <ion-input formControlName="description" type="text" [value]="entryData[0].description">{{entryData[0].description}}</ion-input>
+      <ion-input name="description" type="text" [value]="entryData[0].description"></ion-input>
     </ion-item>
-    <ion-item lines="full">
+   <ion-item lines="full">
       <ion-label position="floating">status.</ion-label>
-      <ion-input formControlName="status" type="number" [value]="entryData[0].status">{{entryData[0].status}}</ion-input>
+      <ion-input  type="number" [value]="entryData[0].status"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
-      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date" [value]="entryData[0].date"></ion-datetime>
+      <ion-input name="date" type="date" (ionChange)="getDate($event)" [value]="entryData[0].date"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Lieu</ion-label>
-      <ion-input formControlName="location" type="text" [value]="entryData[0].location">{{entryData[0].location}}</ion-input>
+      <ion-input name="location" type="text" [value]="entryData[0].location"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Prénom</ion-label>
-      <ion-input formControlName="firstname" type="text" [value]="entryData[0].firstname">{{entryData[0].firstname}}</ion-input>
+      <ion-input  name="firstname" type="text" [value]="entryData[0].firstname"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Nom</ion-label>
-      <ion-input formControlName="lastname" type="text" [value]="entryData[0].lastname">{{entryData[0].lastname}}</ion-input>
+      <ion-input  name="lastname" type="text" [value]="entryData[0].lastname"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label name="email" position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email" [value]="entryData[0].email">{{entryData[0].email}}</ion-input>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input name="email" type="email" [value]="entryData[0].email"></ion-input>
     </ion-item>
     <ion-row>
       <ion-col>
@@ -51,4 +51,77 @@
       </ion-col>
     </ion-row>
   </form>
+</ion-content> -->
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
+    <!-- <ion-button slot="end">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button> -->
+  </ion-buttons>
+  <ion-title>
+    OBJET N°: {{id}}
+  </ion-title>
+</ion-toolbar>
+<ion-content>
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">DOB</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Mobile</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <!-- Radio buttons -->
+    <ion-radio-group lines="full">
+      <ion-list-header>
+        <ion-label>Gender</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Male</ion-label>
+        <ion-radio slot="start" value="male" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Female</ion-label>
+        <ion-radio slot="start" value="female"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <!-- Checkboxes -->
+    <ion-list lines="full">
+      <ion-list-header>
+        <ion-label>Subjects</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>English</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Maths</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Science</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>History</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
+

@@ -14,8 +14,8 @@ export class ViewentryPage implements OnInit {
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   id_object;
-  description;
   status;
+  description;
   location;
   date;
   firstname;
@@ -29,9 +29,9 @@ export class ViewentryPage implements OnInit {
     console.log(this.id);
     this.getEntry();
     this.ionicForm = this.formBuilder.group({
-      id_object: this.entryData[0].id_object,
-      description: this.entryData[0].description,
+      id_object: this.id,
       status: this.entryData[0].status,
+      description: this.entryData[0].description,    
       location: this.entryData[0].location,
       date: this.entryData[0].date,
       firstname: this.entryData[0].firstname,
@@ -39,8 +39,8 @@ export class ViewentryPage implements OnInit {
       email: this.entryData[0].email,
     });
     this.id_object = this.id;
-    this.description = this.entryData[0].description;
     this.status = this.entryData[0].status;
+    this.description = this.entryData[0].description;
     this.location = this.entryData[0].location;
     this.date = this.entryData[0].date;
     this.firstname = this.entryData[0].firstname;
@@ -49,7 +49,6 @@ export class ViewentryPage implements OnInit {
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
   
   getEntry() {
@@ -58,19 +57,16 @@ export class ViewentryPage implements OnInit {
       console.log('data :', data);
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
-        this.entryData[i] = {
-          id_object: data[i].id_object,
-          status: data[i].status,
-          description: data[i].description,
-          date: data[i].date,
-          location: data[i].location,
-          firstname: data[i].firstname,
-          lastname: data[i].lastname,
-          email: data[i].email,
-        };
-      } // fin boucle for
-    });
-  }
+        if (data[i].id_object == this.id) {
+          this.entryData = data[i];
+        }
+      };
+      console.log("entrydata:", this.entryData);
+      // console.log('entrydata[0]:', this.entryData[0]);
+    }); 
+      // fin boucle for
+    }
+  
 
   
 

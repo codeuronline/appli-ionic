@@ -4,11 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewentryPage } from './viewentry.page';
 
 const routes: Routes = [
-{
-    path: 'viewentry/:id',
+  {
+    path: ':id',
     component: ViewentryPage
-  }
-];
+  },
+
+//   {
+//     path: 'viewentry/:id',
+//     component: ViewentryPage
+//   }
+ ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
