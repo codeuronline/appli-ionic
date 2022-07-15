@@ -24,10 +24,10 @@ export class UserService {
     return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data,{responseType: 'text'});
   }
   deleteObjet(number) {
-    return this.http.get('http://localhost/ionicserver/manage-data.php?key=delete=id_task', number);
+    return this.http.get('http://localhost/ionicserver/manage-data.php?key=delete&id_task=', number);
   }
   updateForm(data,number) {
-    return this.http.put('http://localhost/ionicserver/manage-data.php?key=update=id_task=' + number, data, { responseType: 'text' });
+    return this.http.put('http://localhost/ionicserver/manage-data.php?key=update&id_task=' + number, data, { responseType: 'text' });
   }
   // getObject(number) {
   //   return this.http.get('http://localhost/ionicserver/retrieve-data.php?key=' + number,{responseType: 'text'});

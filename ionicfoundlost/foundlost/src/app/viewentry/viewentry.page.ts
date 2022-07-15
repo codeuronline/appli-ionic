@@ -67,14 +67,14 @@ export class ViewentryPage implements OnInit {
   }
   submit() {
     let formObj = this.ionicForm.getRawValue();
-    if (formObj.id_objet == null) { formObj.id_objet = this.entryData.id_object; }
+    if (formObj.id_object == null) { formObj.id_object = this.entryData.id_object; }
     if (formObj.description == null) { formObj.description = this.entryData.description; }
     if (formObj.status == null) { formObj.status = this.entryData.status; }
     if (formObj.location == null) { formObj.location = this.entryData.location }
     if (formObj.date == null) { formObj.date = this.entryData.date; }
     if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
     if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
-    if (formObj.email == null) { formObj.email = this.entryData.description; }
+    if (formObj.email == null) { formObj.email = this.entryData.email; }
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
