@@ -13,6 +13,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ViewentryPage implements OnInit {
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
+  id_object;
+  status;
+  description;
+  location;
+  date;
+  firstname;
+  lastname;
+  email;
   ionicForm: FormGroup;  
   entryData = {
     id_object:null,
@@ -30,19 +38,18 @@ export class ViewentryPage implements OnInit {
     console.log(this.id);
     this.getEntry();
     this.ionicForm = this.formBuilder.group({
-      id_object: new Number,
-      description: new String,
-      status: new Boolean,
-      location: new String,
-      date: new Date,
-      firstname: new String,
-      lastname: new String,
-      email: new String,
+      id_object: this.id,
+      status: this.entryData[0].status,
+      description: this.entryData[0].description,    
+      location: this.entryData[0].location,
+      date: this.entryData[0].date,
+      firstname: this.entryData[0].firstname,
+      lastname: this.entryData[0].lastname,
+      email: this.entryData[0].email,
     });
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
   
   getEntry() {
@@ -70,7 +77,7 @@ export class ViewentryPage implements OnInit {
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);    
     console.log(serializedForm);
-    this.userService.submitForm(serializedForm).
+    this.userService.updateForm(serializedForm,this.id).
       subscribe(
         (res) => {console.log("SUCCES ===", res);
        
