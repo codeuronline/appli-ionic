@@ -55,11 +55,14 @@ export class ViewentryPage implements OnInit {
         if (this.id == data[i].id_object) {
           this.entryData = data[i];
         }
-      }
-      console.log("entrydata", this.entryData);
-    });
-
-  }
+      };
+      console.log("entrydata:", this.entryData);
+      
+      // console.log('entrydata[0]:', this.entryData[0]);
+    }); 
+      // fin boucle for
+    }
+  
 
 
   readAPI(URL: string) {

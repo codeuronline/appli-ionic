@@ -32,18 +32,15 @@ const routes: Routes = [
     path: 'foundlist',
     loadChildren: () => import('./foundlist/foundlist.module').then(m => m.FoundlistPageModule)
   },
-  { path: 'viewentry/:id',
-  loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
-},
   {
+    path: 'viewentry/:id',
+    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
+   
+  },{
     path: 'lostlist',
     loadChildren: () => import('./lostlist/lostlist.module').then(m => m.LostlistPageModule)
   },
-  // {
-  //   path: 'lostlist/viewentry/:id',
-  //   loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
-  //   pathMatch: 'prefix',
-  // },
+ 
   // {
   //   path: 'foundlist/viewentry/:id',
   //   loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),

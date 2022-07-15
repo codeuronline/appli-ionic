@@ -3,8 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
       <ion-button slot="end">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+         <ion-icon name="trash"></ion-icon>
+      </ion-button> 
     </ion-buttons>
     <ion-title>
       OBJET N°: {{id}}
@@ -12,38 +12,35 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-content> -->
+<ion-content>
   <form [formGroup]="ionicForm" (ngSubmit)="submit()" novalidate>
     <ion-item lines="full">
       <ion-label position="floating">Descr.</ion-label>
-      <ion-input formControlName="ionicForm.description" type="text" [value]="entryData.description"></ion-input>
+      <ion-input type="text" [value]="entryData.description"></ion-input>
     </ion-item>
-    <ion-item lines="full">
+     <ion-item lines="full">
       <ion-label position="floating">status.</ion-label>
-      <ion-input formControlName="ionicForm.status" type="number" [value]="entryData.status"></ion-input>
-    </ion-item>
-
+      <ion-input  type="number" [value]="entryData.status"></ion-input>
+    </ion-item> 
     <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
-      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="ionicForm.date" [value]="entryData.date">
-      </ion-datetime>
+      <ion-datetime type="date" (ionChange)="getDate($event)" [value]="entryData.date"></ion-datetime>
     </ion-item>
-
     <ion-item lines="full">
       <ion-label position="floating">Lieu</ion-label>
-      <ion-input formControlName="ionicForm.location" type="text" [value]="entryData.location"></ion-input>
+      <ion-input type="text" [value]="entryData.location"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Prénom</ion-label>
-      <ion-input formControlName="ionicForm.firstname" type="text" [value]="entryData.firstname"></ion-input>
+      <ion-input type="text" [value]="entryData.firstname"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Nom</ion-label>
-      <ion-input formControlName="ionicForm.lastname" type="text" [value]="entryData.lastname"></ion-input>
+      <ion-input  type="text" [value]="entryData.lastname"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label name="email" position="floating">Email</ion-label>
-      <ion-input formControlName="ionicForm.email" type="email" [value]="entryData.email"></ion-input>
+      <ion-input  type="email" [value]="entryData.email"></ion-input>
     </ion-item>
     <ion-row>
       <ion-col>
@@ -51,4 +48,4 @@
       </ion-col>
     </ion-row>
   </form>
-<!-- </ion-content> -->
+</ion-content>
