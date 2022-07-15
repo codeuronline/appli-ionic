@@ -13,25 +13,17 @@ import { ActivatedRoute } from '@angular/router';
 export class ViewentryPage implements OnInit {
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
-  id_object;
-  status;
-  description;
-  location;
-  date;
-  firstname;
-  lastname;
-  email;
   ionicForm: FormGroup;  
   entryData = {
-    id_object:null,
+    id_object: null,
     status: null,
-    description: null,
-    date: null,
+    description: null,    
     location: null,
+    date: null,
     firstname: null,
     lastname: null,
     email: null,
-  };
+    };
   constructor(public userService: UserService, public http:HttpClient , public activatedRouter: ActivatedRoute,public formBuilder: FormBuilder) {}
   
   ngOnInit() {
@@ -39,14 +31,15 @@ export class ViewentryPage implements OnInit {
     this.getEntry();
     this.ionicForm = this.formBuilder.group({
       id_object: this.id,
-      status: this.entryData[0].status,
-      description: this.entryData[0].description,    
-      location: this.entryData[0].location,
-      date: this.entryData[0].date,
-      firstname: this.entryData[0].firstname,
-      lastname: this.entryData[0].lastname,
-      email: this.entryData[0].email,
+      status: this.entryData.status,
+      description: this.entryData.description,    
+      location: this.entryData.location,
+      date: this.entryData.date,
+      firstname: this.entryData.firstname,
+      lastname: this.entryData.lastname,
+      email: this.entryData.email,
     });
+    
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -58,17 +51,16 @@ export class ViewentryPage implements OnInit {
       console.log('data :', data);
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
-        if (data[i].id_object==this.id) {
+        if (this.id == data[i].id_object) {
           this.entryData = data[i];
         }
-        
       }
-      console.log('entryData:', this.entryData); // fin boucle for
+      console.log("entrydata",this.entryData);
     });
-  }
-
   
-
+    }
+  
+  
   readAPI(URL: string) {
     return this.http.get(URL);
   }

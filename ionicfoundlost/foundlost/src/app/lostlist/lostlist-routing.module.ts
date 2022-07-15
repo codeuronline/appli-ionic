@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewentryPage } from '../viewentry/viewentry.page';
 import { LostlistPage } from './lostlist.page';
 
-
 const routes: Routes = [
   {
     path: '',
