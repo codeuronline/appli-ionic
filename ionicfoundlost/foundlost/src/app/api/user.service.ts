@@ -24,6 +24,7 @@ export class UserService {
     return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data,{responseType: 'text' });
   }
   deleteObjet(number) {
+    console.log(number)
     return this.http.delete('http://localhost/ionicserver/manage-data.php?key=delete&id_task='+number,{responseType: 'text' });
   }
   updateForm(data,number) {
