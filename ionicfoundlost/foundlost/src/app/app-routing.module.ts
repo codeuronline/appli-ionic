@@ -35,17 +35,17 @@ const routes: Routes = [
   {
     path: 'viewentry/:id',
     loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
-   
+     pathMatch: 'prefix'
   },{
     path: 'lostlist',
     loadChildren: () => import('./lostlist/lostlist.module').then(m => m.LostlistPageModule)
   },
  
-  // {
-  //   path: 'foundlist/viewentry/:id',
-  //   loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
-  //   pathMatch: 'prefix',
-  // },
+  {
+     path: 'foundlist/viewentry/:id',
+     loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
+     pathMatch: 'prefix',
+   },
 ];
 
 @NgModule({
