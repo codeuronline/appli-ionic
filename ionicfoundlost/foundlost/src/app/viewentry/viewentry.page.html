@@ -1,4 +1,4 @@
-<ion-header [translucent]="false">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content> -->
   <form [formGroup]="ionicForm" (ngSubmit)="submit()" novalidate>
     <ion-item lines="full">
       <ion-label position="floating">Descr.</ion-label>
@@ -51,4 +51,4 @@
       </ion-col>
     </ion-row>
   </form>
-</ion-content>
+<!-- </ion-content> -->
