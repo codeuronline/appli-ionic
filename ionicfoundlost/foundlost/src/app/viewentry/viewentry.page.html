@@ -11,32 +11,17 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- <ion-header [translucent]="false">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
-      <ion-button slot="end">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button> 
-    </ion-buttons>
-    <ion-title>
-      OBJET N°: {{id}}
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
 
 <ion-content>
-<form  (ngSubmit)="submit()" novalidate>
-
+  <form [formGroup]="ionicForm" (ngSubmit)="submit()" novalidate>
     <ion-item lines="full">
       <ion-label position="floating">Descr.</ion-label>
       <ion-input type="text" [value]="entryData.description"></ion-input>
     </ion-item>
-     <!-- <ion-item lines="full">
+     <ion-item lines="full">
       <ion-label position="floating">status.</ion-label>
       <ion-input  type="number" [value]="entryData.status"></ion-input>
-    </ion-item> -->
-
+    </ion-item> 
     <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
       <ion-datetime type="date" (ionChange)="getDate($event)" [value]="entryData.date"></ion-datetime>
