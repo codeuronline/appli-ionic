@@ -44,6 +44,7 @@ export class ViewentryPage implements OnInit {
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
+    this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
 
   getEntry() {
@@ -87,6 +88,14 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
+  }
+  delete() {
+    this.userService.deleteObjet(this.id).subscribe(
+      (res) => {
+        console.log("SUCCS ===", res)
+      }
+    )
+    
   }
 }
 
