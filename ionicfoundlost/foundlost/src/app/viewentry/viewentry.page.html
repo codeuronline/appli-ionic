@@ -2,46 +2,53 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button text="Retour" routerDirection="back"></ion-back-button>
-      <ion-button (click)="delete()" slot="end">
-        <ion-icon name="trash"></ion-icon> 
-      </ion-button>
+      <!-- <ion-button slot="end">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button> -->
     </ion-buttons>
     <ion-title>
-      OBJET N°: {{id_object}}
+      OBJET N°: {{id}}
     </ion-title>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form action="">
-  <ion-card>
-    <ion-item>
-      <ion-label (click)="mytoggle.checked = !mytoggle.checked">status</ion-label>
-        <ion-toggle #mytoggle></ion-toggle>
-       </ion-item><ion-item side="lines">
-      <ion-label position="floating">Description</ion-label>
-      <ion-input></ion-input>
+  <form [formGroup]="ionicForm" (ngSubmit)="submit()" novalidate>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Descr.</ion-label>
+      <ion-input formControlName="description" type="text" [value]="entryData[0].description">{{entryData[0].description}}</ion-input>
     </ion-item>
-    <ion-item side="lines">
+    <ion-item lines="full">
+      <ion-label position="floating">status.</ion-label>
+      <ion-input formControlName="status" type="number" [value]="entryData[0].status">{{entryData[0].status}}</ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
       <ion-label position="floating">Date</ion-label>
-      <ion-input></ion-input>
+      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date" [value]="entryData[0].date"></ion-datetime>
     </ion-item>
-    <ion-item side="lines">
-      <ion-label position="floating"></ion-label>
-      <ion-input>Nom</ion-input>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Lieu</ion-label>
+      <ion-input formControlName="location" type="text" [value]="entryData[0].location">{{entryData[0].location}}</ion-input>
     </ion-item>
-    <ion-item side="lines">
-        <ion-label position="floating"></ion-label>
-        <ion-input>Prénom</ion-input>
+    <ion-item lines="full">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input formControlName="firstname" type="text" [value]="entryData[0].firstname">{{entryData[0].firstname}}</ion-input>
     </ion-item>
-    <ion-item side="lines">
-      <ion-label position="floating"></ion-label>
-      <ion-input>Email</ion-input>
+    <ion-item lines="full">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input formControlName="lastname" type="text" [value]="entryData[0].lastname">{{entryData[0].lastname}}</ion-input>
     </ion-item>
-    <ion-item side="full">
-      <ion-button type="submit">Modifier</ion-button>
+    <ion-item lines="full">
+      <ion-label name="email" position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email" [value]="entryData[0].email">{{entryData[0].email}}</ion-input>
     </ion-item>
-  </ion-card>
-</form>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="warning" expand="block">MODIFIER</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

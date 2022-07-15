@@ -25,10 +25,12 @@ export class LostPage implements OnInit {
     });
   
   }
+
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
+  
   submitForm() {
     //
     let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}

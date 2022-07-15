@@ -3,9 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
-
-
 
 
 @Component({
@@ -14,46 +11,82 @@ import { NavController, NavParams } from '@ionic/angular';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  id_object = this.activatedRouter.snapshot.paramMap.get('id');
+  id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
+  id_object;
+  description;
+  status;
+  location;
+  date;
+  firstname;
+  lastname;
+  email;
+  ionicForm: FormGroup;  
+  entryData = [];
+  constructor(public userService: UserService, public http:HttpClient , public activatedRouter: ActivatedRoute,public formBuilder: FormBuilder) {}
   
-  
-  entryData = [];    
-  
-  constructor(public Userservice: UserService, private NavController: NavController, private activatedRouter: ActivatedRoute, public http: HttpClient) {
-    console.log(this.id_object);
-    this.getEntry();
-  }
   ngOnInit() {
-  this.getEntry()   
+    console.log(this.id);
+    this.getEntry();
+    this.ionicForm = this.formBuilder.group({
+      id_object: new Number,
+      description: new String,
+      status: new Boolean,
+      location: new String,
+      date: new Date,
+      firstname: new String,
+      lastname: new String,
+      email: new String,
+    });
+    this.id_object = this.id;
+    this.description = this.entryData[0].description;
+    this.status = this.entryData[0].status;
+    this.location = this.entryData[0].location;
+    this.date = this.entryData[0].date;
+    this.firstname = this.entryData[0].firstname;
+    this.lastname = this.entryData[0].lastname;
+      this.email = this.entryData[0].email;
   }
+  getDate(e) {
+    let date = new Date(e.target.value).toISOString().substring(0, 10);
+    this.ionicForm.get('date').setValue(date, { onlyself: true });
+  }
+  
   getEntry() {
-
-    this.readAPI(this.bdUrl+this.id_object).subscribe(data => {
+    
+    this.readAPI(this.bdUrl + this.id).subscribe(data => {
+      console.log('data :', data);
       data = JSON.parse(JSON.stringify(data));
-      console.log(data);
       for (let i = 0; i < Object.keys(data).length; i++) {
         this.entryData[i] = {
-          "id_object": data[i].id_object,
-          "status": data[i].status,
-          "description": data[i].description,
-          "date": data[i].date,
-          "location": data[i].location,
-          "firstname": data[i].firstname,
-          "lastname": data[i].lastname,
-          "email": data[i].email
+          id_object: data[i].id_object,
+          status: data[i].status,
+          description: data[i].description,
+          date: data[i].date,
+          location: data[i].location,
+          firstname: data[i].firstname,
+          lastname: data[i].lastname,
+          email: data[i].email,
         };
       } // fin boucle for
-    }); // fin subscribe 
-    }
+    });
+  }
 
-    readAPI(URL: string) {
-      return this.http.get(URL);
-  }
   
-  delete() {
-    const bdDelete = 'http://localhost/ionicserver/manage-data.php?key=delete=id_task';
-    this.readAPI(bdDelete + this.id_object);
+
+  readAPI(URL: string) {
+    return this.http.get(URL);
   }
+  submit() {
+    let formObj = this.ionicForm.getRawValue();
+    console.log(formObj);// {name: '', description: ''}
+    let serializedForm = JSON.stringify(formObj);    
+    console.log(serializedForm);
+    this.userService.submitForm(serializedForm).
+      subscribe(
+        (res) => {console.log("SUCCES ===", res);
+       
+      })
+}
 }
 

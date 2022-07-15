@@ -26,6 +26,9 @@ export class UserService {
   deleteObjet(number) {
     return this.http.get('http://localhost/ionicserver/manage-data.php?key=delete=id_task', number);
   }
+  updateForm(data,number) {
+    return this.http.put('http://localhost/ionicserver/manage-data.php?key=update=id_task=' + number, data, { responseType: 'text' });
+  }
   // getObject(number) {
   //   return this.http.get('http://localhost/ionicserver/retrieve-data.php?key=' + number,{responseType: 'text'});
   // }
