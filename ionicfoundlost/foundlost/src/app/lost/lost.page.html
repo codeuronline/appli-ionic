@@ -11,32 +11,32 @@
   <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     
     <ion-item lines="full">
-      <ion-label position="floating" >Descr.</ion-label>
+      <ion-label >Descr.</ion-label>
       <ion-input formControlName="description" type="text" required></ion-input>
     </ion-item>
     
     <ion-item lines="full">
-      <ion-label position="floating">Date</ion-label>
+      <ion-label>Date</ion-label>
       <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="floating">Lieu</ion-label>
+      <ion-label>Lieu</ion-label>
       <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="floating">Prénom</ion-label>
+      <ion-label>Prénom</ion-label>
       <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="floating">Nom</ion-label>
+      <ion-label>Nom</ion-label>
       <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label name="email" position="floating">Email</ion-label>
+      <ion-label>Email</ion-label>
       <ion-input formControlName="email" type="email" required></ion-input>
     </ion-item>
     

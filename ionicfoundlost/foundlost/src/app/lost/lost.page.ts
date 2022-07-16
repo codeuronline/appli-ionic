@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { NavController } from '@ionic/angular';
+import { AlertController,NavController } from '@ionic/angular';
 import { FormGroup,FormBuilder } from '@angular/forms';
 
 @Component({
@@ -9,10 +9,31 @@ import { FormGroup,FormBuilder } from '@angular/forms';
   styleUrls: ['./lost.page.scss'],
 })
 export class LostPage implements OnInit {
+  
+  handlerMessagelost = '';
+  roleMessage= '';
   ionicForm: FormGroup;
   defaultValue: 0;
   defaultDate: "2022-07-11";
-  constructor(public apiService: UserService, public formBuilder: FormBuilder) { }
+  constructor(private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) { }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: "Déclaration d'objet perdu",
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
+  }
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
@@ -42,7 +63,7 @@ export class LostPage implements OnInit {
         (res) => {console.log("SUCCES ===", res);
        
         })
-  
+    this.presentAlert();
   }
 }
     

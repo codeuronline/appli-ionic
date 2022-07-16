@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup,FormBuilder ,Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {  AlertController } from "@ionic/angular";
 
 @Component({
   selector: 'app-found',
@@ -11,7 +12,28 @@ export class FoundPage implements OnInit {
   ionicForm: FormGroup;
   defaultValue: 1;
   defaultDate: "2022-07-11";
-  constructor(public apiService: UserService, public formBuilder: FormBuilder) { }
+  handlerMessagelost= '';
+  roleMessage='';
+
+  constructor(private alertController: AlertController,public apiService: UserService, public formBuilder: FormBuilder) { }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: "Déclaration d'objet trouvé",
+      buttons: [
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
+  }
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
@@ -36,8 +58,8 @@ export class FoundPage implements OnInit {
     console.log(serializedForm);
     this.apiService.submitForm(serializedForm).
       subscribe(
-        (res) => {console.log("SUCCES ===", res);
-       
-      })
+        (res) => {console.log("SUCCES ===", res);     
+        })
+    this.presentAlert();
   }
 }
