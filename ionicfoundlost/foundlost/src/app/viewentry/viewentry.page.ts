@@ -2,7 +2,7 @@ import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { ReactiveFormsModule ,FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {ActivatedRoute } from '@angular/router';
 
 
@@ -17,7 +17,7 @@ export class ViewentryPage implements OnInit {
   
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
-  ionicForm: FormGroup;
+  ionicFormView: FormGroup;
   entryData = {
     id_object: null,
     status: null,
@@ -35,21 +35,22 @@ export class ViewentryPage implements OnInit {
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
-    this.ionicForm = this.formBuilder.group({
+    this.ionicFormView = this.formBuilder.group({
       id_object: this.id,
       status: this.entryData.status,
-      description: this.entryData.description,
-      location: this.entryData.location,
-      date: this.entryData.date,
-      firstname: this.entryData.firstname,
-      lastname: this.entryData.lastname,
-      email: this.entryData.email,
+      description:null,
+      location: null,
+      date: null,
+      firstname: null,
+      lastname: null,
+      email: null,  
     });
     this.myValue = true;
+    this.etat = (this.myValue) ? "Trouvé" : "Perdu";
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.ionicForm.get('date').setValue(date, { onlyself: true });
+    this.ionicFormView.get('date').setValue(date, { onlyself: true });
   }
 
   getEntry() {
@@ -62,7 +63,7 @@ export class ViewentryPage implements OnInit {
         }
       };
       console.log("entrydata:", this.entryData);
-      this.etatStatus();
+      // this.etatStatus();
   
       // console.log('entrydata[0]:', this.entryData[0]);
     }); 
@@ -72,22 +73,22 @@ export class ViewentryPage implements OnInit {
     console.log(this.myValue);
     this.myValue = !this.myValue;
     if (this.myValue==true) {
-      this.etat = "Found";
+      this.etat = "Trouvé";
     }
     if (this.myValue==false) {
-      this.etat = "Lost";
+      this.etat = "Perdu";
     }
     
     
 }
-  etatStatus() {
-    if (this.entryData.status==1) {
-      this.etat = "Found";
-    } else {
-      this.etat = "Lost";
-    }
+  // etatStatus() {
+  //   if (this.entryData.status==1) {
+  //     this.etat = "Trouvé";
+  //   } else {
+  //     this.etat = "Perdu";
+  //   }
   
-  }
+  // }
   
 
 
@@ -95,15 +96,25 @@ export class ViewentryPage implements OnInit {
     return this.http.get(URL);
   }
   submit() {
-    let formObj = this.ionicForm.getRawValue();
-    if (formObj.id_object == null) { formObj.id_object = this.entryData.id_object; }
-    if (formObj.description == null) { formObj.description = this.entryData.description; }
-    if (formObj.status == null) { formObj.status = this.entryData.status; }
+    let formObj = this.ionicFormView.value;
+
+    console.log("this.ionicFormView.value", this.ionicFormView.value);
+    console.log("------------------")
+    formObj.id_object = this.entryData.id_object;
+    formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description; 
+    //if (formObj.status == null) { formObj.status = this.entryData.status; }
+    formObj.status = (this.myValue == true) ? 1 : 0;
+    formObj.date = (this.ionicFormView.get('date').value != null ) ? this.ionicFormView.get('date').value : this.entryData.date; 
+    formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
+    formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
+    formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
+    formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     if (formObj.location == null) { formObj.location = this.entryData.location }
     if (formObj.date == null) { formObj.date = this.entryData.date; }
     if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
     if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
     if (formObj.email == null) { formObj.email = this.entryData.email; }
+    
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
