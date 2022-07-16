@@ -20,7 +20,7 @@ export class FoundlistPage implements OnInit {
   ngOnInit() {
   }
   getEntry() {
-    this.readAPI(this.bdUrl).subscribe((data) => {
+    this.readAPI(this.bdUrl).subscribe(data => {
       console.log(data)
       data = JSON.parse(JSON.stringify(data));   
       for (let i = 0; i < Object.keys(data).length; i++) {
@@ -41,5 +41,5 @@ export class FoundlistPage implements OnInit {
     return this.http.get(URL);
   }
 
-  goToObject(){}
+ 
 }

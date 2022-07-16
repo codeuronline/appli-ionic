@@ -1,9 +1,11 @@
+import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { KeyValue } from '@angular/common';
+import { ReactiveFormsModule ,FormGroup, FormBuilder } from '@angular/forms';
+import {ActivatedRoute } from '@angular/router';
+
+
 
 
 @Component({
@@ -12,6 +14,7 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
+  
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   ionicForm: FormGroup;
@@ -25,6 +28,8 @@ export class ViewentryPage implements OnInit {
     lastname: null,
     email: null,
   };
+  etat = new String;
+  myValue = new Boolean;
   constructor(public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -40,7 +45,7 @@ export class ViewentryPage implements OnInit {
       lastname: this.entryData.lastname,
       email: this.entryData.email,
     });
-
+    this.myValue = true;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -48,7 +53,6 @@ export class ViewentryPage implements OnInit {
   }
 
   getEntry() {
-
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       console.log('data :', data);
       data = JSON.parse(JSON.stringify(data));
@@ -58,11 +62,32 @@ export class ViewentryPage implements OnInit {
         }
       };
       console.log("entrydata:", this.entryData);
-      
+      this.etatStatus();
+  
       // console.log('entrydata[0]:', this.entryData[0]);
     }); 
       // fin boucle for
+  }
+  myChange($event) {
+    console.log(this.myValue);
+    this.myValue = !this.myValue;
+    if (this.myValue==true) {
+      this.etat = "Found";
     }
+    if (this.myValue==false) {
+      this.etat = "Lost";
+    }
+    
+    
+}
+  etatStatus() {
+    if (this.entryData.status==1) {
+      this.etat = "Found";
+    } else {
+      this.etat = "Lost";
+    }
+  
+  }
   
 
 
@@ -94,8 +119,8 @@ export class ViewentryPage implements OnInit {
       (res) => {
         console.log("SUCCS ===", res)
       }
-    )
-    
+    ) 
+       //manque l'affichage du succes
   }
 }
 

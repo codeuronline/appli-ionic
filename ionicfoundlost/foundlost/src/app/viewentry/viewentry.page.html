@@ -1,14 +1,12 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button text="Retour" routerDirection="backward"></ion-back-button>
-      <ion-button (click)="delete()" slot="end">
-         <ion-icon name="trash"></ion-icon>
-      </ion-button> 
-    </ion-buttons>
+      <ion-back-button  defaultHref="/lostlist" text="retour" routerDirection="backward" slot="start"></ion-back-button>
     <ion-title>
-      OBJET N°: {{id}}
-    </ion-title>
+      OBJET N°: {{id}} 
+    </ion-title> 
+    <ion-button (click)="delete()" slot="end">
+      <ion-icon name="trash"></ion-icon>
+   </ion-button> 
   </ion-toolbar>
 </ion-header>
 
@@ -17,12 +15,13 @@
       <ion-label position="floating">Descr.</ion-label>
       <ion-input formControlName="ionicForm.description" type="text" [value]="entryData.description"></ion-input>
     </ion-item>
-     <ion-item lines="full">
-      <ion-label position="floating">status.</ion-label>
-      <ion-input formControlName="ionicForm.status" type="number" [value]="entryData.status"></ion-input>
-    </ion-item> 
+    <ion-item lines="full"> 
+      <ion-label>Status: {{etat}}</ion-label>
+      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
+     <ion-toggle (ionChange)="myChange($event)" formControlName="ionicForm.status" [value]="entryData.status" [checked]="entryData.status==1"></ion-toggle> 
+    </ion-item>
     <ion-item lines="full">
-      <ion-label position="floating">Date</ion-label>
+      <ion-label>Date</ion-label>
       <ion-datetime formControlName="ionicForm.date" type="date" (ionChange)="getDate($event)" [value]="entryData.date"></ion-datetime>
     </ion-item>
     <ion-item lines="full">
