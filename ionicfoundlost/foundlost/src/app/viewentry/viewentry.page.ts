@@ -1,11 +1,9 @@
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import {ActivatedRoute } from '@angular/router';
-
-
 
 
 @Component({
@@ -14,7 +12,8 @@ import {ActivatedRoute } from '@angular/router';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  
+  handlerMessagelost= '';
+  roleMessage = '';
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   ionicFormView: FormGroup;
@@ -30,7 +29,30 @@ export class ViewentryPage implements OnInit {
   };
   etat = new String;
   myValue = new Boolean;
-  constructor(public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder) { }
+  constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
+  
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirmer la Suppression',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
+  }
 
   ngOnInit() {
     console.log(this.id);
@@ -38,14 +60,14 @@ export class ViewentryPage implements OnInit {
     this.ionicFormView = this.formBuilder.group({
       id_object: this.id,
       status: this.entryData.status,
-      description:null,
+      description: null,
       location: null,
       date: null,
       firstname: null,
       lastname: null,
-      email: null,  
+      email: null,
     });
-    this.myValue = true;
+    this.myValue = (this.entryData.status==1)?true:false;
     this.etat = (this.myValue) ? "Trouvé" : "Perdu";
   }
   getDate(e) {
@@ -63,48 +85,44 @@ export class ViewentryPage implements OnInit {
         }
       };
       console.log("entrydata:", this.entryData);
-      // this.etatStatus();
+       this.etatStatus();
   
       // console.log('entrydata[0]:', this.entryData[0]);
-    }); 
-      // fin boucle for
+    });
+    // fin boucle for
   }
   myChange($event) {
-    console.log(this.myValue);
     this.myValue = !this.myValue;
-    if (this.myValue==true) {
+    if (this.myValue == true) {
       this.etat = "Trouvé";
     }
-    if (this.myValue==false) {
+    if (this.myValue == false) {
       this.etat = "Perdu";
     }
     
     
-}
-  // etatStatus() {
-  //   if (this.entryData.status==1) {
-  //     this.etat = "Trouvé";
-  //   } else {
-  //     this.etat = "Perdu";
-  //   }
+  }
+  etatStatus() {
+    if (this.entryData.status==1) {
+      this.etat = "Trouvé";
+    } else {
+      this.etat = "Perdu";
+    }
   
-  // }
+  }
   
-
-
   readAPI(URL: string) {
     return this.http.get(URL);
   }
+  
   submit() {
+    // formObj recoit l'etat des valeurs du formulaire
     let formObj = this.ionicFormView.value;
-
-    console.log("this.ionicFormView.value", this.ionicFormView.value);
-    console.log("------------------")
+    // charge les valeurs qui n'ont pas ete modifié
     formObj.id_object = this.entryData.id_object;
-    formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description; 
-    //if (formObj.status == null) { formObj.status = this.entryData.status; }
+    formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
-    formObj.date = (this.ionicFormView.get('date').value != null ) ? this.ionicFormView.get('date').value : this.entryData.date; 
+    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
@@ -128,10 +146,17 @@ export class ViewentryPage implements OnInit {
   delete() {
     this.userService.deleteObjet(this.id).subscribe(
       (res) => {
-        console.log("SUCCS ===", res)
+        console.log("SUCCES ===", res)
       }
-    ) 
-       //manque l'affichage du succes
+    )
+    this.presentAlert();
+    //manque l'affichage du succes
+    if (this.entryData.status == 1) {
+      this.navCtrl.navigateBack("foundlist");
+    } else{
+  
+      this.navCtrl.navigateBack("lostlist");
+    
+    }
   }
 }
-

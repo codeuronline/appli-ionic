@@ -10,15 +10,14 @@ export class LostlistPage implements OnInit {
   // Créer deux propriétés
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
-  // Un tableau
   entryData = [];
-  onedata = [];
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
     this.getEntry();
   }
 
   ngOnInit() {
+    
   }
   getEntry() {
     this.readAPI(this.bdUrl).subscribe(data => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
+import { NavController } from '@ionic/angular';
 import { FormGroup,FormBuilder } from '@angular/forms';
 
 @Component({
@@ -25,7 +26,7 @@ export class LostPage implements OnInit {
     });
   
   }
-
+  
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicForm.get('date').setValue(date, { onlyself: true });
@@ -40,7 +41,8 @@ export class LostPage implements OnInit {
       subscribe(
         (res) => {console.log("SUCCES ===", res);
        
-      })
+        })
+  
   }
 }
     

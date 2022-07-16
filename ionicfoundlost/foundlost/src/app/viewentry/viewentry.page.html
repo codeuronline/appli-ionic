@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-      <ion-back-button  defaultHref="/lostlist" text="retour" routerDirection="backward" slot="start"></ion-back-button>
+      <!-- <ion-back-button  defaultHref="lostflist" text="Retour" slot="start"></ion-back-button> -->
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
     <ion-title>
       OBJET N°: {{id}} 
     </ion-title> 
@@ -16,9 +19,9 @@
       <ion-input formControlName="description" type="text" [value]="entryData.description" required></ion-input>
     </ion-item>
     <ion-item lines="full"> 
-      <ion-label>Status: {{etat}}</ion-label>
+      <ion-label>Status : {{etat}}</ion-label>
       <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
-     <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="entryData.status" [checked]="entryData.status==1" required></ion-toggle> 
+     <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="entryData.status" checked="{{myValue}}" required></ion-toggle> 
     </ion-item>
     <ion-item lines="full">
       <ion-label>Date</ion-label>
