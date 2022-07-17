@@ -7,14 +7,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+  <form id="formFound" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item lines="full">
       <ion-label>Descr.</ion-label>
       <ion-input formControlName="description" type="text" placeholder="Description de l'objet trouvé"required></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label >Date</ion-label>
-      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
+      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate"></ion-datetime>
     </ion-item>
    <ion-item lines="full">
       <ion-label >Lieu</ion-label>

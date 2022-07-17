@@ -61,5 +61,6 @@ export class FoundPage implements OnInit {
         (res) => {console.log("SUCCES ===", res);     
         })
     this.presentAlert();
+    this.ionicForm.reset();
   }
 }

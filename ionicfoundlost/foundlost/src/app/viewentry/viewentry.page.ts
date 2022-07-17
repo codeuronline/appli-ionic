@@ -2,7 +2,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  routerHref ="home"
+  routerHref = "home"
   handlerMessagelost = '';
   roleMessage = '';
   id = this.activatedRouter.snapshot.paramMap.get('id');
@@ -33,30 +33,53 @@ export class ViewentryPage implements OnInit {
   myCheckedPhoto = new Boolean;
 
   constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
-  
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Confirmer la Suppression',
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'cancel',
-          handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
-        }
-      ]
-    });
 
-    await alert.present();
+  async presentAlert(etat) {
+    switch (etat) {
+      case "delete":
 
-    const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
+        const alertDelete = await this.alertController.create({
+          header: 'Confirmer la Suppression',
+          buttons: [
+            {
+              text: 'Annuler',
+              role: 'cancel',
+              handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
+            },
+            {
+              text: 'OK',
+              role: 'confirm',
+              handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
+            }
+          ]
+        });
+        await alertDelete.present();
+
+        var { role } = await alertDelete.onDidDismiss();
+        this.roleMessage = `Dismissed with role: ${role}`;
+
+
+        break;
+      case "update":
+        const alertUpdate = await this.alertController.create({
+          header: 'Confirmer la Modification',
+          buttons: [
+            {
+              text: 'OK',
+              role: 'confirm',
+              handler: () => { this.handlerMessagelost = 'Modification Confirmée'; }
+            }
+          ]
+        });
+        await alertUpdate.present();
+
+        var { role } = await alertUpdate.onDidDismiss();
+        this.roleMessage = `Dismissed with role: ${role}`; break;
+
+    }
+
+
   }
-
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
@@ -91,7 +114,7 @@ export class ViewentryPage implements OnInit {
       };
       console.log("entrydata:", this.entryData);
       this.etatStatus();
-  
+
       // console.log('entrydata[0]:', this.entryData[0]);
     });
     // fin boucle for
@@ -104,26 +127,26 @@ export class ViewentryPage implements OnInit {
     if (this.myValue == false) {
       this.etat = "Perdu";
     }
-    
-    
+
+
   }
   myChangePhoto($event) {
     this.myCheckedPhoto = !this.myCheckedPhoto;
   }
 
   etatStatus() {
-    if (this.entryData.status==1) {
+    if (this.entryData.status == 1) {
       this.etat = "Trouvé";
     } else {
       this.etat = "Perdu";
     }
-  
+
   }
-  
+
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-  
+
   submit() {
     // formObj recoit l'etat des valeurs du formulaire
     let formObj = this.ionicFormView.value;
@@ -141,7 +164,7 @@ export class ViewentryPage implements OnInit {
     if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
     if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
     if (formObj.email == null) { formObj.email = this.entryData.email; }
-    
+
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
@@ -151,15 +174,17 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
+    this.presentAlert("update")
+    this.ionicFormView.reset();
   }
-  
+
   goBack() {
     if (this.entryData.status == 1) {
       this.navCtrl.navigateBack("foundlist");
-    } else{
-  
+    } else {
+
       this.navCtrl.navigateBack("lostlist");
-    
+
     }
 
   }
@@ -169,32 +194,33 @@ export class ViewentryPage implements OnInit {
         console.log("SUCCES ===", res)
       }
     )
-    this.presentAlert();
+    this.presentAlert("delete");
+    this.goBack();
     //manque l'affichage du succes
-    
+
   }
   loadImageFromDevice(event) {
 
     const file = event.target.files[0];
-  
+
     const reader = new FileReader();
-  
+
     reader.readAsArrayBuffer(file);
-  
+
     reader.onload = () => {
-  
+
       // get the blob of the image:
       let blob: Blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-  
+
       // create blobURL, such that we could use it in an image element:
       let blobURL: string = URL.createObjectURL(blob);
-  
+
     };
-  
+
     reader.onerror = (error) => {
-  
+
       //handle errors
-  
+
     };
   };
 }

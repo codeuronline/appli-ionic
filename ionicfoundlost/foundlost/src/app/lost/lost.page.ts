@@ -54,7 +54,7 @@ export class LostPage implements OnInit {
   }
   
   submitForm() {
-    //
+    // tester sur le formulaire est valide -> a faire
     let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);    
     console.log(serializedForm);
@@ -64,6 +64,7 @@ export class LostPage implements OnInit {
        
         })
     this.presentAlert();
+    this.ionicForm.reset();
   }
 }
     
