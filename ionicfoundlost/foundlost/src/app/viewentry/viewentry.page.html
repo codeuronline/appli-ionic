@@ -1,61 +1,65 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-back-button defaultHref="{{routerHref}}" (tap)="goBack()" text="Retour" slot="start" routerDirection="backward"></ion-back-button>
-      </ion-buttons>
+      <ion-back-button defaultHref="{{routerHref}}" (tap)="goBack()" text="Retour" slot="start"
+        routerDirection="backward"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      OBJET N°: {{id}} 
-    </ion-title> 
+      OBJET N°: {{id}}
+    </ion-title>
     <ion-button (click)="delete()" slot="end">
       <ion-icon name="trash"></ion-icon>
-   </ion-button> 
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-  <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
-    <ion-item lines="full">
-      <ion-label >Descr.</ion-label>
-      <ion-input formControlName="description" type="text" [value]="entryData.description" required></ion-input>
+<form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
+  <ion-item lines="full">
+    <ion-label>Descr.</ion-label>
+    <ion-input formControlName="description" type="text" [value]="entryData.description" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Status : {{etat}}</ion-label>
+    <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
+    <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="myValue" checked="{{myValue}}"
+      required></ion-toggle>
+  </ion-item>
+  <ion-item slot="start" lines="full">
+    <ion-label>Date</ion-label>
+    <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required>
+    </ion-datetime>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Lieu :</ion-label>
+    <ion-input formControlName="location" type="text" [value]="entryData.location" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Prénom : </ion-label>
+    <ion-input formControlName="firstname" type="text" [value]="entryData.firstname" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Nom : </ion-label>
+    <ion-input formControlName="lastname" type="text" [value]="entryData.lastname" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Email</ion-label>
+    <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Photo </ion-label>
+    <ion-toggle (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture"> checked="{{myOptionPicture}}"</ion-toggle>
+    <ion-item *ngIf="myOptionPicture">
+      <ion-button expand="full">
+        <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+        <ion-label for="photo" slot="end">Upload photo</ion-label>
+      </ion-button>
+      <input type="file" (change)="loadImageFromDevice($event)" id="picture" accept="image/png, image/jpeg"
+        placeholder="photo de l'objet" />
     </ion-item>
-    <ion-item lines="full"> 
-      <ion-label>Status : {{etat}}</ion-label>
-      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
-     <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="entryData.status" checked="{{myValue}}" required></ion-toggle> 
-    </ion-item>
-    <ion-item  slot="start" lines="full">
-      <ion-label>Date</ion-label>
-      <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required></ion-datetime>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label>Lieu :</ion-label>
-      <ion-input formControlName="location"type="text" [value]="entryData.location" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label>Prénom : </ion-label>
-      <ion-input formControlName="firstname" type="text" [value]="entryData.firstname" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label>Nom : </ion-label>
-      <ion-input formControlName="lastname" type="text" [value]="entryData.lastname" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label>Email</ion-label>
-      <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
-    </ion-item>
-    <!-- <ion-item lines="full"> 
-      <ion-label>Photo </ion-label>
-     <ion-toggle (ionChange)="myChangePhoto($event)" checked="{{myCheckedPhoto}}"></ion-toggle> 
-     <ion-button *ngIf="myCheckedPhoto" expand="full">
-      <ion-icon   lazy="true" slot="start" name="image"></ion-icon>
-      <ion-label for="photo" slot="end">Upload photo</ion-label>
-    </ion-button>
-      <input type="file" (change)="loadImageFromDevice($event)" id="file-input"
-        accept="image/png, image/jpeg" placeholder="photo de l'objet" />
-    </ion-item> -->
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="warning" expand="block">MODIFIER</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
-
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="warning" expand="block">MODIFIER</ion-button>
+    </ion-col>
+  </ion-row>
+</form>

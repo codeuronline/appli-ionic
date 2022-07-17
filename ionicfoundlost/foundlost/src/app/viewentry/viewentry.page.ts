@@ -27,17 +27,18 @@ export class ViewentryPage implements OnInit {
     firstname: null,
     lastname: null,
     email: null,
+    checkedpicture: null,
+    picture:null,
   };
   etat = new String;
   myValue = new Boolean;
-  myCheckedPhoto = new Boolean;
+  myOptionPicture = new Boolean;
 
   constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
 
   async presentAlert(etat) {
     switch (etat) {
       case "delete":
-
         const alertDelete = await this.alertController.create({
           header: 'Confirmer la Suppression',
           buttons: [
@@ -54,11 +55,8 @@ export class ViewentryPage implements OnInit {
           ]
         });
         await alertDelete.present();
-
         var { role } = await alertDelete.onDidDismiss();
         this.roleMessage = `Dismissed with role: ${role}`;
-
-
         break;
       case "update":
         const alertUpdate = await this.alertController.create({
@@ -72,10 +70,8 @@ export class ViewentryPage implements OnInit {
           ]
         });
         await alertUpdate.present();
-
         var { role } = await alertUpdate.onDidDismiss();
         this.roleMessage = `Dismissed with role: ${role}`; break;
-
     }
 
 
@@ -92,11 +88,13 @@ export class ViewentryPage implements OnInit {
       firstname: null,
       lastname: null,
       email: null,
+      checkedpicture: null,
+      picture: null,
     });
     this.myValue = (this.entryData.status == 1) ? true : false;
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.etat = (this.myValue) ? "Trouvé" : "Perdu";
-    this.myCheckedPhoto = false;
+    this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -131,7 +129,7 @@ export class ViewentryPage implements OnInit {
 
   }
   myChangePhoto($event) {
-    this.myCheckedPhoto = !this.myCheckedPhoto;
+    this.myOptionPicture = !this.myOptionPicture
   }
 
   etatStatus() {
@@ -160,12 +158,14 @@ export class ViewentryPage implements OnInit {
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
+    formObj.checkedpicture = (this.myOptionPicture == true) ? 1 : 0;
+    formObj.picture = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') :this.entryData.picture ;// ici picture est le nom du fichier
     if (formObj.location == null) { formObj.location = this.entryData.location }
     if (formObj.date == null) { formObj.date = this.entryData.date; }
     if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
     if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
     if (formObj.email == null) { formObj.email = this.entryData.email; }
-
+    if (formObj.picture==null){formObj.picture = this.entryData.picture} //picture est le blob du fichier
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);

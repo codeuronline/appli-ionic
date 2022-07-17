@@ -44,6 +44,7 @@ export class LostPage implements OnInit {
       firstname: '',
       lastname: '',
       email: '',
+      checkedpicture : false
     });
   
   }

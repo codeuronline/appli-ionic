@@ -32,7 +32,9 @@ export class FoundlistPage implements OnInit {
           "location": data[i].location,
           "firstname": data[i].firstname,
           "lastname": data[i].lastname,
-          "email": data[i].email
+          "email": data[i].email,
+          "checkedpicture": data[i].checkedpicture,
+          "picture":data[i].picture,
         };
       } // fin boucle for
     }); // fin subscribe 

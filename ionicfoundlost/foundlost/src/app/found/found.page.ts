@@ -44,6 +44,8 @@ export class FoundPage implements OnInit {
       firstname: '',
       lastname: '',
       email: '',
+      checkedpicture: false,
+      picture:'',
     });
   
   }
