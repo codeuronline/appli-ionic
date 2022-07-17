@@ -147,7 +147,7 @@ export class ViewentryPage implements OnInit {
     return this.http.get(URL);
   }
 
-  submit() {
+  onSubmit() {
     // formObj recoit l'etat des valeurs du formulaire
 
     let formObj = this.ionicFormView.value;
@@ -175,8 +175,9 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
+        this.presentAlert("update");
     if (this.ionicFormView.valid) {
-      this.presentAlert("update")
+
       this.ionicFormView.reset();
     }
 

@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-  <form [formGroup]="ionicFormView" (ngSubmit)="submit()" novalidate>
+  <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
       <ion-label >Descr.</ion-label>
       <ion-input formControlName="description" type="text" [value]="entryData.description" required></ion-input>
