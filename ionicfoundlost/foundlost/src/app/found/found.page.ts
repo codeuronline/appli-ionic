@@ -60,7 +60,10 @@ export class FoundPage implements OnInit {
       subscribe(
         (res) => {console.log("SUCCES ===", res);     
         })
-    this.presentAlert();
-    this.ionicForm.reset();
+    if (this.ionicForm.valid) {
+      this.presentAlert();
+      this.ionicForm.reset();  
+    }
+    
   }
 }

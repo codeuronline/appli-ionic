@@ -63,8 +63,11 @@ export class LostPage implements OnInit {
         (res) => {console.log("SUCCES ===", res);
        
         })
-    this.presentAlert();
-    this.ionicForm.reset();
+    if (this.ionicForm.valid) {
+      this.presentAlert();
+      this.ionicForm.reset();
+    }
+   
   }
 }
     

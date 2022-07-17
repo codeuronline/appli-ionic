@@ -149,6 +149,7 @@ export class ViewentryPage implements OnInit {
 
   submit() {
     // formObj recoit l'etat des valeurs du formulaire
+
     let formObj = this.ionicFormView.value;
     // charge les valeurs qui n'ont pas ete modifié
     formObj.id_object = this.entryData.id_object;
@@ -174,8 +175,11 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
-    this.presentAlert("update")
-    this.ionicFormView.reset();
+    if (this.ionicFormView.valid) {
+      this.presentAlert("update")
+      this.ionicFormView.reset();
+    }
+
   }
 
   goBack() {
@@ -199,6 +203,7 @@ export class ViewentryPage implements OnInit {
     //manque l'affichage du succes
 
   }
+  //traitement des images
   loadImageFromDevice(event) {
 
     const file = event.target.files[0];
