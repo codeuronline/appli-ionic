@@ -1,5 +1,5 @@
 # Application mobile 
-### plateforme developpement : Ionic / Angular
+### Plateforme developpement : Ionic / Angular
 ### BACK : Server APACHE/MYSQL(foundlost) ET SERVER IONIC/FIREBASE(ToDoList)
 ### API : PHP(foundlost) ET JAVASCRIPT (Navigation/ToDoList)
 ### FRONT : IONIC / ANGULAR
