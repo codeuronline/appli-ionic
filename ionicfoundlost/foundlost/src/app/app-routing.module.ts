@@ -20,31 +20,21 @@ const routes: Routes = [
     path: 'lost',
     loadChildren: () => import('./lost/lost.module').then(m => m.LostPageModule)
   },
-  {
-    path: 'foundlist/:id',
-    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
-  },
-  {
-    path: 'lostlist/:id',
-    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule)
-  }
-  ,{
+{
     path: 'foundlist',
     loadChildren: () => import('./foundlist/foundlist.module').then(m => m.FoundlistPageModule)
   },
-  {
-    path: 'viewentry/:id',
-    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
-     pathMatch: 'prefix'
-  },{
+ {
     path: 'lostlist',
     loadChildren: () => import('./lostlist/lostlist.module').then(m => m.LostlistPageModule)
   },
- 
+  {
+    path: 'lostlist/viewentry/:id',
+    loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
+  },
   {
      path: 'foundlist/viewentry/:id',
      loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
-     pathMatch: 'prefix',
    },
 ];
 

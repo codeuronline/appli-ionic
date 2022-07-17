@@ -1,8 +1,7 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-      <!-- <ion-back-button  defaultHref="lostflist" text="Retour" slot="start"></ion-back-button> -->
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="home"></ion-back-button>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="{{routerHref}}" (tap)="goBack()" text="Retour" slot="start" routerDirection="backward"></ion-back-button>
       </ion-buttons>
     <ion-title>
       OBJET N°: {{id}} 
@@ -23,7 +22,7 @@
       <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
      <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="entryData.status" checked="{{myValue}}" required></ion-toggle> 
     </ion-item>
-    <ion-item lines="full">
+    <ion-item  slot="start" lines="full">
       <ion-label>Date</ion-label>
       <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required></ion-datetime>
     </ion-item>
@@ -42,6 +41,17 @@
     <ion-item lines="full">
       <ion-label formControlName="email" name="email" required>Email</ion-label>
       <ion-input  type="email" [value]="entryData.email"></ion-input>
+    </ion-item>
+    <ion-item lines="full"> 
+      <ion-label>Photo </ion-label>
+      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
+     <ion-toggle (ionChange)="myChangePhoto($event)" checked="{{myCheckedPhoto}}" required></ion-toggle> 
+     <ion-button *ngIf="myCheckedPhoto" expand="full">
+      <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+      <ion-label slot="end">Upload Image</ion-label>
+      <input type="file" (change)="loadImageFromDevice($event)" id="file-input"
+        accept="image/png, image/jpeg">
+    </ion-button>
     </ion-item>
     <ion-row>
       <ion-col>

@@ -12,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  handlerMessagelost= '';
+  routerHref ="home"
+  handlerMessagelost = '';
   roleMessage = '';
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
@@ -29,6 +30,8 @@ export class ViewentryPage implements OnInit {
   };
   etat = new String;
   myValue = new Boolean;
+  myCheckedPhoto = new Boolean;
+
   constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
   
   async presentAlert() {
@@ -67,8 +70,10 @@ export class ViewentryPage implements OnInit {
       lastname: null,
       email: null,
     });
-    this.myValue = (this.entryData.status==1)?true:false;
+    this.myValue = (this.entryData.status == 1) ? true : false;
+    this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.etat = (this.myValue) ? "Trouvé" : "Perdu";
+    this.myCheckedPhoto = false;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -85,7 +90,7 @@ export class ViewentryPage implements OnInit {
         }
       };
       console.log("entrydata:", this.entryData);
-       this.etatStatus();
+      this.etatStatus();
   
       // console.log('entrydata[0]:', this.entryData[0]);
     });
@@ -102,6 +107,10 @@ export class ViewentryPage implements OnInit {
     
     
   }
+  myChangePhoto($event) {
+    this.myCheckedPhoto = !this.myCheckedPhoto;
+  }
+
   etatStatus() {
     if (this.entryData.status==1) {
       this.etat = "Trouvé";
@@ -143,6 +152,17 @@ export class ViewentryPage implements OnInit {
 
         })
   }
+  
+  goBack() {
+    if (this.entryData.status == 1) {
+      this.navCtrl.navigateBack("foundlist");
+    } else{
+  
+      this.navCtrl.navigateBack("lostlist");
+    
+    }
+
+  }
   delete() {
     this.userService.deleteObjet(this.id).subscribe(
       (res) => {
@@ -151,12 +171,30 @@ export class ViewentryPage implements OnInit {
     )
     this.presentAlert();
     //manque l'affichage du succes
-    if (this.entryData.status == 1) {
-      this.navCtrl.navigateBack("foundlist");
-    } else{
-  
-      this.navCtrl.navigateBack("lostlist");
     
-    }
   }
+  loadImageFromDevice(event) {
+
+    const file = event.target.files[0];
+  
+    const reader = new FileReader();
+  
+    reader.readAsArrayBuffer(file);
+  
+    reader.onload = () => {
+  
+      // get the blob of the image:
+      let blob: Blob = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
+  
+      // create blobURL, such that we could use it in an image element:
+      let blobURL: string = URL.createObjectURL(blob);
+  
+    };
+  
+    reader.onerror = (error) => {
+  
+      //handle errors
+  
+    };
+  };
 }

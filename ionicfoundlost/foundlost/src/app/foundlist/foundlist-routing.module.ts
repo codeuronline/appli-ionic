@@ -11,7 +11,6 @@ const routes: Routes = [
   {
     path: 'viewentry/:id',
     component: ViewentryPage,
-    pathMatch: 'prefix'
   }
 ];
 

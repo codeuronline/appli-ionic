@@ -5,7 +5,7 @@ import { ViewentryPage } from './viewentry.page';
 
 const routes: Routes = [
    {
-    path: ':id',
+    path: '',
     component: ViewentryPage
    },
 
