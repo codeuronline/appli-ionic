@@ -21,7 +21,7 @@
   <ion-item lines="full">
     <ion-label>Status : {{etat}}</ion-label>
     <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
-    <ion-toggle (ionChange)="myChange($event)" formControlName="status" [value]="myValue" checked="{{myValue}}"
+    <ion-toggle (ionChange)="myChange($event)" formControlName="entryData.status" [value]="myValue" checked="{{myValue}}"
       required></ion-toggle>
   </ion-item>
   <ion-item slot="start" lines="full">
