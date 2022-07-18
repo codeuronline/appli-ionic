@@ -21,9 +21,9 @@
   <ion-item lines="full">
     <ion-label>Status : {{etat}}</ion-label>
     <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
-    <ion-toggle (ionChange)="myChange($event)" formControlName="entryData.status" [value]="myValue" checked="{{myValue}}"
-      required></ion-toggle>
-  </ion-item>{{myValue}}
+    <ion-toggle formControlName="status" (ionChange)="myChange($event)"  [value]="entryData.status" checked="{{entryData.status}}"
+      required></ion-toggle> 
+  </ion-item>
   <ion-item slot="start" lines="full">
     <ion-label>Date</ion-label>
     <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required>
@@ -47,7 +47,7 @@
   </ion-item>
   <ion-item lines="full">
     <ion-label>Photo </ion-label>
-    <ion-toggle (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture"> checked="{{myOptionPicture}}"</ion-toggle>
+    <ion-toggle (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture" checked="{{myOptionPicture}}"></ion-toggle>
     <ion-item *ngIf="myOptionPicture">
       <ion-button expand="full">
         <ion-icon lazy="true" slot="start" name="image"></ion-icon>
