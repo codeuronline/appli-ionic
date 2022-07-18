@@ -52,8 +52,7 @@
       <span *ngIf="myOptionPicture">
       <ion-button expand="full">
         <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-        <ion-label for="photo" slot="end">Upload photo</ion-label>
-      </ion-button>
+       </ion-button>
       <input type="file" (change)="loadImageFromDevice($event)" id="picture" accept="image/png, image/jpeg"
         placeholder="photo de l'objet" />
       </span>
