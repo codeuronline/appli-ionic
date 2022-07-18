@@ -23,7 +23,7 @@
     <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
     <ion-toggle (ionChange)="myChange($event)" formControlName="entryData.status" [value]="myValue" checked="{{myValue}}"
       required></ion-toggle>
-  </ion-item>
+  </ion-item>{{myValue}}
   <ion-item slot="start" lines="full">
     <ion-label>Date</ion-label>
     <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required>

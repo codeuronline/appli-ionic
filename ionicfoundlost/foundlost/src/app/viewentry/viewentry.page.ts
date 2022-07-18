@@ -2,8 +2,9 @@ import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -12,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./viewentry.page.scss'],
 })
 export class ViewentryPage implements OnInit {
-  routerHref = "home"
+  routerHref = "home";
+  isSubmitted = false;
   handlerMessagelost = '';
   roleMessage = '';
   id = this.activatedRouter.snapshot.paramMap.get('id');
@@ -79,21 +81,21 @@ export class ViewentryPage implements OnInit {
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
+    this.myValue = (this.entryData.status == 1) ? true : false;
+    this.etat = (this.myValue==true) ? "Trouvé" : "Perdu";
+    this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.ionicFormView = this.formBuilder.group({
       id_object: this.id,
-      status: this.entryData.status,
+      status: this.myValue,
       description: null,
-      location: null,
+      location: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
       date: null,
-      firstname: null,
-      lastname: null,
-      email: null,
+      firstname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
+      lastname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
+      email: new FormControl([null,[Validators.required,Validators.email]]),
       checkedpicture: null,
       picture: null,
     });
-    this.myValue = (this.entryData.status == 1) ? true : false;
-    this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
-    this.etat = (this.myValue) ? "Trouvé" : "Perdu";
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
   }
   getDate(e) {
@@ -117,6 +119,9 @@ export class ViewentryPage implements OnInit {
     });
     // fin boucle for
   }
+  get errorControl() {
+    return this.ionicFormView.controls;
+  }
   myChange($event) {
     this.myValue = !this.myValue;
     if (this.myValue == true) {
@@ -125,7 +130,6 @@ export class ViewentryPage implements OnInit {
     if (this.myValue == false) {
       this.etat = "Perdu";
     }
-
 
   }
   myChangePhoto($event) {
@@ -146,9 +150,9 @@ export class ViewentryPage implements OnInit {
   }
 
   onSubmit() {
-    // formObj recoit l'etat des valeurs du formulaire
-
-    let formObj = this.ionicFormView.value;
+    this.isSubmitted = true;
+    if (!this.ionicFormView.controls) { } else {
+      let formObj = this.ionicFormView.value;
     // charge les valeurs qui n'ont pas ete modifié
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
@@ -181,6 +185,9 @@ export class ViewentryPage implements OnInit {
       this.ionicFormView.reset();
     }
 
+    }
+    // formObj recoit l'etat des valeurs du formulaire
+    
   }
 
   goBack() {
