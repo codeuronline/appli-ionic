@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { AlertController,NavController } from '@ionic/angular';
-import { FormGroup,FormBuilder } from '@angular/forms';
+import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-lost',
@@ -9,7 +9,7 @@ import { FormGroup,FormBuilder } from '@angular/forms';
   styleUrls: ['./lost.page.scss'],
 })
 export class LostPage implements OnInit {
-  
+  isSubmitted = false;
   handlerMessagelost = '';
   roleMessage= '';
   ionicForm: FormGroup;
@@ -37,37 +37,51 @@ export class LostPage implements OnInit {
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      description: '',
-      status: 0,
-      location: '',
-      date: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      checkedpicture : false
+      description:  [null, [Validators.required]],
+      status: [this.defaultValue],
+      location: [null, [Validators.required, Validators.maxLength(25)]],
+      date: [null, [Validators.required]],
+      firstname: [null, [Validators.required, Validators.maxLength(25)]],
+      lastname:  [null, [Validators.required, Validators.maxLength(25)]],
+      email: [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      checkedpicture: [false],
+      filename: [''],
     });
   
   }
-  
+  get errorControl() {
+    return this.ionicForm.controls;
+    }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
+
   
   submitForm() {
     // tester sur le formulaire est valide -> a faire
-    let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}
-    let serializedForm = JSON.stringify(formObj);    
-    console.log(serializedForm);
-    this.apiService.submitForm(serializedForm).
-      subscribe(
-        (res) => {console.log("SUCCES ===", res);
-       
-        })
-    if (this.ionicForm.valid) {
-      this.presentAlert();
-      this.ionicForm.reset();
+    this.isSubmitted = true;
+    if (!this.ionicForm.valid) {
+      console.log('Veuillez renseigner tous les champs!')
+      return false;
+    } else {
+      if (this.ionicForm.valid) {
+      let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}
+      let serializedForm = JSON.stringify(formObj);    
+      console.log(serializedForm);
+      this.apiService.submitForm(serializedForm).
+        subscribe(
+          (res) => {console.log("SUCCES ===", res); 
+          })
+        this.presentAlert();
+        this.ionicForm.reset();
+        this.isSubmitted = false;
+      }
     }
+
+
+
+    
    
   }
 }

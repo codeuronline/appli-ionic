@@ -30,7 +30,7 @@ export class ViewentryPage implements OnInit {
     lastname: null,
     email: null,
     checkedpicture: null,
-    picture:null,
+    picture: null,
   };
   etat = new String;
   myValue = new Boolean;
@@ -82,7 +82,7 @@ export class ViewentryPage implements OnInit {
     console.log(this.id);
     this.getEntry();
     this.myValue = (this.entryData.status == 1) ? true : false;
-    this.etat = (this.myValue==true) ? "Trouvé" : "Perdu";
+    this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.ionicFormView = this.formBuilder.group({
       id_object: this.id,
@@ -90,9 +90,9 @@ export class ViewentryPage implements OnInit {
       description: null,
       location: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
       date: null,
-      firstname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
-      lastname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
-      email: new FormControl([null,[Validators.required,Validators.email]]),
+      firstname: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
+      lastname: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
+      email: new FormControl([null, [Validators.required, Validators.email]]),
       checkedpicture: null,
       picture: null,
     });
@@ -150,9 +150,9 @@ export class ViewentryPage implements OnInit {
   }
 
   onSubmit() {
-    this.isSubmitted = true;
-    if (!this.ionicFormView.controls) { } else {
-      let formObj = this.ionicFormView.value;
+
+    let formObj = this.ionicFormView.value;
+    console.log("essai ");
     // charge les valeurs qui n'ont pas ete modifié
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
@@ -163,13 +163,13 @@ export class ViewentryPage implements OnInit {
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     formObj.checkedpicture = (this.myOptionPicture == true) ? 1 : 0;
-    formObj.picture = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') :this.entryData.picture ;// ici picture est le nom du fichier
+    formObj.picture = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') : this.entryData.picture;// ici picture est le nom du fichier
     if (formObj.location == null) { formObj.location = this.entryData.location }
     if (formObj.date == null) { formObj.date = this.entryData.date; }
     if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
     if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
     if (formObj.email == null) { formObj.email = this.entryData.email; }
-    if (formObj.picture==null){formObj.picture = this.entryData.picture} //picture est le blob du fichier
+    if (formObj.picture == null) { formObj.picture = this.entryData.picture } //picture est le blob du fichier
     console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
@@ -179,27 +179,21 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
-        this.presentAlert("update");
-    if (this.ionicFormView.valid) {
-
-      this.ionicFormView.reset();
-    }
-
-    }
-    // formObj recoit l'etat des valeurs du formulaire
+    this.presentAlert("update");
     
+    this.navCtrl.navigateBack(this.routerHref);
+    //this.ionicFormView.reset();
+
+    // formObj recoit l'etat des valeurs du formulaire
+
   }
 
   goBack() {
-    if (this.entryData.status == 1) {
-      this.navCtrl.navigateBack("foundlist");
-    } else {
-
-      this.navCtrl.navigateBack("lostlist");
-
-    }
+    this.navCtrl.navigateBack(this.routerHref);
 
   }
+
+
   delete() {
     this.userService.deleteObjet(this.id).subscribe(
       (res) => {

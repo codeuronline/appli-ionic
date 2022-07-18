@@ -9,37 +9,68 @@
 
 <ion-content>
   <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-    
+
     <ion-item lines="full">
-      <ion-label >Descr.</ion-label>
-      <ion-input formControlName="description" type="text" placeholder="Description de l'objet perdu" required></ion-input>
+      <ion-label>Descr.</ion-label>
+      <ion-input formControlName="description" type="text" placeholder="Description de l'objet perdu" required>
+      </ion-input>
     </ion-item>
-    
+    <!-- Error messages Description-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
+      la Description doit être définie.
+    </span>
     <ion-item lines="full">
       <ion-label>Date</ion-label>
-      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date"  [value]="defaultDate"></ion-datetime>
+      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate">
+      </ion-datetime>
     </ion-item>
-
+    <!-- Error messages Date-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
+      la Date doit être définie.
+    </span>
     <ion-item lines="full">
       <ion-label>Lieu</ion-label>
       <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
     </ion-item>
-
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.required">
+      la Localisation doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.maxlength">
+      la Localisation est limité à 25 caractère
+    </span>
     <ion-item lines="full">
       <ion-label>Prénom</ion-label>
       <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
     </ion-item>
-
+    <!-- Error messages Prénom -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
+      le Prénom doit être défini.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.maxlength">
+      le Prénom est limité à 25 caractère
+    </span>
     <ion-item lines="full">
       <ion-label>Nom</ion-label>
       <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
     </ion-item>
-
+    <!-- Error messages Nom-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
+      le Nom doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.maxlength">
+      le Nom est limité à 25 caractère
+    </span>
     <ion-item lines="full">
       <ion-label>Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Votre Email" required></ion-input>
     </ion-item>
-    
+    <!-- Error messages Email-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      l'Email doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      l'Email doit être valide
+    </span>
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="danger" expand="block">ENVOYER</ion-button>
