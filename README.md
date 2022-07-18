@@ -36,7 +36,7 @@
 #### -> PAGE (VOIR) -> UPDATE l'OBJET -> FINIE
 
 #####-> Alert  UPDATE -> FINIE
-######-> TEST avant Mise a jour -> EN COURS
+######-> TEST avant Mise a jour -> FINIE
 
 #### -> COMPLEMENT DE PHOTO OPTIONNEL SUR FORMULAIRE -> FINIE
 
