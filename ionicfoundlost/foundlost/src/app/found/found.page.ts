@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import {  AlertController } from "@ionic/angular";
+import { AlertController } from "@ionic/angular";
 
 @Component({
   selector: 'app-found',
@@ -39,15 +39,18 @@ export class FoundPage implements OnInit {
     this.ionicForm = this.formBuilder.group({
       description: '',
       status: 1,
-      location: '',
-      date: '',
-      firstname: '',
-      lastname: '',
-      email: '',
+      location: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
+      date: null,
+      firstname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
+      lastname: new FormControl([null,[Validators.required,Validators.maxLength(25)]]),
+      email: new FormControl([null,[Validators.required,Validators.email]]),
       checkedpicture: false,
-      picture:'',
+      filename:'',
     });
   
+  }
+  get errorControl() {
+    return this.ionicForm.controls;
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
