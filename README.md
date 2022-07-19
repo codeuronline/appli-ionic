@@ -1,8 +1,7 @@
 # Application mobile
 
 ```
-
-![Alt text](https://github.com/codeuronline/to/first.png)?raw=true "Image All APP - MOBILE")
+![Alt text](https://github.com/codeuronline/to/first.png?raw=true "Image All APP - MOBILE")
 ```
 
 
