@@ -29,7 +29,7 @@
 #### -> PAGES DECLARATIONS OBJETS(PERDUS/TROUVES) -> FINIES
 
 #####-> Alert CREATION D'OBJETS(PERDUS/TROUVES) -> FINIES
-#####-> TEST avant Validation -> FINIE
+###-> TEST avant Validation -> FINIE
 
 #### -> PAGES LISTE DES OBJETS PERDUS/TROUVES -> FINIES
 
@@ -42,7 +42,7 @@
 #### -> PAGE (VOIR) -> UPDATE l'OBJET -> FINIE
 
 #####-> Alert  UPDATE -> FINIE
-######-> TEST avant Mise a jour -> FINIE
+###-> TEST avant Mise a jour -> FINIE
 
 #### -> COMPLEMENT DE PHOTO OPTIONNEL SUR FORMULAIRE -> FINIE
 
