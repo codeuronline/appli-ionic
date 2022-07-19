@@ -81,7 +81,7 @@ export class ViewentryPage implements OnInit {
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
-    this.myValue = (this.entryData.status == 1) ? true : false;
+    this.myValue = (this.entryData.status == 1) ? true : null;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.ionicFormView = this.formBuilder.group({
@@ -151,9 +151,11 @@ export class ViewentryPage implements OnInit {
 
   onSubmit() {
 
+    // creer un object ecoute
     let formObj = this.ionicFormView.value;
     console.log("essai ");
-    // charge les valeurs qui n'ont pas ete modifié
+    // test les changement selon l'ecoute 
+    // si l'objet ecoute est 
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
@@ -164,15 +166,18 @@ export class ViewentryPage implements OnInit {
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     formObj.checkedpicture = (this.myOptionPicture == true) ? 1 : 0;
     formObj.picture = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') : this.entryData.picture;// ici picture est le nom du fichier
-    if (formObj.location == null) { formObj.location = this.entryData.location }
-    if (formObj.date == null) { formObj.date = this.entryData.date; }
-    if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
-    if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
-    if (formObj.email == null) { formObj.email = this.entryData.email; }
-    if (formObj.picture == null) { formObj.picture = this.entryData.picture } //picture est le blob du fichier
-    console.log(formObj);// {name: '', description: ''}
+    
+    // if (formObj.description == null) { formObj.description = this.entryData.description; }
+    // if (formObj.status == null) { formObj.status = this.entryData.status }
+    // if (formObj.location == null) { formObj.location = this.entryData.location }
+    // if (formObj.date == null) { formObj.date = this.entryData.date; }
+    // if (formObj.firstname == null) { formObj.firstname = this.entryData.firstname; }
+    // if (formObj.lastname == null) { formObj.lastname = this.entryData.lastname; }
+    // if (formObj.email == null) { formObj.email = this.entryData.email; }
+    // if (formObj.picture == null) { formObj.picture = this.entryData.picture } //picture est le blob du fichier
+    // console.log(formObj);// {name: '', description: ''}
     let serializedForm = JSON.stringify(formObj);
-    console.log(serializedForm);
+    console.log("objet Json",serializedForm);
     this.userService.updateForm(serializedForm, this.id).
       subscribe(
         (res) => {
