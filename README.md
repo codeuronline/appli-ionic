@@ -1,7 +1,7 @@
 # Application mobile
 
 ```
-![Alt text]([(https://github.com/codeuronline/appli-ionic/blob/master/first.png)
+![appli-ionic first]([(https://github.com/codeuronline/appli-ionic/blob/master/first.png)
 ```
 
 
