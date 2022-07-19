@@ -5,12 +5,10 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div class="bg-img">
     <h1><b>Aujourd'hui</b></h1>
     <h3>{{ currentDate }}</h3>
-
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let task of tasks">
       <ion-item-sliding>
@@ -28,7 +26,6 @@
             <p>{{ task.hour }}</p>
           </ion-label>
         </ion-item>
-
       </ion-item-sliding>
     </ion-card>
     <!-- addtask -->
@@ -40,7 +37,6 @@
         </ion-button>
       </ion-item>
     </ion-card>
-
     <ion-button *ngIf="!addTask" (click)="showForm()" expand="block" class="add-button">
       <ion-icon name="add" slot="start"></ion-icon>
       Ajouter une tâche
