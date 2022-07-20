@@ -102,7 +102,6 @@ export class ViewentryPage implements OnInit {
         this.roleMessage = `Dismissed with role: ${role}`; break;
     }
 
-
   }
   ngOnInit() {
     console.log(this.id);
@@ -169,13 +168,10 @@ export class ViewentryPage implements OnInit {
     } else {
       this.etat = "Perdu";
     }
-
   }
-
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-
   onSubmit() {
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
@@ -190,9 +186,9 @@ export class ViewentryPage implements OnInit {
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
+    console.log(this.myOptionPicture);
     if (this.myOptionPicture == true) {
-      this.submitImageForm();
-      
+      this.submitImageForm();   
     }
     let serializedForm = JSON.stringify(formObj);
     console.log("objet Json", serializedForm);
@@ -234,10 +230,11 @@ export class ViewentryPage implements OnInit {
   }
   // traitement des images
   onFileChange($event) {
-    this.filename = $event.target.files[0].name;
+    const oldfilenemame = $event.target.files[0].name;
+    this.filename ="object_" + this.id + "." + this.getFileExtension(oldfilenemame);
     this.file = $event.target.files[0];
-    console.log(this.filename);
-    console.log(this.file);
+    console.log("filename",this.filename);
+    console.log("file", this.file);
   }
 
   async submitImageForm() {
@@ -246,7 +243,7 @@ export class ViewentryPage implements OnInit {
       "object_" + this.id + "." + this.getFileExtension(this.filename));
 
     try {
-      const response = await fetch('http://localhost/ionserver/upload', {
+      const response = await fetch('http://localhost/ionicserver/upload/', {
         method: 'POST',
         body: formData,
       });
