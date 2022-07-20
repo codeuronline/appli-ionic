@@ -4,6 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+<<<<<<< HEAD
+=======
+//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+>>>>>>> c7bc87bfe5e5f782eb024e5d0cd2771cec8fdc20
 
 
 
