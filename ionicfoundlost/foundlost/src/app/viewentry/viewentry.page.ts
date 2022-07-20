@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 
 
 
@@ -17,6 +18,8 @@ export class ViewentryPage implements OnInit {
   isSubmitted = false;
   handlerMessagelost = '';
   roleMessage = '';
+  //  ELEMENT de fichier à télécharger //
+  fichierAEnvoyer: File = null;
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   ionicFormView: FormGroup;
@@ -30,13 +33,29 @@ export class ViewentryPage implements OnInit {
     lastname: null,
     email: null,
     checkedpicture: null,
-    picture: null,
+    filename: null,
+    file: null,   
   };
+  // element de fichier uploader
+  file: null;
+  filename = new String;
+  extension= new String
+    ;
   etat = new String;
   myValue = new Boolean;
   myOptionPicture = new Boolean;
 
-  constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
+  envoiFichier(fichiers: FileList) {
+    this.fichierAEnvoyer = fichiers.item(0)
+  }
+  envoiFichierParLeService(){
+    // this.userService.postFile(this.fichierAEnvoyer).subscribe(resulat => {
+    
+    // }, erreur => {
+    //   console.log("Erreur lors de l'envoi du fichier : ", erreur);
+    // })
+  }
+    constructor(private alertController: AlertController, public userService: UserService, public http: HttpClient, public activatedRouter: ActivatedRoute, public formBuilder: FormBuilder, public navCtrl: NavController) { }
 
   async presentAlert(etat) {
     switch (etat) {
@@ -94,7 +113,8 @@ export class ViewentryPage implements OnInit {
       lastname: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
       email: new FormControl([null, [Validators.required, Validators.email]]),
       checkedpicture: null,
-      picture: null,
+      filename: null,
+      file:null,
     });
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
   }
@@ -153,7 +173,6 @@ export class ViewentryPage implements OnInit {
 
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
-    console.log("essai ");
     // test les changement selon l'ecoute 
     // si l'objet ecoute est 
     formObj.id_object = this.entryData.id_object;
@@ -164,8 +183,19 @@ export class ViewentryPage implements OnInit {
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
-    formObj.checkedpicture = (this.myOptionPicture == true) ? 1 : 0;
-    formObj.picture = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') : this.entryData.picture;// ici picture est le nom du fichier
+    if (this.myOptionPicture == true) {
+      formObj.checkedpicture = 1;
+      formObj.filename = "bob.png";
+      formObj.file = "A BIG BLOB"
+      formObj.filename= "object_"+this.id+ "."+ this.getFileExtension(formObj.filename);
+    } else {   
+      formObj.checkedpicture = 0;
+      formObj.filename = null;
+      formObj.file = null;
+    }
+         //formObj.filename = (this.ionicFormView.get('picture').value != null) ? this.ionicFormView.get('picture.value:') : this.entryData.filename// ici picture est le nom du fichier
+;
+    
     
     // if (formObj.description == null) { formObj.description = this.entryData.description; }
     // if (formObj.status == null) { formObj.status = this.entryData.status }
@@ -210,11 +240,27 @@ export class ViewentryPage implements OnInit {
     //manque l'affichage du succes
 
   }
+  envoyerFichier() {
+    
+  }
+ getFileExtension(filename)
+{
+  var ext = /^.+\.([^.]+)$/.exec(filename);
+  return ext == null ? "" : ext[1];
+}
   //traitement des images
+  seeImage(event) {
+    this.filename = "object_"+this.id +"."+ this.getFileExtension(event.target.files[0].name); 
+    this.file =event.target.files[0];
+  }
+  
   loadImageFromDevice(event) {
 
     const file = event.target.files[0];
+    const filename = event.target.files[0].name;
 
+    this.filename = "object_"+this.id +"."+this.getFileExtension(filename)
+    this.file = file;
     const reader = new FileReader();
 
     reader.readAsArrayBuffer(file);
@@ -234,5 +280,6 @@ export class ViewentryPage implements OnInit {
       //handle errors
 
     };
-  };
+  }
+
 }

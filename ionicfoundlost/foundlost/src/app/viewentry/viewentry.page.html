@@ -21,8 +21,8 @@
   <ion-item lines="full">
     <ion-label>Status : {{etat}}</ion-label>
     <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
-    <ion-toggle formControlName="status" (ionChange)="myChange($event)"  [value]="entryData.status" [checked]="etat"
-          required></ion-toggle> 
+    <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat"
+      required></ion-toggle>
   </ion-item>
   <ion-item slot="start" lines="full">
     <ion-label>Date</ion-label>
@@ -47,14 +47,18 @@
   </ion-item>
   <ion-item lines="full">
     <ion-label>Photo </ion-label>
-    <ion-toggle formControlName="checkedpicture"  (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture" checked="{{myOptionPicture}}"></ion-toggle>
-    <ion-item >
-      <span *ngIf="myOptionPicture">
-      <ion-button expand="full">
-        <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-       </ion-button>
-      <input type="file" (change)="loadImageFromDevice($event)" id="picture" accept="image/png, image/jpeg"
-        placeholder="photo de l'objet" />
+    <ion-toggle formControlName="checkedpicture" (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture"
+      checked="{{myOptionPicture}}"></ion-toggle>
+    <ion-item>
+      <span (*ngIf)="myOptionPicture">
+        <ion-item>
+          <ion-button expand="full">
+            <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+          </ion-button>
+          <input type="file" (change)="seeImage($event)" id="file" accept="image/png, image/jpeg"
+            placeholder="photo" />
+          <!-- <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/> -->
+        </ion-item>
       </span>
     </ion-item>
   </ion-item>
