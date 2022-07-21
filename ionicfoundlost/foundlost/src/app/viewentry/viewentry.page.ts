@@ -1,3 +1,4 @@
+// import { File } from '@awesome-cordova-plugins/file';
 import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -172,6 +173,24 @@ export class ViewentryPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
+  // async submitImageForm() {
+  //   let formData = new FormData();
+  //   formData.append('file', this.file,
+  //     "object_" + this.id + "." + this.getFileExtension(this.filename));
+
+  //   try {
+  //     const response = await fetch('http://localhost/ionicserver/upload/upload.php', {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(response.statusText);
+  //     }
+  //     console.log(response);
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
   onSubmit() {
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
@@ -188,7 +207,13 @@ export class ViewentryPage implements OnInit {
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     console.log(this.myOptionPicture);
     if (this.myOptionPicture == true) {
-      this.submitImageForm();   
+      //this.submitImageForm();   
+      formObj.filename = this.filename;
+      
+      let formData = new FormData();
+      formData.append('file', this.file,
+        "object_" + this.id + "." + this.getFileExtension(this.filename)); 
+      formObj.file = formData;
     }
     let serializedForm = JSON.stringify(formObj);
     console.log("objet Json", serializedForm);
@@ -237,24 +262,7 @@ export class ViewentryPage implements OnInit {
     console.log("file", this.file);
   }
 
-  async submitImageForm() {
-    let formData = new FormData();
-    formData.append('file', this.file,
-      "object_" + this.id + "." + this.getFileExtension(this.filename));
 
-    try {
-      const response = await fetch('http://localhost/ionicserver/upload/upload.php', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      console.log(response);
-    } catch (err) {
-      console.log(err)
-    }
-  }
 }
 
 
