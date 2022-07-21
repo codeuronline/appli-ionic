@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoundlistPage implements OnInit {
   id_object = null;
+
 // Créer deux propriétés
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=found";
+  imgUrl="http://localhost/ionicserver/upload/"
   // Un tableau
   entryData = [];
   constructor(public http: HttpClient) {
@@ -34,7 +36,8 @@ export class FoundlistPage implements OnInit {
           "lastname": data[i].lastname,
           "email": data[i].email,
           "checkedpicture": data[i].checkedpicture,
-          "picture":data[i].picture,
+          "filename": data[i].picture,
+          "filenameWithUrl":this.imgUrl+data[i].filename,
         };
       } // fin boucle for
     }); // fin subscribe 
