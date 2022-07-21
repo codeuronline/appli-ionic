@@ -10,6 +10,7 @@ export class LostlistPage implements OnInit {
   // Créer deux propriétés
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
+  imgUrl="http://localhost/ionicserver/upload/"
   entryData = [];
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
@@ -24,6 +25,7 @@ export class LostlistPage implements OnInit {
       console.log(data);
       data = JSON.parse(JSON.stringify(data))
       for (let i = 0; i < Object.keys(data).length; i++) {
+        
         this.entryData[i] = {
           "id_object": data[i].id_object,
           "status": data[i].status,
@@ -34,9 +36,12 @@ export class LostlistPage implements OnInit {
           "lastname": data[i].lastname,
           "email": data[i].email,
           "checkedpicture": data[i].checkedpicture,
-          "picture": data[i].picture,
+          "filename": data[i].picture,
+          "filenameWithUrl":this.imgUrl+data[i].filename,
         };
-      } // fin boucle for
+      }
+      console.log(this.entryData);
+       // fin boucle for
     }); // fin subscribe 
   }
   readAPI(URL: string) {

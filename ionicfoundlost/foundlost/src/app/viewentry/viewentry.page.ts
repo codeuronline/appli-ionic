@@ -1,3 +1,4 @@
+import { FoundlistPageModule } from './../foundlist/foundlist.module';
 // import { File } from '@awesome-cordova-plugins/file';
 import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -18,13 +19,12 @@ export class ViewentryPage implements OnInit {
   file: File;
   filename: String;
   extension: String;
-
+  fileNew: Boolean;
   routerHref = "home";
   isSubmitted = false;
   handlerMessagelost = '';
   roleMessage = '';
   //  ELEMENT de fichier à télécharger //
-  fichierAEnvoyer: File = null;
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   ionicFormView: FormGroup;
@@ -47,16 +47,7 @@ export class ViewentryPage implements OnInit {
   myValue = new Boolean;
   myOptionPicture = new Boolean;
 
-  envoiFichier(fichiers: FileList) {
-    this.fichierAEnvoyer = fichiers.item(0)
-  }
-  envoiFichierParLeService() {
-    // this.userService.postFile(this.fichierAEnvoyer).subscribe(resulat => {
 
-    // }, erreur => {
-    //   console.log("Erreur lors de l'envoi du fichier : ", erreur);
-    // })
-  }
   constructor(
     private alertController: AlertController,
     public userService: UserService,
@@ -107,6 +98,7 @@ export class ViewentryPage implements OnInit {
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
+    this.fileNew = false;
     this.myValue = (this.entryData.status == 1) ? true : null;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
@@ -114,11 +106,11 @@ export class ViewentryPage implements OnInit {
       id_object: this.id,
       status: this.myValue,
       description: null,
-      location: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
+      location: null,//new FormControl([this.entryData.location, [Validators.required, Validators.maxLength(25)]]),
       date: null,
-      firstname: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
-      lastname: new FormControl([null, [Validators.required, Validators.maxLength(25)]]),
-      email: new FormControl([null, [Validators.required, Validators.email]]),
+      firstname: null,//new FormControl([this.entryData.firstname, [Validators.required, Validators.maxLength(25)]]),
+      lastname: null,//new FormControl([this.entryData.lastname, [Validators.required, Validators.maxLength(25)]]),
+      email: null,//new FormControl([this.entryData.email, [Validators.required, Validators.email]]),
       checkedpicture: null,
       filename: null,
       file: null,
@@ -191,7 +183,16 @@ export class ViewentryPage implements OnInit {
   //     console.log(err)
   //   }
   // }
-  onSubmit() {
+  // traitement des images
+  onFileChange($event) {
+    const oldfilenemame = $event.target.files[0].name;
+    this.filename = "object_" + this.id + "." + this.getFileExtension(oldfilenemame);
+    this.file = $event.target.files[0];
+    this.fileNew = true;
+    console.log("filename", this.filename);
+    console.log("file:", this.file);
+  }
+  async onSubmit() {
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
@@ -201,19 +202,51 @@ export class ViewentryPage implements OnInit {
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
     formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
+    formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     console.log(this.myOptionPicture);
+    
     if (this.myOptionPicture == true) {
       //this.submitImageForm();   
-      formObj.filename = this.filename;
+      formObj.checkedpicture = true;
+      if (this.fileNew == true) {
+        //generation d'un nouveau formulaire pour l'image
+        formObj.filename = this.filename;
+        let formData = new FormData();
+        formData.append('id', formObj.filename);
+        formData.append('photo', this.file);
+        formObj.file = formData;
+        
+        try {
+          const response = await fetch('http://localhost/ionicserver/image.php', {
+            method: 'POST',
+            body: formData,
+          })
+          console.log("response =>", response)
+          if (!response.ok) {
+            throw new Error(response.statusText)
+          }
+          console.log(response);
+        } catch (err) {
+          console.log(err)
+            ;
+        }
+      } else { 
+        formObj.filename =this.entryData.filename
+      }
+    } else {
+      formObj.checkedpicture = this.entryData.checkedpicture;
+      if (formObj.filename == null) {
+        if (this.entryData.filename == null) {
+          formObj.filename="Object_vide.png"
+        } else {
+          formObj.filename = this.entryData.filename;
+        }
+      }
       
-      let formData = new FormData();
-      formData.append('file', this.file,
-        "object_" + this.id + "." + this.getFileExtension(this.filename)); 
-      formObj.file = formData;
     }
     let serializedForm = JSON.stringify(formObj);
     console.log("objet Json", serializedForm);
@@ -253,14 +286,7 @@ export class ViewentryPage implements OnInit {
     var ext = /^.+\.([^.]+)$/.exec(filename);
     return ext == null ? "" : ext[1];
   }
-  // traitement des images
-  onFileChange($event) {
-    const oldfilenemame = $event.target.files[0].name;
-    this.filename ="object_" + this.id + "." + this.getFileExtension(oldfilenemame);
-    this.file = $event.target.files[0];
-    console.log("filename",this.filename);
-    console.log("file", this.file);
-  }
+
 
 
 }

@@ -25,6 +25,9 @@
             <p>{{ data.location }}</p>
             <p>{{ data.date }}</p>
           </ion-label>
+        <ion-thumbnail  slot="end">
+          <ion-img (*ngIf)="data.filename!=null"  [src]="data.filenameWithUrl" ></ion-img>
+        </ion-thumbnail>
         </ion-item>
 
       </ion-item-sliding>
