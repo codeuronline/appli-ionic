@@ -10,11 +10,11 @@
 
 ## FRONT : IONIC / ANGULAR
 
-## Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE
+## Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE[navigation.md
 
-### ToDoList -> Appli mobile permettant de gérér une ToDoList utilisant une BD sous Firebase -> FINIE
+### ToDoList -> Appli mobile permettant de gérér une ToDoList utilisant une BD sous Firebase -> FINIE[todolist.md]
 
-### LostFound -> Appli mobile permettant de gérer les objets perdus/trouvés,
+### LostFound -> Appli mobile permettant de gérer les objets perdus/trouvés,[foundlost.md]
 
 ### de les déclarés perdus/trouvés de lister les perdus/trouvés.
 
