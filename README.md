@@ -4,7 +4,7 @@
 ![appli-ionic first]('https://raw.githubusercontent.com/codeuronline/appli-ionic/master/first.png')]
 ```
 
-### Plateforme developpement : Ionic / Angular
+## Plateforme developpement : Ionic / Angular
 
 ## BACK : Server APACHE/MYSQL(foundlost) ET SERVER IONIC/FIREBASE(ToDoList)
 
