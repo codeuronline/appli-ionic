@@ -1,19 +1,18 @@
-# Application mobile
+# Application mobile([en image](lostfound.md))
 
 ```
 ![appli-ionic first]('https://raw.githubusercontent.com/codeuronline/appli-ionic/master/first.png')]
 ```
 
-
 ### Plateforme developpement : Ionic / Angular
 
-### BACK : Server APACHE/MYSQL(foundlost) ET SERVER IONIC/FIREBASE(ToDoList)
+## BACK : Server APACHE/MYSQL(foundlost) ET SERVER IONIC/FIREBASE(ToDoList)
 
-### API : PHP(foundlost) ET JAVASCRIPT (Navigation/ToDoList)
+## API : PHP(foundlost) ET JAVASCRIPT (Navigation/ToDoList)
 
-### FRONT : IONIC / ANGULAR
+## FRONT : IONIC / ANGULAR
 
-### Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE
+## Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE
 
 ### ToDoList -> Appli mobile permettant de gérér une ToDoList utilisant une BD sous Firebase -> FINIE
 
@@ -43,10 +42,12 @@
 #####-> Alert  UPDATE -> FINIE
 ###-> TEST avant Mise a jour -> FINIE
 
-#### -> COMPLEMENT DE PHOTO OPTIONNEL SUR FORMULAIRE -> FINIE
+##### -> COMPLEMENT DE PHOTO OPTIONNEL SUR FORMULAIRE -> FINIE
 
-#### -> TRAITEMENT D'UN OBJET PHOTO (optionnel) DANS LA DECLARATION -> FINIE
+##### -> TRAITEMENT D'UN OBJET PHOTO (optionnel) DANS LA DECLARATION -> FINIE
 
-#### -> TRAITEMENT DU CAS PHOTO DANS LA BD -> EN COURS
+##### -> TRAITEMENT DU CAS PHOTO DANS LA BD -> FINIE
 
-#### -> MISE A JOUR DES TABLES ET DES CHAMPS -> EN COURS
+##### -> MISE A JOUR DES TABLES ET DES CHAMPS -> FINIE
+
+##### --> SUPPRESSION DES IMAGES LIES A L'OBJET' (update et delete)-> EN COURS
