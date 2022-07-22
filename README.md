@@ -1,5 +1,5 @@
 # Application mobile
-![alt text]([https://raw.githubusercontent.com/codeuronline/appli-ionic/master/first.png)
+[https://raw.githubusercontent.com/codeuronline/appli-ionic/master/first.png]
 ![appli-ionic first](]
 
 ## Plateforme developpement : Ionic / Angular
