@@ -51,12 +51,12 @@ export class LostPage implements OnInit {
   }
   get errorControl() {
     return this.ionicForm.controls;
-    }
+  }
+  
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
-
   
   submitForm() {
     // tester sur le formulaire est valide -> a faire
@@ -66,7 +66,7 @@ export class LostPage implements OnInit {
       return false;
     } else {
       if (this.ionicForm.valid) {
-      let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}
+      let formObj = this.ionicForm.getRawValue();
       let serializedForm = JSON.stringify(formObj);    
       console.log(serializedForm);
       this.apiService.submitForm(serializedForm).
@@ -78,8 +78,6 @@ export class LostPage implements OnInit {
         this.isSubmitted = false;
       }
     }
-
-
 
     
    
