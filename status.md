@@ -10,11 +10,11 @@
 
 ## FRONT : IONIC / ANGULAR
 
-## Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE[navigation.md
+## Nagivation -> Appli mobile permettant de naviguer sur 3 pages -> FINIE
 
-### ToDoList -> Appli mobile permettant de gérér une ToDoList utilisant une BD sous Firebase -> FINIE[todolist.md]
+### ToDoList -> Appli mobile permettant de gérér une ToDoList utilisant une BD sous Firebase -> FINIE
 
-### LostFound -> Appli mobile permettant de gérer les objets perdus/trouvés,[foundlost.md]
+### LostFound -> Appli mobile permettant de gérer les objets perdus/trouvés,
 
 ### de les déclarés perdus/trouvés de lister les perdus/trouvés.
 
@@ -48,4 +48,6 @@
 
 ##### -> MISE A JOUR DES TABLES ET DES CHAMPS -> FINIE
 
-##### --> SUPPRESSION DES IMAGES LIES A L'OBJET' (update et delete)-> EN COURS
+##### --> SUPPRESSION DES IMAGES LIES A L'OBJET' (update et delete)-> FINIE
+
+##### -> Améliorer la navigation / optimiser le code -> EN COURS
