@@ -274,7 +274,7 @@ export class ViewentryPage implements OnInit {
   delete() {
     this.userService.deleteObjet(this.id).subscribe(
       (res) => {
-        console.log("SUCCES ===", res)
+        console.log("SUCCES ===>", res)
       }
     )
     this.presentAlert("delete");
