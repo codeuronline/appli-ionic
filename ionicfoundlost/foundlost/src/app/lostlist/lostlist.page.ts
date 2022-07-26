@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-lostlist',
   templateUrl: './lostlist.page.html',
@@ -25,7 +26,7 @@ export class LostlistPage implements OnInit {
       console.log(data);
       data = JSON.parse(JSON.stringify(data))
       for (let i = 0; i < Object.keys(data).length; i++) {
-        
+        data[i].filename = (data[i].filename == undefined) ? "object_vide.png" : data[i].filename;
         this.entryData[i] = {
           "id_object": data[i].id_object,
           "status": data[i].status,

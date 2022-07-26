@@ -39,7 +39,7 @@ export class ViewentryPage implements OnInit {
     email: null,
     checkedpicture: 0,
     filename: null,
-    file: null,
+    // file: null,
   };
 
 
@@ -113,7 +113,7 @@ export class ViewentryPage implements OnInit {
       email: null,//new FormControl([this.entryData.email, [Validators.required, Validators.email]]),
       checkedpicture: null,
       filename: null,
-      file: null,
+      //file: null,
     });
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
   }
@@ -197,7 +197,6 @@ export class ViewentryPage implements OnInit {
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
     // si l'objet ecoute est 
-    console.log(this.myOptionPicture);
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
@@ -207,7 +206,7 @@ export class ViewentryPage implements OnInit {
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
-    console.log(this.myOptionPicture);
+   
     
     if (this.myOptionPicture == true) {
       //this.submitImageForm();   
@@ -241,7 +240,7 @@ export class ViewentryPage implements OnInit {
       formObj.checkedpicture = this.entryData.checkedpicture;
       if (formObj.filename == null) {
         if (this.entryData.filename == null) {
-          formObj.filename="Object_vide.png"
+          formObj.filename = null;
         } else {
           formObj.filename = this.entryData.filename;
         }
