@@ -95,6 +95,10 @@ export class ViewentryPage implements OnInit {
     }
 
   }
+  getFileExtension(filename) {
+    var ext = /^.+\.([^.]+)$/.exec(filename);
+    return ext == null ? "" : ext[1];
+  }
   ngOnInit() {
     console.log(this.id);
     this.getEntry();
@@ -281,10 +285,7 @@ export class ViewentryPage implements OnInit {
     //manque l'affichage du succes
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  getFileExtension(filename) {
-    var ext = /^.+\.([^.]+)$/.exec(filename);
-    return ext == null ? "" : ext[1];
-  }
+ 
 
 
 
