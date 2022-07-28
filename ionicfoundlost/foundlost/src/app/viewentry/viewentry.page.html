@@ -16,7 +16,7 @@
 <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
   <ion-item lines="full">
     <ion-label>Descr.</ion-label>
-    <ion-input formControlName="description" type="text" [value]="entryData.description" required></ion-input>
+    <ion-input formControlName="description" type="text" [value]="entryData.description" required [disabled]="entryData.status==1"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Status : {{etat}}</ion-label>
@@ -26,29 +26,29 @@
   </ion-item>
   <ion-item slot="start" lines="full">
     <ion-label>Date</ion-label>
-    <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required>
+    <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required [disabled]="entryData.status==1">
     </ion-datetime>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Lieu :</ion-label>
-    <ion-input formControlName="location" type="text" [value]="entryData.location" required></ion-input>
+    <ion-input formControlName="location" type="text" [value]="entryData.location" required [disabled]="entryData.status==1"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Prénom : </ion-label>
-    <ion-input formControlName="firstname" type="text" [value]="entryData.firstname" required></ion-input>
+    <ion-input formControlName="firstname" type="text" [value]="entryData.firstname" required [disabled]="entryData.status==1"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Nom : </ion-label>
-    <ion-input formControlName="lastname" type="text" [value]="entryData.lastname" required></ion-input>
+    <ion-input formControlName="lastname" type="text" [value]="entryData.lastname" required [disabled]="entryData.status==1"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Email</ion-label>
-    <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
+    <ion-input formControlName="email" type="email" [value]="entryData.email" required [disabled]="entryData.status==1"></ion-input>
   </ion-item>
   <ion-item lines="full">
     <ion-label>Photo </ion-label>
     <ion-toggle formControlName="checkedpicture" (ionChange)="myChangePhoto($event)" [value]="entryData.checkedpicture"
-      checked="{{myOptionPicture}}"></ion-toggle>
+      checked="{{myOptionPicture}}" [disabled]="entryData.status==1"></ion-toggle>
       <span *ngIf="myOptionPicture">
       <ion-item>
         <ion-button expand="full">
