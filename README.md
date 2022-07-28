@@ -2,7 +2,7 @@
 
 ### Page d'Accueil de l'appli :
 
-![Accueil](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/acceuil.png)
+![Accueil](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/acceuilionic.png)
 
 ### Page de déclaration d'un objet perdu(la meme interface existe pour l'objet trouvé) :
 
