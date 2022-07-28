@@ -38,3 +38,4 @@
 ### Mise à Jour -> du 28/07/2022
 #### Correction du comportement de la page view si l'objet a été trouvé -> tous les champs ont été désativés
 #### Si le status trouvé n'a pas été validé -> il appapartient toujours au objet perdu et tous les champs sont modifiable
+#### Correction des formulaires found et lost qui tranmettaient aucune valeur de status
