@@ -2,7 +2,7 @@
 
 ### Page d'Accueil de l'appli :
 
-![Accueil](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/acceuil.png)
+![Accueil](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/accueilionic.png)
 
 ### Page de déclaration d'un objet perdu(la meme interface existe pour l'objet trouvé) :
 
@@ -39,3 +39,5 @@
 #### Correction du comportement de la page view si l'objet a été trouvé -> tous les champs ont été désativés
 #### Si le status trouvé n'a pas été validé -> il appapartient toujours au objet perdu et tous les champs sont modifiables
 #### Correction des formulaires found et lost qui tranmettaient aucune valeur de status
+#### Correction de l'affichage de la page d'accueil affichant correctement le bouton liste objet trouvé
+#### Correction de l'affichage de la Date au seul format Date et non plus au format DateTime dasn les 3 formulaires
