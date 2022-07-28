@@ -1,21 +1,20 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color=primary>
-    <ion-title>
-      <div class="ion-text-center">
-      Objets trouvés
-      </div>
+  <ion-toolbar >
+       <ion-title color="primary" class="ion-text-center">
+        <div class="ion-text-center">
+          Objets trouvés
+        </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-   <div id="container"> -->
+   <div id="container">
     <ion-card>
       <div id="bubble">
-        <ion-icon name="chatbubbles-outline" color="primary"></ion-icon>
+        <ion-icon name="eye" color="warning"></ion-icon>
     </div>
     </ion-card>
-    <ion-title class="ion-text-left">Effectué une Déclaration</ion-title> 
+    <ion-title class="ion-text-left">Faire une Déclaration</ion-title> 
     <ion-card side="start">
       <ion-item routerLink="/lost" routerDirection="forward">
         <div id="reverseRed">
@@ -30,13 +29,12 @@
     </div>
   </ion-item>
     </ion-card>
-    <ion-title class="ion-text-left"> Ou accédez aux listes d'objets</ion-title>
-
+    <ion-title class="ion-text-left"> Accès aux listes d'objets</ion-title>
     <ion-item>  
       <ion-card  line="start" class="ion-text-left">
         <ion-item side="start"  class="ion-text-left">
             <ion-button routerLink="/lostlist" routerDirection="forward" color="danger">
-              <ion-icon name="sad" class="ion-text-left"></ion-icon> Objets perdus  
+              <ion-icon name="sad" class="ion-text-small"></ion-icon> Objets perdus  
             </ion-button>
 
             <ion-button routerLink="/foundlist" routerDirection="forward" color="success" >
