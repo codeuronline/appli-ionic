@@ -19,4 +19,5 @@
 ![liste objets perdus](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/listobjectperdu.png)
 ### Mise à Jour
 #### -> du 28/07/2022
-#### correction du comportement de la page view si l'objet a été trouvé(si le status trouvé n'a pas été validé ->il appapartient toujours au objet perdu et tous les champs sont modifiable) -> tous les champs ont été désativés
+#### correction du comportement de la page view si l'objet a été trouvé -> tous les champs ont été désativés
+#### si le status trouvé n'a pas été validé -> il appapartient toujours au objet perdu et tous les champs sont modifiable
