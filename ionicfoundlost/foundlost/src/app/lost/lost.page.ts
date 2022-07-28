@@ -38,7 +38,7 @@ export class LostPage implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       description:  [null, [Validators.required]],
-      status: [this.defaultValue],
+      status: [0],
       location: [null, [Validators.required, Validators.maxLength(25)]],
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
@@ -66,7 +66,8 @@ export class LostPage implements OnInit {
       return false;
     } else {
       if (this.ionicForm.valid) {
-      let formObj = this.ionicForm.getRawValue();
+        let formObj = this.ionicForm.getRawValue();
+        console.log(formObj);
       let serializedForm = JSON.stringify(formObj);    
       console.log(serializedForm);
       this.apiService.submitForm(serializedForm).

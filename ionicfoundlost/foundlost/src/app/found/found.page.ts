@@ -10,7 +10,7 @@ import { AlertController } from "@ionic/angular";
 })
 export class FoundPage implements OnInit {
   ionicForm: FormGroup;
-  defaultValue: 1;
+  defaultValue: 1;//status
   defaultDate: "2022-07-11";
   handlerMessagelost = '';
   isSubmitted = false;
@@ -39,7 +39,7 @@ export class FoundPage implements OnInit {
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       description:  [null, [Validators.required]],
-      status: [this.defaultValue],
+      status: [1],
       location: [null, [Validators.required, Validators.maxLength(25)]],
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
@@ -65,7 +65,8 @@ export class FoundPage implements OnInit {
       return false;
      } else {
       if (this.ionicForm.valid) {
-      let formObj = this.ionicForm.getRawValue(); // {name: '', description: ''}
+        let formObj = this.ionicForm.getRawValue()
+        console.log(formObj); // {name: '', description: ''}
       let serializedForm = JSON.stringify(formObj);
       console.log(serializedForm);
       this.apiService.submitForm(serializedForm).
