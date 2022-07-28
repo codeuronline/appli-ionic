@@ -18,7 +18,7 @@
     </span>
     <ion-item>
     <ion-label >Date :</ion-label>
-      <ion-datetime type="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate"></ion-datetime>
+      <ion-datetime presentation="date" type="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate"></ion-datetime>
     </ion-item>
       <!-- Error messages Date-->
   <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">

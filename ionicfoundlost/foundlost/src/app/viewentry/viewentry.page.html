@@ -26,7 +26,7 @@
   </ion-item>
   <ion-item slot="start" lines="full">
     <ion-label>Date</ion-label>
-    <ion-datetime formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required [disabled]="entryData.status==1">
+    <ion-datetime presentation="date" formControlName="date" type="date" (ionChange)="getDate($event)" [value]="entryData.date" required [disabled]="entryData.status==1">
     </ion-datetime>
   </ion-item>
   <ion-item lines="full">
