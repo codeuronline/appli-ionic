@@ -110,7 +110,7 @@ export class ViewentryPage implements OnInit {
       id_object: this.id,
       status: this.myValue,
       description: null,
-      location: null,//new FormControl([this.entryData.location, [Validators.required, Validators.maxLength(25)]]),
+      location: null ,//new FormControl([ null, this.entryData.location, [Validators.required, Validators.maxLength(25)]),
       date: null,
       firstname: null,//new FormControl([this.entryData.firstname, [Validators.required, Validators.maxLength(25)]]),
       lastname: null,//new FormControl([this.entryData.lastname, [Validators.required, Validators.maxLength(25)]]),
@@ -260,7 +260,6 @@ export class ViewentryPage implements OnInit {
 
         })
     this.presentAlert("update");
-
     this.navCtrl.navigateBack(this.routerHref);
     //this.ionicFormView.reset();
 
@@ -269,7 +268,7 @@ export class ViewentryPage implements OnInit {
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////
   goBack() {
-    this.navCtrl.navigateBack(this.routerHref);
+    
 
   }
 
@@ -281,7 +280,8 @@ export class ViewentryPage implements OnInit {
       }
     )
     this.presentAlert("delete");
-    this.goBack();
+    this.ngOnInit();
+    this.navCtrl.navigateBack(this.routerHref);
     //manque l'affichage du succes
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

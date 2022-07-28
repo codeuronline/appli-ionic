@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "foundlost",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
