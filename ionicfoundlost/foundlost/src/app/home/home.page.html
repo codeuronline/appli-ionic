@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <div id="container"> -->
+   <div id="container"> -->
     <ion-card>
       <div id="bubble">
         <ion-icon name="chatbubbles-outline" color="primary"></ion-icon>
@@ -31,24 +31,19 @@
   </ion-item>
     </ion-card>
     <ion-title class="ion-text-left"> Ou accédez aux listes d'objets</ion-title>
-    <div>
-    <ion-item>
-     
-    <ion-card  line="full" class="ion-text-left">
-        <ion-item side="start" routerLink="/lostlist" routerDirection="forward" class="ion-text-left">
-            <ion-button color="danger">
+
+    <ion-item>  
+      <ion-card  line="start" class="ion-text-left">
+        <ion-item side="start"  class="ion-text-left">
+            <ion-button routerLink="/lostlist" routerDirection="forward" color="danger">
               <ion-icon name="sad" class="ion-text-left"></ion-icon> Objets perdus  
-           </ion-button>
-      
-          </ion-item>
-          <ion-item routerLink="/foundlist" routerDirection="forward" class="ion-text-left">
-            <ion-button color="success" >
-              <ion-icon name="happy"></ion-icon>Objet trouvés
             </ion-button>
-            </ion-item>
-        </ion-card>
-    
-  
+
+            <ion-button routerLink="/foundlist" routerDirection="forward" color="success" >
+            <ion-icon name="happy"></ion-icon>Objet trouvés
+          </ion-button>
+          </ion-item>  
+      </ion-card>
   </ion-item>
-  </div>
+</div>
 </ion-content>
