@@ -18,7 +18,9 @@ export class FoundlistPage implements OnInit {
   constructor(public http: HttpClient) {
     this.getEntry();
   }
-
+  doRefresh($event) {
+    
+  }
   ngOnInit() {
   }
   getEntry() {

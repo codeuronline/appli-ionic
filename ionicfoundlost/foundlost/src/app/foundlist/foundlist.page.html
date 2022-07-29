@@ -3,15 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
     </ion-buttons>
-
     <ion-title>LISTES DES OBJETS TROUVES</ion-title>
   </ion-toolbar>
 </ion-header>
-
-
-<ion-content>
-
-  <!-- Liste des taches sous forme de card -->
+ <!-- Liste des taches sous forme de card -->
   <ion-card *ngFor="let data of entryData">
     <ion-item-sliding>
       <ion-item-options side="end">
