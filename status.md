@@ -50,4 +50,4 @@
 
 ##### --> SUPPRESSION DES IMAGES LIES A L'OBJET' (update et delete)-> FINIE
 
-##### -> Améliorer la navigation / optimiser le code -> EN COURS
+##### -> Améliorer la navigation / optimiser le code / correction des bug -> EN COURS
