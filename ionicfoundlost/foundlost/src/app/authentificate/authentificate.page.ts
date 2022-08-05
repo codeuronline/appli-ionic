@@ -63,9 +63,8 @@ export class AuthentificatePage implements OnInit {
       this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
         this.valider();
         console.log("SUCCES ===", res);
-        if(res==false){
-this.uniqueMail();
-
+        if(JSON.parse(JSON.stringify(res))==false){
+          this.uniqueMail();
         }
       })
 
@@ -138,7 +137,8 @@ verifier(){
     this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
       
       console.log("SUCCES ===", res);
-      if (res==true) {
+      console.log(res);
+      if (JSON.parse(res)==true){
         // this.echec();
          this.router.navigateByUrl("/home");
       } else {
