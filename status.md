@@ -50,4 +50,7 @@
 
 ##### --> SUPPRESSION DES IMAGES LIES A L'OBJET' (update et delete)-> FINIE
 
-##### -> Améliorer la navigation / optimiser le code -> EN COURS
+##### -> Améliorer la navigation / optimiser le code / correction des bug -> EN COURS
+##### -> Ajout d'une authentification connexion / enregistrement -> EN COURS
+##### -> Ajout des controles le formulaire connexion /enregistrement -> EN COURS
+##### -> d'un élément de deconnexion sur les differentes pages -> EN COURS
