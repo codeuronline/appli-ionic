@@ -13,12 +13,16 @@ export class LostlistPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl="http://localhost/ionicserver/upload/"
   entryData = [];
+  user = sessionStorage.getItem("user");
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
-    this.getEntry();
   }
-
   ngOnInit() {
+    this.user = sessionStorage.getItem("user");
+    if (this.user !== null && this.user !== "") {
+    this.navCtrl.navigateBack("authentificate")
+    }
+    this.getEntry();
     
   }
   getEntry() {

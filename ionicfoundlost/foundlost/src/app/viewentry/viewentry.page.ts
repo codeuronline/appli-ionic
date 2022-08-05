@@ -24,6 +24,7 @@ export class ViewentryPage implements OnInit {
   isSubmitted = false;
   handlerMessagelost = '';
   roleMessage = '';
+  user: String;
   //  ELEMENT de fichier à télécharger //
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
@@ -54,7 +55,10 @@ export class ViewentryPage implements OnInit {
     public http: HttpClient,
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController) {
+      
+    
+     }
 
   async presentAlert(etat) {
     switch (etat) {

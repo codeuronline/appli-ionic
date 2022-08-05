@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoundlistPage implements OnInit {
   id_object = null;
+  user : string;
 
 // Créer deux propriétés
   // URL du serveur backend
@@ -15,13 +17,23 @@ export class FoundlistPage implements OnInit {
   imgUrl="http://localhost/ionicserver/upload/"
   // Un tableau
   entryData = [];
-  constructor(public http: HttpClient) {
-    this.getEntry();
+  constructor(public http: HttpClient,public navCtrl:NavController) {
+   
   }
-  doRefresh($event) {
+  //doRefresh($event) {
     
+  //}
+  destroyUser() {
+    this.user = null;
+    sessionStorage.removeItem('user');
+    this.navCtrl.navigateBack("autentificate");
   }
   ngOnInit() {
+    this.user=sessionStorage.getItem("user");
+    if (this.user !== null && this.user !== "") {
+      this.navCtrl.navigateBack("authentificate")
+    }
+    this.getEntry();
   }
   getEntry() {
     this.readAPI(this.bdUrl).subscribe(data => {

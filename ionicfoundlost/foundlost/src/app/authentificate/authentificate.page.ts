@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ToastController, AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ToastController, AlertController, NavController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-authentificate',
@@ -13,13 +13,15 @@ import { Router } from '@angular/router';
 export class AuthentificatePage implements OnInit {
 
   handlerMessagelost = '';
-  roleMessage= '';
+  roleMessage = '';
   email_user: string;
+  user: string;
   password: string;
   ionicForm: FormGroup;
   isSubmitted = false;
 
-  constructor(public apiService: UserService, public formBuilder: FormBuilder, public toastController: ToastController, private router: Router,private alertController: AlertController) { }
+  constructor(public apiService: UserService, public formBuilder: FormBuilder, public toastController: ToastController, private router: Router, private alertController: AlertController, public activatedRouter: ActivatedRoute,
+    public navCtrl: NavController) { }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -39,10 +41,11 @@ export class AuthentificatePage implements OnInit {
     this.roleMessage = `Dismissed with role: ${role}`;
   }
   ngOnInit() {
+    //this.user = sessionStorage.getItem('user');
     this.ionicForm = this.formBuilder.group({
-  
+
       email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required,  Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
     })
 
   }
@@ -52,7 +55,7 @@ export class AuthentificatePage implements OnInit {
   }
 
   submitForm() {
-   
+
     this.isSubmitted = true;
 
     if (!this.ionicForm.valid) {
@@ -60,10 +63,12 @@ export class AuthentificatePage implements OnInit {
       return false;
     } else {
       console.log(this.ionicForm.value)
+      this.email_user = this.ionicForm.get('email_user').value;
+
       this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
         this.valider();
         console.log("SUCCES ===", res);
-        if(JSON.parse(JSON.stringify(res))==false){
+        if (JSON.parse(JSON.stringify(res)) == false) {
           this.uniqueMail();
         }
       })
@@ -126,34 +131,37 @@ export class AuthentificatePage implements OnInit {
   }
 
 
-verifier(){
-  this.isSubmitted = true;
+  verifier() {
+    this.isSubmitted = true;
 
-  if (!this.ionicForm.valid) {
-    console.log('Remplissez les champs requis')
-    return false;
-  } else {
-    console.log(this.ionicForm.value)
-    this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
-      
-      console.log("SUCCES ===", res);
-      console.log(res);
-      if (JSON.parse(res)==true){
-        // this.echec();
-         this.router.navigateByUrl("/home");
-      } else {
-        this.echec();
-        // this.router.navigateByUrl("/inscription");
-      }
+    if (!this.ionicForm.valid) {
+      console.log('Remplissez les champs requis')
 
-    })
+      return false;
+    } else {
+      this.email_user = this.ionicForm.get('email_user').value;
+      console.log(this.ionicForm.value)
+      this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
+        console.log("SUCCES ===", res);
+        console.log(res);
+        if (JSON.parse(res) == true) {
 
-    this.isSubmitted = false;
+          //generer un id de session
+          sessionStorage.setItem("user", this.email_user);
+          this.router.navigateByUrl("/home");
+        } else {
+          this.echec();
+          // this.router.navigateByUrl("/inscription");
+        }
+
+      })
+
+      this.isSubmitted = false;
+    }
+
+    this.ionicForm.reset();
+
   }
-
-  this.ionicForm.reset();
-
-}
 
 
 

@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor() {}
-
+  user : String;
+  
+  constructor(public navCtrl: NavController) {}
+  ngInit() {
+    this.user = sessionStorage.getItem("user");
+    if (this.user !== null && this.user !== "") {
+    this.navCtrl.navigateBack("authentificate")
+    }
+  }
+  destroyUser() {
+    this.user = "";
+    sessionStorage.removeItem('user');
+    this.navCtrl.navigateBack("autentificate");
+  }
 }

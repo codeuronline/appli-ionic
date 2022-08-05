@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AlertController } from "@ionic/angular";
+import { AlertController,NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-found',
@@ -15,8 +15,12 @@ export class FoundPage implements OnInit {
   handlerMessagelost = '';
   isSubmitted = false;
   roleMessage = '';
+  user: string;
 
-  constructor(private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) { }
+  constructor(public navCtrl: NavController,private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) {
+    //go ahead and authenticate them without getting a new token.}) 
+    }
+  
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -37,18 +41,22 @@ export class FoundPage implements OnInit {
   }
 
   ngOnInit() {
+    this.user=sessionStorage.getItem("user");
+    if (this.user !== null && this.user !== "") {
+      this.navCtrl.navigateBack("authentificate")
+    }
     this.ionicForm = this.formBuilder.group({
-      description:  [null, [Validators.required]],
+      description: [null, [Validators.required]],
       status: [1],
       location: [null, [Validators.required, Validators.maxLength(25)]],
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
-      lastname:  [null, [Validators.required, Validators.maxLength(25)]],
+      lastname: [null, [Validators.required, Validators.maxLength(25)]],
       email: [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
     });
-  
+
   }
   get errorControl() {
     return this.ionicForm.controls;
@@ -63,17 +71,17 @@ export class FoundPage implements OnInit {
     if (!this.ionicForm.controls) {
       console.log("Veuillez renseigner tous les champs");
       return false;
-     } else {
+    } else {
       if (this.ionicForm.valid) {
         let formObj = this.ionicForm.getRawValue()
         console.log(formObj); // {name: '', description: ''}
-      let serializedForm = JSON.stringify(formObj);
-      console.log(serializedForm);
-      this.apiService.submitForm(serializedForm).
-        subscribe(
-          (res) => {
-            console.log("SUCCES ===", res);
-          })
+        let serializedForm = JSON.stringify(formObj);
+        console.log(serializedForm);
+        this.apiService.submitForm(serializedForm).
+          subscribe(
+            (res) => {
+              console.log("SUCCES ===", res);
+            })
         this.presentAlert();
         this.ionicForm.reset();
         this.isSubmitted = false;

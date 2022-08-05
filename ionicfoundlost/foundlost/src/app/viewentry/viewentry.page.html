@@ -7,6 +7,9 @@
     <ion-title>
       OBJET N°: {{id}}
     </ion-title>
+    <ion-button (click)="destroy()" slot="end">
+      <ion-icon name="exit"></ion-icon>
+    </ion-button>
     <ion-button (click)="delete()" slot="end">
       <ion-icon name="trash"></ion-icon>
     </ion-button>
