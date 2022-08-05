@@ -49,7 +49,7 @@ export class LostPage implements OnInit {
 
   ngOnInit() {
     this.user=sessionStorage.getItem("user");
-    if (this.user !== null && this.user !== "") {
+    if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
     this.ionicForm = this.formBuilder.group({

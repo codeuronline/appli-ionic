@@ -148,7 +148,7 @@ export class AuthentificatePage implements OnInit {
 
           //generer un id de session
           sessionStorage.setItem("user", this.email_user);
-          this.router.navigateByUrl("/home");
+          this.navCtrl.navigateForward("home");
         } else {
           this.echec();
           // this.router.navigateByUrl("/inscription");

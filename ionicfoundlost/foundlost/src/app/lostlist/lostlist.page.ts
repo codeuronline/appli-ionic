@@ -18,9 +18,9 @@ export class LostlistPage implements OnInit {
   constructor(public http: HttpClient, private navCtrl: NavController) {
   }
   ngOnInit() {
-    this.user = sessionStorage.getItem("user");
-    if (this.user !== null && this.user !== "") {
-    this.navCtrl.navigateBack("authentificate")
+    this.user=sessionStorage.getItem("user");
+    if (this.user == null || this.user == "") {
+      this.navCtrl.navigateBack("authentificate")
     }
     this.getEntry();
     

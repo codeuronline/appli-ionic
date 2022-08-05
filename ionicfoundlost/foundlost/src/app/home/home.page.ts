@@ -7,18 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user : String;
+  user : string;
   
-  constructor(public navCtrl: NavController) {}
-  ngInit() {
-    this.user = sessionStorage.getItem("user");
-    if (this.user !== null && this.user !== "") {
-    this.navCtrl.navigateBack("authentificate")
-    }
+  constructor(public navCtrl: NavController) {
   }
-  destroyUser() {
+ngInit() {
+  this.user=sessionStorage.getItem("user");
+  if (this.user == null || this.user == "") {
+    this.navCtrl.navigateBack("authentificate")
+  }   
+ }
+destroyUser() {
     this.user = "";
     sessionStorage.removeItem('user');
-    this.navCtrl.navigateBack("autentificate");
+    this.navCtrl.navigateBack("authentificate");
   }
 }

@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title>J'AI TROUVE</ion-title>
   </ion-toolbar>
+  <ion-button (click)="destroyUser()" slot="end">
+    <ion-icon name="exit"></ion-icon>
+  </ion-button>
 </ion-header>
 <ion-content>
   <form id="formFound" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
