@@ -21,7 +21,7 @@ export class UserService {
   }
   // On définit la méthode qui envoie les données du formulaire au serveur backend.
   submitForm(data) {
-    return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data,{responseType: 'text' });
+    return this.http.post('http://localhost/ionicserver/manage-data.php?key=create', data);
   }
   deleteObjet(number) {
     console.log(number)
@@ -33,5 +33,12 @@ export class UserService {
   // getObject(number) {
   //   return this.http.get('http://localhost/ionicserver/retrieve-data.php?key=' + number,{responseType: 'text'});
   // }
+  createUser(data) {
+    return this.http.post("http://localhost/ionicserver/manage-data.php?key=user", data);
+  }
+  
+  connexion(data) {
+    return this.http.post("http://localhost/ionicserver/manage-data.php?key=connexion", data);
+  }
 }
 

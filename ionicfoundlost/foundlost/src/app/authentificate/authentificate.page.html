@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Accueil"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="bg-img"></div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <h1 class="ion-text-center"><b>Demande d'inscription</b></h1>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()"  novalidate>
+
+
+      <ion-item lines="full">
+        <ion-label>E-mail : </ion-label>
+        <ion-input  type="email" formControlName="email_user" placeholder="entrer votre e-mail"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.required">
+        E-mail requis.
+       </span>
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.pattern">
+        Format non valide.
+       </span>
+    
+
+      <ion-item lines="full">
+        <ion-label>Mot de passe : </ion-label>
+        <ion-input formControlName="password" type="password" placeholder="entrer un mot de passe">
+        </ion-input>
+      </ion-item><span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+        Mot de passe requis.
+       </span>
+       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+        - Doit contenir 1 majuscule <br>
+        - 1 minuscule au minimum <br>
+        - 1 chiffre au minimum <br>
+        - 1 caractère spécial au minimum 
+        </span>
+
+      <ion-button expand="block" type="submit" class="add-button" >Inscription</ion-button>
+      <ion-button expand="block" (click)="verifier()" class="add-button" >connexion</ion-button>
+      <ion-button expand="block" type="reset" class="add-button">Effacer</ion-button>
+
+    </form>
+  </ion-card>
+
+
+</ion-content>

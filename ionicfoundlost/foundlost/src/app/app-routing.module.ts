@@ -2,14 +2,19 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+ 
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'authentificate',
     pathMatch: 'full'
+  },
+  {
+    path: 'authentificate',
+    loadChildren: () => import('./authentificate/authentificate.module').then( m => m.AuthentificatePageModule)
   },
   {
     path: 'found',
@@ -36,6 +41,8 @@ const routes: Routes = [
      path: 'foundlist/viewentry/:id',
      loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
    },
+ 
+
 ];
 
 @NgModule({
