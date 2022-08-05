@@ -41,3 +41,9 @@
 #### Correction des formulaires found et lost qui tranmettaient aucune valeur de status
 #### Correction de l'affichage de la page d'accueil affichant correctement le bouton liste objet trouvé
 #### Correction de l'affichage de la Date au seul format Date et non plus au format DateTime dasn les 3 formulaires
+### Mise à Jour -> du 05/08/2022
+#### Ajout de la page Authentifcation
+#### Seul les utilisateurs enregistrés peuvent consulter l'appli
+#### Filtrage des informations de connexion via regex coté front et back
+#### A finir -> appliquer le design final
+#### A finir -> corriger les bugs
