@@ -200,7 +200,6 @@ export class ViewentryPage implements OnInit {
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
-    // si l'objet ecoute est 
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
@@ -211,7 +210,7 @@ export class ViewentryPage implements OnInit {
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
   
-    
+  // cas si le toggle picture est activé  
     if (this.myOptionPicture == true) {
       //this.submitImageForm();   
       formObj.checkedpicture = true;
