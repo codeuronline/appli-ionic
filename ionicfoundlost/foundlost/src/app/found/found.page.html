@@ -12,34 +12,44 @@
 <ion-content>
   <form id="formFound" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item lines="full">
-      <ion-label>Descr. :</ion-label>
-      <ion-input formControlName="description" type="text" placeholder="Description de l'objet trouvé"required></ion-input>
+      <ion-label>
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-label>
+      <ion-input formControlName="description" type="text" placeholder="Description de l'objet trouvé" required>
+      </ion-input>
     </ion-item>
     <!-- Error messages Description-->
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
       la Description doit être définie.
     </span>
     <ion-item>
-    <ion-label >Date :</ion-label>
-      <ion-datetime presentation="date" type="date" (ionChange)="getDate($event)" formControlName="date" [value]="defaultDate"></ion-datetime>
+      <ion-label>
+        <ion-icon name="date"></ion-icon>
+      </ion-label>
+      <ion-input displayFormat="YYYY-MM-DD" presentation="date" type="date" (ionChange)="getDate($event)"
+        formControlName="date" [value]="defaultDate"></ion-input>
     </ion-item>
-      <!-- Error messages Date-->
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
-    la Date doit être définie.
-  </span>
-   <ion-item lines="full">
-      <ion-label >Lieu :</ion-label>
+    <!-- Error messages Date-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
+      la Date doit être définie.
+    </span>
+    <ion-item lines="full">
+      <ion-label>
+        <ion-icon name="location"></ion-icon>
+      </ion-label>
       <ion-input formControlName="location" type="text" placeholder="Endroit de la trouvaille" required></ion-input>
     </ion-item>
     <!-- Error messages Locat-->
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.required">
-    la Localisation doit être définie.
-  </span>
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.maxlength">
-    la Localisation est limité à 25 caractère
-  </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.required">
+      la Localisation doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.maxlength">
+      la Localisation est limité à 25 caractère
+    </span>
     <ion-item lines="full">
-      <ion-label >Prénom :</ion-label>
+      <ion-label>
+        <ion-icon name="id-card"></ion-icon>
+      </ion-label>
       <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
     </ion-item>
     <!-- Error messages Prénom -->
@@ -50,27 +60,29 @@
       le Prénom est limité à 25 caractère
     </span>
     <ion-item lines="full">
-      <ion-label >Nom :</ion-label>
+      <ion-label>
+        <ion-icon name="id-card"></ion-icon>
+      </ion-label>
       <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
     </ion-item>
-   <!-- Error messages Nom-->
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
-    le Nom doit être définie.
-  </span>
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.maxlength">
-    le Nom est limité à 25 caractère
-  </span>
+    <!-- Error messages Nom-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
+      le Nom doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.maxlength">
+      le Nom est limité à 25 caractère
+    </span>
     <ion-item lines="full">
-      <ion-label >Email :</ion-label>
+      <ion-label>Email :</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Votre Email" required></ion-input>
     </ion-item>
-     <!-- Error messages Email-->
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-    l'Email doit être définie.
-  </span>
-  <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
-    l'Email doit être valide
-  </span>
+    <!-- Error messages Email-->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      l'Email doit être définie.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      l'Email doit être valide.
+    </span>
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="success" expand="block">ENVOYER</ion-button>
