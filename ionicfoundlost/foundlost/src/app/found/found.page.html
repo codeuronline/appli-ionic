@@ -1,14 +1,16 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" text="Accueil"></ion-back-button>
+      <ion-back-button defaultHref="home" text="Accueil" ></ion-back-button>
     </ion-buttons>
     <ion-title>J'AI TROUVE</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="bg-img">
-  <div class="logo"></div>
+  <div  class="bg-img">
+  <div class="logo">
+  </div>
+  <br>
   <form id="formFound" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
     <ion-item lines="full">
       <ion-label>

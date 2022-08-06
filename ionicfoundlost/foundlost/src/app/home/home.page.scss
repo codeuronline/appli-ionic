@@ -1,3 +1,21 @@
+.bg-img {
+  padding: 1px;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo {
+  background-color: transparent;
+  padding: 0px;
+  height: 250px;
+  width: 100%;
+  align-items: center;
+  background: no-repeat center/80% url('../../assets/logo-lost-found-small.png');
+  background-size: cover;
+}
 #container {
   text-align: center;
 

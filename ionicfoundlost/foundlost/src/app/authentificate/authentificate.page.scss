@@ -2,7 +2,7 @@
     padding: 1px;
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/pexels-pixabay-461940.jpg');
+    background-image: url('../../assets/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -13,13 +13,14 @@
     height: 250px;
     width: 100%;
     align-items: center;
-    background: no-repeat center/80% url('../../assets/objets-perdus\ \(1\).png');
+    background: no-repeat center/50% url('../../assets/authentification.png');
     background-size: cover;
   }
 .error {
     color: rgb(207, 14, 14);
     font-size: small;
 }
+
 .icon{
     border:0px;
     padding:50px;

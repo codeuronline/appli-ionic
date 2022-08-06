@@ -7,7 +7,7 @@
     padding: 1px;
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/pexels-pixabay-461940.jpg');
+    background-image: url('../../assets/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -18,26 +18,26 @@
     height: 250px;
     width: 100%;
     align-items: center;
-    background: no-repeat center/80% url('../../assets/objets-perdus\ \(1\).png');
+    background: no-repeat center/50% url('../../assets/logo-found.png');
     background-size: cover;
 }
 
-ion-toobar,
-ion-title {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 100% 100%;
-    animation: gradient 15s ease infinite;
-    height: 8vh;
-}
+// ion-toobar,
+// ion-title {
+//     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+//     background-size: 100% 100%;
+//     animation: gradient 15s ease infinite;
+//     height: 8vh;
+// }
 
-#bubble ion-icon {
-    font-size: 200px; //Preferred size here{
-    margin-top: 80px;
-    background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752);
-    // background-size: 100% 400%;
-    animation: gradient 15s ease infinite;
-    //height: 100vh;
-}
+// #bubble ion-icon {
+//     font-size: 200px; //Preferred size here{
+//     margin-top: 80px;
+//     background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752);
+//     // background-size: 100% 400%;
+//     animation: gradient 15s ease infinite;
+//     //height: 100vh;
+// }
 
 
 @keyframes gradient {

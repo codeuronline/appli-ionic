@@ -59,7 +59,7 @@ export class LostPage implements OnInit {
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
       lastname: [null, [Validators.required, Validators.maxLength(25)]],
-      email: [null, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      email: [this.user,null, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
     });
