@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 
@@ -21,5 +22,9 @@ destroyUser() {
     this.user = "";
     sessionStorage.removeItem('user');
     this.navCtrl.navigateBack("authentificate");
+  }
+
+  goTo(element){
+    this.navCtrl.navigateForward(element);
   }
 }

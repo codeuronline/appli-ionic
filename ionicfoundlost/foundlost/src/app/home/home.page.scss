@@ -2,73 +2,92 @@
   padding: 1px;
   height: 100%;
   width: 100%;
-  background-image: url('../../assets/bg.jpg');
+  background-image: url('../../assets/bg-2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .logo {
   background-color: transparent;
-  padding: 0px;
-  height: 250px;
-  width: 100%;
-  align-items: center;
-  background: no-repeat center/80% url('../../assets/logo-lost-found-small.png');
-  background-size: cover;
+    padding: 0px;
+    height: 250px;
+    width: 100%;
+    align-items: center;
+    background: no-repeat center/40% url('../../assets/logo-lost-found-small.png');
+    background-size: cover;
+  }
+.add-button{
+  background: transparent;
 }
-#container {
-  text-align: center;
+// #container {
+//   text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40%;
-  transform: translateY(-50%);
-}
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   top: 40%;
+//   transform: translateY(-50%);
+// }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+// #container strong {
+//   font-size: 20px;
+//   line-height: 26px;
+// }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+// #container p {
+//   font-size: 16px;
+//   line-height: 22px;
 
-  color: #8c8c8c;
+//   color: #8c8c8c;
 
-  margin: 0;
-}
+//   margin: 0;
+// }
 
 
-#container a {
-  text-decoration: none;
-}
+// #container a {
+//   text-decoration: none;
+// }
 
-#bubble ion-icon {
-  font-size: 240px; //Preferred size here
-}
-#reverseGreen ion-button {
+
+.reverseGreen {
+  
   padding:0px;
   color: green;
   text-transform: uppercase;
-  border: 2px solid green;
+  border: 5px solid green;
   border-radius: 15px;
+  font-size: large;
 }
-#reverseRed ion-button {
+.reverseGreen:hover{
+color: white;
+background-color: green;
+border: 5px solid white;
+border-radius:15px;
+font-size: larger;
+}
+.reverseRed {
+  padding:0px;
   color: red;
   text-transform:uppercase;
-  border: 2px solid red;
+  border: 5px solid red;
   border-radius: 15px;
+  font-size: large;
 }
-#ion-text-left{
-  padding: 0px;
-  margin: 0px;
-}
-ion-button {
-  padding:0px 0px;
-  border-radius: 15px;
-}
+.reverseRed:hover{
+  color: white;
+  background-color: red;
+  border: 5px solid white;
+  border-radius:15px;
+  font-size: larger;
+  }
+// #ion-text-left{
+//   padding: 0px;
+//   margin: 0px;
+// }
+// ion-button {
+//   padding:0px 0px;
+//   border-radius: 15px;
+// }
 // #toolbar{background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 // 	background-size: 400% 400%;
 // 	animation: gradient 15s ease infinite;

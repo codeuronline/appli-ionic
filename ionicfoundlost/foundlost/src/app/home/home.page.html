@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
-       <ion-title class="ion-text-center">
-        <div class="ion-text-center">
-          Objets trouvés
-        </div>
+  <ion-toolbar color="sucess">
+    <ion-title class="ion-text-center">
+      <div class="ion-text-center">
+        Objets trouvés
+      </div>
     </ion-title>
     <ion-button (click)="destroyUser()" slot="end" color="none">
       <img class="image" src="../../assets/se-deconnecter.png">
@@ -11,40 +11,31 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-   <div id="container" class="bg-img">
-    <div class="logo">&nbsp;</div>
-    <!-- <ion-card>
-      <div id="bubble">
-        <ion-icon name="eye" color="warning"></ion-icon>
-    </div>
-    </ion-card> -->
-    <ion-title class="ion-text-center">Faire une Déclaration</ion-title> 
-    <ion-card id="lost">
-      <ion-item routerLink="/lost" routerDirection="forward">
-        <div id="reverseRed">
-          <ion-button color="danger-outline" class="ion-text-center" > J'ai perdu un objet</ion-button>
-        </div>
-      </ion-item>
+  <div class="bg-img">
+    <ion-card>
+      <ion-card-header>
+        <div id="container" class="logo">&nbsp;</div>
+      </ion-card-header>
+    </ion-card>
+    <ion-title class="ion-text-center">Faire une Déclaration</ion-title>
+    <ion-card expand="block" class="add-button">
+      <ion-button expand="block" (click)="goTo('lost')" color="danger-outline" class="ion-text-center reverseRed"> J'ai trouvé un objet</ion-button>
     </ion-card>
     <ion-card expand="block" class="add-button">
-      <ion-item routerLink="/found" routerDirection="forward">
-        <div id="reverseGreen">
-        <ion-button expand="block" color="success-outline" class="ion-text-center"> J'ai trouvé un objet</ion-button>
-      </div>
-  </ion-item>
+      <ion-button expand="block" (click)="goTo('found')" color="success-outline" class="ion-text-center reverseGreen"> J'ai trouvé un objet</ion-button>
     </ion-card>
     <ion-title class="ion-text-center"> Accès aux listes d'objets</ion-title>
-    <ion-item>  
-      <!-- <ion-card  line="start" class="ion-text-left">
-        <ion-item side="start"  class="ion-text-left">
-            <ion-button routerLink="/lostlist" routerDirection="forward" color="danger">
-              <ion-icon name="sad" class="ion-text-small"></ion-icon> Objets perdus  
-            </ion-button>
-            <ion-button routerLink="/foundlist" routerDirection="forward" color="success" >
+    <ion-item>
+      <ion-card line="start" class="ion-text-left">
+        <ion-item side="start" class="ion-text-left">
+          <ion-button routerLink="/lostlist" routerDirection="forward" color="danger">
+            <ion-icon name="sad" class="ion-text-small"></ion-icon> Objets perdus
+          </ion-button>
+          <ion-button routerLink="/foundlist" routerDirection="forward" color="success">
             <ion-icon name="happy"></ion-icon>Objet trouvés
           </ion-button>
-          </ion-item>  
-      </ion-card> -->
-  </ion-item>
-</div>
+        </ion-item>
+      </ion-card>
+    </ion-item>
+  </div>
 </ion-content>
