@@ -1,18 +1,16 @@
-<ion-header [translucent]="false">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="#002039">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
     </ion-buttons>
     <ion-title>J'AI PERDU</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div class="bg-img">
     <div class="logo">
     </div>
-    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-
+    <form id="formLost" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
       <ion-item lines="full">
         <ion-label>
           <ion-icon name="information-circle-outline"></ion-icon>
@@ -24,13 +22,12 @@
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.description.errors?.required">
         la Description doit être définie.
       </span>
-      <ion-item lines="full">
+      <ion-item>
         <ion-label>
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
         <ion-input displayFormat="YYYY-MM-DD" presentation="date" type="date" (ionChange)="getDate($event)"
-          formControlName="date" [value]="defaultDate">
-        </ion-input>
+          formControlName="date" [value]="defaultDate"></ion-input>
       </ion-item>
       <!-- Error messages Date-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
@@ -40,13 +37,14 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input formControlName="location" type="text" placeholder="Lieu de perte" required></ion-input>
+        <ion-input formControlName="location" type="text" placeholder="Endroit où il a été perdu" required></ion-input>
       </ion-item>
+      <!-- Error messages Locat-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.required">
         la Localisation doit être définie.
       </span>
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.maxlength">
-        la Localisation est limité à 25 caractère.
+        la Localisation est limité à 25 caractère
       </span>
       <ion-item lines="full">
         <ion-label>
@@ -89,7 +87,7 @@
       </span>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="danger" expand="block">ENVOYER</ion-button>
+          <ion-button type="submit" class="button-valid" expand="block"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </form>

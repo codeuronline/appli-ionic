@@ -1,3 +1,11 @@
+.bg-img {
+  padding: 1px;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/bg-2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 ion-toggle {
     --background :red;
     --background-checked:green;
@@ -5,3 +13,17 @@ ion-toggle {
     --handle-background:white;
     --handle-background-checked:white;
   }
+  .button-valid{
+    padding: 0px;
+     background-color: #022135;
+     border-radius: 15px;
+     color: white;
+     font-size: large;
+ 
+ }
+ .button-valid:hover{
+     background-color: white;
+     color: #022135;
+     font-size:larger;
+ 
+ }

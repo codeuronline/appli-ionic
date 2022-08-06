@@ -9,17 +9,15 @@ import { AlertController,NavController } from "@ionic/angular";
   styleUrls: ['./found.page.scss'],
 })
 export class FoundPage implements OnInit {
+  isSubmitted = false;
+  handlerMessagelost = '';
+  roleMessage = '';
   ionicForm: FormGroup;
   defaultValue: 1;//status
-  defaultDate: "2022-07-11";
-  handlerMessagelost = '';
-  isSubmitted = false;
-  roleMessage = '';
+  defaultDate: "2022-07-11"; 
   user: string;
 
-  constructor(public navCtrl: NavController,private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) {
-    //go ahead and authenticate them without getting a new token.}) 
-    }
+  constructor(public navCtrl: NavController,private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) {}
   
 
   async presentAlert() {
@@ -67,7 +65,6 @@ export class FoundPage implements OnInit {
     this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
   submitForm() {
-    //
     this.isSubmitted = true;
     if (!this.ionicForm.controls) {
       console.log("Veuillez renseigner tous les champs");

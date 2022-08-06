@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="#002230">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="{{routerHref}}" (tap)="goBack()" text="Retour" slot="start"
         routerDirection="backward"></ion-back-button>
@@ -7,15 +7,9 @@
     <ion-title>
       OBJET N°: {{id}}
     </ion-title>
-    <ion-button (click)="destroyUser()" slot="end">
-      <ion-icon name="exit"></ion-icon>
-    </ion-button>
-    <ion-button (click)="delete()" slot="end">
-      <ion-icon name="trash"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="img-bg">
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
       <ion-label><ion-icon name="information"></ion-icon></ion-label>
@@ -78,7 +72,7 @@
     </ion-item>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="warning" expand="block">MODIFIER</ion-button>
+        <ion-button type="submit" class="button-valid" expand="block"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
       </ion-col>
     </ion-row>
   </form>

@@ -56,9 +56,9 @@ export class ViewentryPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
     public navCtrl: NavController) {
-      
-    
-     }
+
+
+  }
 
   async presentAlert(etat) {
     switch (etat) {
@@ -104,7 +104,7 @@ export class ViewentryPage implements OnInit {
     return ext == null ? "" : ext[1];
   }
   ngOnInit() {
-    this.user=sessionStorage.getItem("user");
+    this.user = sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -118,7 +118,7 @@ export class ViewentryPage implements OnInit {
       id_object: this.id,
       status: this.myValue,
       description: null,
-      location: null ,//new FormControl([ null, this.entryData.location, [Validators.required, Validators.maxLength(25)]),
+      location: null,//new FormControl([ null, this.entryData.location, [Validators.required, Validators.maxLength(25)]),
       date: null,
       firstname: null,//new FormControl([this.entryData.firstname, [Validators.required, Validators.maxLength(25)]]),
       lastname: null,//new FormControl([this.entryData.lastname, [Validators.required, Validators.maxLength(25)]]),
@@ -177,25 +177,7 @@ export class ViewentryPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-  // async submitImageForm() {
-  //   let formData = new FormData();
-  //   formData.append('file', this.file,
-  //     "object_" + this.id + "." + this.getFileExtension(this.filename));
 
-  //   try {
-  //     const response = await fetch('http://localhost/ionicserver/upload/upload.php', {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     console.log(response);
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // traitement des images
   onFileChange($event) {
     const oldfilenemame = $event.target.files[0].name;
     this.filename = "object_" + this.id + "." + this.getFileExtension(oldfilenemame);
@@ -217,8 +199,8 @@ export class ViewentryPage implements OnInit {
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
-  
-  // cas si le toggle picture est activé  
+
+    // cas si le toggle picture est activé  
     if (this.myOptionPicture == true) {
       //this.submitImageForm();   
       formObj.checkedpicture = true;
@@ -226,10 +208,13 @@ export class ViewentryPage implements OnInit {
         //generation d'un nouveau formulaire pour l'image
         formObj.filename = this.filename;
         let formData = new FormData();
+        //ajout de l'id de l'objet
         formData.append('id', formObj.filename);
+        //ajout de fichier image
         formData.append('photo', this.file);
         formObj.file = formData;
-        
+
+        // envoie du fichier sous forme de requete ajax
         try {
           const response = await fetch('http://localhost/ionicserver/image.php', {
             method: 'POST',
@@ -244,8 +229,8 @@ export class ViewentryPage implements OnInit {
           console.log(err)
             ;
         }
-      } else { 
-        formObj.filename =this.entryData.filename
+      } else {
+        formObj.filename = this.entryData.filename
       }
     } else {
       formObj.checkedpicture = this.entryData.checkedpicture;
@@ -256,8 +241,9 @@ export class ViewentryPage implements OnInit {
           formObj.filename = this.entryData.filename;
         }
       }
-      
+
     }
+    // envoie des modifications des informations
     let serializedForm = JSON.stringify(formObj);
     console.log("objet Json", serializedForm);
     this.userService.updateForm(serializedForm, this.id).
@@ -275,7 +261,11 @@ export class ViewentryPage implements OnInit {
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////
   goBack() {
-    
+    if (this.entryData.status == 1) {
+      this.routerHref = "/foundlist"
+
+    } else { this.routerHref = "/lostlist" }
+    this.navCtrl.navigateBack(this.routerHref);
 
   }
 
@@ -292,7 +282,7 @@ export class ViewentryPage implements OnInit {
     //manque l'affichage du succes
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- 
+
 
 
 

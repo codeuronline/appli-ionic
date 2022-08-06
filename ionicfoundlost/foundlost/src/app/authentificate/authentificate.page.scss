@@ -2,7 +2,7 @@
     padding: 1px;
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/bg.jpg');
+    background-image: url('../../assets/bg-2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -28,4 +28,17 @@
     width: 100px;
     height: 100px;
     align-items: center;
+}
+.button-valid{
+  background-color: #002239;
+  color: white;
+  font-size: large;
+  border-radius: 15px;
+}
+
+.button-valid:hover{
+   background-color: white;
+   color: #022135;
+   font-size:larger;
+
 }

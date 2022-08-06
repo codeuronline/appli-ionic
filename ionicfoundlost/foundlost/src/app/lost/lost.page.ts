@@ -15,20 +15,15 @@ export class LostPage implements OnInit {
   ionicForm: FormGroup;
   defaultValue: 0;
   defaultDate: "2022-07-11";
-  user :string;
-  constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) {
+  user: string;
 
-      // go ahead and authenticate them without getting a new token.}) 
-    
+  constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) { }
 
-    }
-  
   destroyUser() {
     this.user = null;
     sessionStorage.removeItem('user');
     this.navCtrl.navigateBack("autentificate");
   }
-
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Déclaration d'objet perdu",
@@ -40,15 +35,12 @@ export class LostPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
-
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
-
   ngOnInit() {
-    this.user=sessionStorage.getItem("user");
+    this.user = sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -59,23 +51,19 @@ export class LostPage implements OnInit {
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
       lastname: [null, [Validators.required, Validators.maxLength(25)]],
-      email: [this.user,null, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
     });
-
   }
   get errorControl() {
     return this.ionicForm.controls;
   }
-
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicForm.get('date').setValue(date, { onlyself: true });
   }
-
   submitForm() {
-    // tester sur le formulaire est valide -> a faire
     this.isSubmitted = true;
     if (!this.ionicForm.valid) {
       console.log('Veuillez renseigner tous les champs!')
@@ -96,9 +84,5 @@ export class LostPage implements OnInit {
         this.isSubmitted = false;
       }
     }
-
-
-
   }
 }
-

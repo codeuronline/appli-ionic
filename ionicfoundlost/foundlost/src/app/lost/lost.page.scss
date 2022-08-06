@@ -2,7 +2,7 @@
     padding: 1px;
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/bg.jpg');
+    background-image: url('../../assets/bg-2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -13,10 +13,26 @@
     height: 250px;
     width: 100%;
     align-items: center;
-    background: no-repeat center/50% url('../../assets/logo-lost.png');
+    background: no-repeat center/40% url('../../assets/logo-lost.png');
     background-size: cover;
 }
 .error {
     color: rgb(207, 14, 14);
     font-size: small;
+
 }
+.button-valid{
+   padding: 0px;
+    background-color: #022135;
+    border-radius: 15px;
+    color: white;
+    font-size: large;
+
+}
+.button-valid:hover{
+    background-color: white;
+    color: #022135;
+    font-size:larger;
+
+}
+

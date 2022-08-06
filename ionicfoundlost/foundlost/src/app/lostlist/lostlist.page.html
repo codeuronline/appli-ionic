@@ -1,17 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="sucess">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
     </ion-buttons>
-
     <ion-title>LISTE OBJETS PERDUS</ion-title>
-    <ion-button (click)="destroyUser()" slot="end">
-      <ion-icon name="exit"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <div class="bg-img">
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let data of entryData">
       <ion-item-sliding>
@@ -32,10 +28,9 @@
           <ion-img (*ngIf)="data.filename!=null"  [src]="data.filenameWithUrl" ></ion-img>
         </ion-thumbnail>
         </ion-item>
-
       </ion-item-sliding>
     </ion-card>
     <!-- addtask -->
     <!-- test affichage -->
-
+</div>
 </ion-content>
