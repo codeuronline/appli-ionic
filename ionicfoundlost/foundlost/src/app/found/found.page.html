@@ -5,9 +5,6 @@
     </ion-buttons>
     <ion-title>J'AI TROUVE</ion-title>
   </ion-toolbar>
-  <ion-button (click)="destroyUser()" slot="end">
-    <ion-icon name="exit"></ion-icon>
-  </ion-button>
 </ion-header>
 <ion-content>
   <form id="formFound" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
@@ -24,7 +21,7 @@
     </span>
     <ion-item>
       <ion-label>
-        <ion-icon name="date"></ion-icon>
+        <ion-icon name="calendar-number"></ion-icon>
       </ion-label>
       <ion-input displayFormat="YYYY-MM-DD" presentation="date" type="date" (ionChange)="getDate($event)"
         formControlName="date" [value]="defaultDate"></ion-input>
@@ -57,7 +54,7 @@
       le Prénom doit être défini.
     </span>
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.maxlength">
-      le Prénom est limité à 25 caractère
+      le Prénom est limité à 25 caractère.
     </span>
     <ion-item lines="full">
       <ion-label>
@@ -70,10 +67,10 @@
       le Nom doit être définie.
     </span>
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.maxlength">
-      le Nom est limité à 25 caractère
+      le Nom est limité à 25 caractère.
     </span>
     <ion-item lines="full">
-      <ion-label>Email :</ion-label>
+      <ion-label> <ion-icon name="mail"></ion-icon></ion-label>
       <ion-input formControlName="email" type="email" placeholder="Votre Email" required></ion-input>
     </ion-item>
     <!-- Error messages Email-->
