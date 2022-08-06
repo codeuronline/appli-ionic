@@ -4,55 +4,59 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div id="container" class="bg-img"></div>
-  <ion-card>
-    <ion-card-header>
-      <ion-icon name="person-add" class="ion-text-center icon"></ion-icon>
-    </ion-card-header>
-  </ion-card>
-
-  <ion-card>
-    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()"  novalidate>
-
-
-      <ion-item lines="full">
-        <ion-label>
-          <ion-icon name="mail">
-          </ion-icon>
-        </ion-label>
-        <ion-input  type="email" formControlName="email_user" placeholder="Entrer votre e-mail"></ion-input>
-      </ion-item>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.required">
-        E-mail requis.
-       </span>
-       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.pattern">
-        Format non valide.
-       </span>
-      <ion-item lines="full">
-        <ion-label>
-          <ion-icon name="key"></ion-icon>
-        </ion-label>
-        <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'" placeholder="Entrer un mot de passe">
-        </ion-input>
-        <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
-      </ion-item>
-      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
-        Mot de passe requis.
-       </span>
-       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
-        - Doit contenir 1 majuscule <br>
-        - 1 minuscule au minimum <br>
-        - 1 chiffre au minimum <br>
-        - 1 caractère spécial au minimum 
+<ion-content [fullscreen]="true" >
+  <div id="container" class="bg-img">
+    <ion-card>
+      <ion-card-header>
+     <div id="container-logo" class="logo">&nbsp;</div>
+      </ion-card-header>
+    </ion-card>
+    <ion-card>
+      <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="mail">
+            </ion-icon>
+          </ion-label>
+          <ion-input type="email" formControlName="email_user" placeholder="Entrer votre e-mail"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.required">
+          E-mail requis.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.pattern">
+          Format non valide.
+        </span>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="key"></ion-icon>
+          </ion-label>
+          <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"
+            placeholder="Entrer un mot de passe">
+          </ion-input>
+          <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+          Mot de passe requis.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+          - Doit contenir 1 majuscule <br>
+          - 1 minuscule au minimum <br>
+          - 1 chiffre au minimum <br>
+          - 1 caractère spécial au minimum
         </span>
 
-      <ion-button expand="block" type="submit" class="add-button" >Inscription</ion-button>
-      <ion-button expand="block" (click)="control()" class="add-button" >connexion</ion-button>
-      <ion-button expand="block" type="reset" class="add-button"><ion-icon name="refresh-circle-outline"></ion-icon></ion-button>
+        <ion-button expand="block" type="submit" class="add-button">
+          <ion-icon name="person-add" class="ion-text-center"></ion-icon>
+        </ion-button>
+        <ion-button expand="block" (click)="control()" class="add-button">
+          <ion-icon name="log-in"></ion-icon>
+        </ion-button>
+        <ion-button expand="block" type="reset" class="add-button">
+          <ion-icon name="refresh-circle-outline"></ion-icon>
+        </ion-button>
 
-    </form>
-  </ion-card>
-
+      </form>
+    </ion-card>
+  </div>
 
 </ion-content>
