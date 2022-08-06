@@ -1,4 +1,5 @@
-import { NavController } from '@ionic/angular';
+import { UserService } from './../api/user.service';
+import { NavController, AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoundlistPage implements OnInit {
   id_object = null;
-  user : string;
+  user: string;
+  roleMessage = "";
+  handlerMessagelost = "";
+  routerHref = "home";
+
 
 // Créer deux propriétés
   // URL du serveur backend
@@ -17,17 +22,44 @@ export class FoundlistPage implements OnInit {
   imgUrl="http://localhost/ionicserver/upload/"
   // Un tableau
   entryData = [];
-  constructor(public http: HttpClient,public navCtrl:NavController) {
+  constructor(public http: HttpClient,public navCtrl:NavController,private userService: UserService, private alertController:AlertController) {
    
   }
-  //doRefresh($event) {
-    
-  //}
-  destroyUser() {
-    this.user = null;
-    sessionStorage.removeItem('user');
-    this.navCtrl.navigateBack("autentificate");
+  async presentAlert(etat) {
+   
+    const alertDelete = await this.alertController.create({
+      header: 'Confirmer la Suppression',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
+        }
+      ]
+    });
+    await alertDelete.present();
+    var { role } = await alertDelete.onDidDismiss();
+    this.roleMessage = `Dismissed with role: ${role}`;
   }
+  //doRefresh($event) {
+    delete(id) {
+      this.userService.deleteObjet(id).subscribe(
+        (res) => {
+          console.log("SUCCES ===>", res)
+        }
+      )
+      this.presentAlert("delete");
+      this.ngOnInit();
+      this.navCtrl.navigateBack(this.routerHref);
+      //manque l'affichage du succes
+    }  
+  //}
+
   ngOnInit() {
     this.user=sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {

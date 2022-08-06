@@ -1,5 +1,5 @@
 import { FoundlistPageModule } from './../foundlist/foundlist.module';
-// import { File } from '@awesome-cordova-plugins/file';
+
 import { AlertController, NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
