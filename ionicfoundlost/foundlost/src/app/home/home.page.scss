@@ -19,38 +19,10 @@
 .add-button{
   background: transparent;
 }
-// #container {
-//   text-align: center;
 
-//   position: absolute;
-//   left: 0;
-//   right: 0;
-//   top: 40%;
-//   transform: translateY(-50%);
-// }
-
-// #container strong {
-//   font-size: 20px;
-//   line-height: 26px;
-// }
-
-// #container p {
-//   font-size: 16px;
-//   line-height: 22px;
-
-//   color: #8c8c8c;
-
-//   margin: 0;
-// }
-
-
-// #container a {
-//   text-decoration: none;
-// }
 
 
 .reverseGreen {
-  
   padding:0px;
   color: green;
   text-transform: uppercase;
@@ -100,6 +72,42 @@ font-size: larger;
 // 	animation: gradient 15s ease infinite;
 //   height: 8vh;
 // }
+
+.button-happy{
+  background: transparent;
+  background-color: white;
+  border: 5px solid  green;
+  color : green;
+  border-radius: 15px;
+  font-size: large;
+}
+.button-happy:hover{
+  background: transparent;
+  background-color: green;
+  border: 5px solid white;
+  color : white;
+  border-radius: 15px;
+  font-size: larger;
+}
+.button-sad{
+  background: transparent;
+  background-color: white;
+  border: 5px solid  red;
+  color : red;
+  border-radius: 15px;
+  font-size: large;
+}
+.button-sad:hover{
+  background: transparent;
+  background-color:red;
+  border: 5px solid  white;
+  color : white;
+  border-radius: 15px;
+  font-size: larger;
+}
+.ion-text-shadow{
+  text-shadow: 2px 2px black;
+}
 #bubble ion-icon {
   font-size: 200px; //Preferred size here{
     margin-top: px;
@@ -113,15 +121,11 @@ font-size: larger;
   width:50px;
   height: 50px;;
 }
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+.containerDouble{
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
 }
+
+
