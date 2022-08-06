@@ -52,7 +52,7 @@ export class FoundPage implements OnInit {
       date: [null, [Validators.required]],
       firstname: [null, [Validators.required, Validators.maxLength(25)]],
       lastname: [null, [Validators.required, Validators.maxLength(25)]],
-      email: [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      email: [null,this.user, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
     });

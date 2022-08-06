@@ -19,10 +19,16 @@ export class AuthentificatePage implements OnInit {
   password: string;
   ionicForm: FormGroup;
   isSubmitted = false;
+  showPassword = false;
+  passwordToggleIcon = 'eye';
 
   constructor(public apiService: UserService, public formBuilder: FormBuilder, public toastController: ToastController, private router: Router, private alertController: AlertController, public activatedRouter: ActivatedRoute,
     public navCtrl: NavController) { }
 
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+    this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
+  }
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Déclaration d'objet trouvé",
@@ -40,10 +46,12 @@ export class AuthentificatePage implements OnInit {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
+
+
+
   ngOnInit() {
     //this.user = sessionStorage.getItem('user');
     this.ionicForm = this.formBuilder.group({
-
       email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
     })
@@ -64,13 +72,12 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       this.email_user = this.ionicForm.get('email_user').value;
-
       this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
-        this.valider();
+        this.message("validateRegister");
         console.log("SUCCES ===", res);
         if (JSON.parse(JSON.stringify(res)) == false) {
-          this.uniqueMail();
-        }
+          this.message("existMail");
+        } else { this.navCtrl.navigateForward("home"); }
       })
 
       this.isSubmitted = false;
@@ -79,59 +86,29 @@ export class AuthentificatePage implements OnInit {
     this.ionicForm.reset();
   }
 
-  async valider() {
-    let toast = await this.toastController.create({
-
-      message: 'Inscription effectuée avec succès',
-      color: 'success',
-      duration: 3000,
-      position: 'middle',
-      buttons: [{
-        role: "cancel",
-        icon: 'close'
-
-      }]
-
-    });
-    toast.present();
+  async message(aValue) {
+    let info = [
+      { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "sucess" },
+      { "description": "existMail", "message": "Adresse mail déjà existante", "color": "warning" },
+      { "description": "failure", "message": "Inscription effectuée avec succès", "color": "danger" }]
+    for (let index = 0; index < info.length; index++) {
+      if (aValue == info[index].description) {
+        let toast = await this.toastController.create({
+          message: info[index].message,
+          color: info[index].color,
+          duration: 3000,
+          position: 'middle',
+          buttons: [{
+            role: "cancel",
+            icon: 'close'
+          }]
+        });
+        toast.present();;
+      }
+    }
   }
 
-  async uniqueMail() {
-    let toast = await this.toastController.create({
-
-      message: 'Adresse mail déjà existante',
-      color: 'danger',
-      duration: 3000,
-      position: 'middle',
-      buttons: [{
-        role: "cancel",
-        icon: 'close'
-
-      }]
-
-    });
-    toast.present();
-  }
-
-  async echec() {
-    let toast = await this.toastController.create({
-
-      message: 'Mot de passe ou identifiant invalide',
-      color: 'danger',
-      duration: 3000,
-      position: 'middle',
-      buttons: [{
-        role: "cancel",
-        icon: 'close'
-
-      }]
-
-    });
-    toast.present();
-  }
-
-
-  verifier() {
+  control() {
     this.isSubmitted = true;
 
     if (!this.ionicForm.valid) {
@@ -145,20 +122,17 @@ export class AuthentificatePage implements OnInit {
         console.log("SUCCES ===", res);
         console.log(res);
         if (JSON.parse(res) == true) {
-
           //generer un id de session
           sessionStorage.setItem("user", this.email_user);
           this.navCtrl.navigateForward("home");
         } else {
-          this.echec();
+          this.message("failure");
           // this.router.navigateByUrl("/inscription");
         }
 
       })
-
       this.isSubmitted = false;
     }
-
     this.ionicForm.reset();
 
   }
