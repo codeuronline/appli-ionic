@@ -18,12 +18,7 @@ export class LostPage implements OnInit {
   user: string;
 
   constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) { }
-
-  destroyUser() {
-    this.user = null;
-    sessionStorage.removeItem('user');
-    this.navCtrl.navigateBack("autentificate");
-  }
+  
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Déclaration d'objet perdu",
@@ -39,6 +34,7 @@ export class LostPage implements OnInit {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
+
   ngOnInit() {
     this.user = sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
