@@ -259,17 +259,15 @@ export class ViewentryPage implements OnInit {
     // formObj recoit l'etat des valeurs du formulaire
 
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   goBack() {
     if (this.entryData.status == 1) {
       this.routerHref = "/foundlist"
-
     } else { this.routerHref = "/lostlist" }
     this.navCtrl.navigateBack(this.routerHref);
 
   }
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   delete() {
     this.userService.deleteObjet(this.id).subscribe(
       (res) => {
