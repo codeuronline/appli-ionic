@@ -45,5 +45,12 @@
 #### Ajout de la page Authentification
 #### Seul les utilisateurs enregistrés peuvent consulter l'appli
 #### Filtrage des informations de connexion via regex coté front et back
-#### A finir -> appliquer le design final
-#### A finir -> corriger les bugs
+### Mise à Jour -> du 06/08/2022
+#### Controle de la visibilité du mot de passe sur la page d'authentification
+#### Révision de la cohérence de l'enchainement des pages
+##### -> La déconnexion n'est accessible seulement qu'à partir de la page home
+##### -> La suppression n'est accessible seulement que pour les objets qui ont status trouvé dans la page list found
+##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour les dans l'appli
+##### -> Révision du design et de l'affichage des boutons -> toujours encours
+##### -> Révision de l'affichage des Toasts -> encours
+
