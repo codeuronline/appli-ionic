@@ -27,3 +27,19 @@ ion-toggle {
      font-size:larger;
  
  }
+ .color {
+  padding:0px;
+  color: white;
+  background-color: #5d61b9;
+  text-transform: uppercase;
+  border: 5px none #5d61b9;
+  border-radius: 15px;
+  font-size: large;
+}
+.color:hover{
+color: white;
+background-color: #5d61b9;
+border: 5px solid white;
+border-radius:15px;
+font-size: large;
+}

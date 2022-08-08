@@ -13,80 +13,29 @@
     height: 250px;
     width: 100%;
     align-items: center;
-    background: no-repeat center/40% url('../../assets/logo-lost-found-small.png');
+    background: no-repeat center/40% url('../../assets/logo-fl.png');
     background-size: cover;
   }
 .add-button{
   background: transparent;
 }
 
-
-
-.reverseGreen {
-  padding:0px;
-  color: green;
-  text-transform: uppercase;
-  border: 5px solid green;
-  border-radius: 15px;
-  font-size: large;
-}
-.reverseGreen:hover{
-color: white;
-background-color: green;
-border: 5px solid white;
-border-radius:15px;
-font-size: larger;
-}
-.reverseRed {
-  padding:0px;
-  color: red;
-  text-transform:uppercase;
-  border: 5px solid red;
-  border-radius: 15px;
-  font-size: large;
-}
-.reverseRed:hover{
+.color {
+    padding:0px;
+    color: white;
+    background-color: #5d61b9;
+    text-transform: uppercase;
+    border: 5px none #5d61b9;
+    border-radius: 15px;
+    font-size: large;
+  }
+  .color:hover{
   color: white;
-  background-color: red;
+  background-color: #5d61b9;
   border: 5px solid white;
   border-radius:15px;
-  font-size: larger;
+  font-size: large;
   }
-
-.button-happy{
-  padding: 0px;
-  background: transparent;
-  // background-color: white;
-  border: 2px solid  green;
-  color : green;
-  border-radius: 15px;
-  font-size: large;
-}
-.button-happy:hover{
-  background: transparent;
-  background-color: green;
-  border: 5px solid white;
-  color : white;
-  border-radius: 15px;
-  font-size: larger;
-}
-.button-sad{
-  padding: 0px;
-  background: transparent;
-  // background-color: white;
-  border: 2px solid  red;
-  color : red;
-  border-radius: 15px;
-  font-size: large;
-}
-.button-sad:hover{
-  background: transparent;
-  background-color:red;
-  border: 5px solid  white;
-  color : white;
-  border-radius: 15px;
-  font-size: larger;
-}
 .ion-text-shadow{
   text-shadow: 2px 2px black;
 }

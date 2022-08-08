@@ -2,7 +2,7 @@
     padding: 1px;
     height: 100%;
     width: 100%;
-    background-image: url('../../assets/bg-2.jpg');
+    background-image: url('../../assets/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -29,6 +29,22 @@
     width: 100px;
     height: 100px;
     align-items: center;
+}
+.color {
+  padding:0px;
+  color: white;
+  background-color: #5d61b9;
+  text-transform: uppercase;
+  border: 5px none #5d61b9;
+  border-radius: 15px;
+  font-size: large;
+}
+.color:hover{
+color: white;
+background-color: #5d61b9;
+border: 5px solid white;
+border-radius:15px;
+font-size: large;
 }
 .button-valid{
   background-color: #002239;

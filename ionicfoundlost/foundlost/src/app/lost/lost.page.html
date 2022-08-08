@@ -15,7 +15,7 @@
         <ion-label>
           <ion-icon name="information-circle-outline"></ion-icon>
         </ion-label>
-        <ion-input formControlName="description" type="text" placeholder="Description de l'objet perdu" required>
+        <ion-input formControlName="description" type="text" placeholder="Description de l'objet perdu" required color="#002239">
         </ion-input>
       </ion-item>
       <!-- Error messages Description-->
@@ -27,7 +27,7 @@
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
         <ion-input displayFormat="YYYY-MM-DD" presentation="date" type="date" (ionChange)="getDate($event)"
-          formControlName="date" [value]="defaultDate"></ion-input>
+          formControlName="date" [value]="defaultDate" color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Date-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
@@ -37,7 +37,7 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input formControlName="location" type="text" placeholder="Endroit où il a été perdu" required></ion-input>
+        <ion-input formControlName="location" type="text" placeholder="Endroit où il a été perdu" required color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Locat-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.location.errors?.required">
@@ -50,7 +50,7 @@
         <ion-label>
           <ion-icon name="id-card"></ion-icon>
         </ion-label>
-        <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required></ion-input>
+        <ion-input formControlName="firstname" type="text" placeholder="Votre Prénom" required color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Prénom -->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
@@ -63,7 +63,7 @@
         <ion-label>
           <ion-icon name="id-card"></ion-icon>
         </ion-label>
-        <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required></ion-input>
+        <ion-input formControlName="lastname" type="text" placeholder="Votre Nom" required color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Nom-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
@@ -76,7 +76,7 @@
         <ion-label>
           <ion-icon name="mail"></ion-icon>
         </ion-label>
-        <ion-input formControlName="email" type="email" placeholder="Votre Email" required></ion-input>
+        <ion-input formControlName="email" type="email" placeholder="Votre Email" required color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Email-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
@@ -87,7 +87,7 @@
       </span>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" class="button-valid" expand="block"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+          <ion-button type="submit" class="color" expand="block" color="#002239"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </form>
