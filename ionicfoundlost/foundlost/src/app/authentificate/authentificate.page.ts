@@ -71,13 +71,19 @@ export class AuthentificatePage implements OnInit {
       return false;
     } else {
       console.log(this.ionicForm.value)
-      this.email_user = this.ionicForm.get('email_user').value;
+
       this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
-        this.message("validateRegister");
+        console.log(typeof(JSON.parse(JSON.stringify(res))));
         console.log("SUCCES ===", res);
-        if (JSON.parse(JSON.stringify(res)) == false) {
-          this.message("existMail");
-        } else { this.navCtrl.navigateForward("home"); }
+        if (JSON.parse(res) == false) {
+          console.log("error_mail");
+          this.message("error_mail");
+        } else {
+          this.email_user = this.ionicForm.get('email_user').value;
+          console.log("ValidateRegister");
+          this.message("validateRegister");
+          this.navCtrl.navigateForward("home");
+        }
       })
 
       this.isSubmitted = false;
@@ -88,16 +94,19 @@ export class AuthentificatePage implements OnInit {
 
   async message(aValue) {
     let info = [
-      { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "sucess" },
-      { "description": "existMail", "message": "Adresse mail déjà existante", "color": "warning" },
-      { "description": "failure", "message": "Inscription effectuée avec succès", "color": "danger" }]
+      { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
+      { "description": "valid_control","message":"Identification réussi","color": "success"},
+      { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
+      { "description": "failure", "message": "Erreur de mot de login/passe", "color": "warning" }]
+    
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
         let toast = await this.toastController.create({
           message: info[index].message,
           color: info[index].color,
-          duration: 3000,
-          position: 'middle',
+          cssClass:'toast',
+          duration: 5000,
+          position: 'bottom',
           buttons: [{
             role: "cancel",
             icon: 'close'
@@ -110,7 +119,7 @@ export class AuthentificatePage implements OnInit {
 
   control() {
     this.isSubmitted = true;
-
+    
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
 
@@ -121,11 +130,15 @@ export class AuthentificatePage implements OnInit {
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
         console.log("SUCCES ===", res);
         console.log(res);
+        console.log("controle")
         if (JSON.parse(res) == true) {
           //generer un id de session
+          console.log("valid_control");
+          this.message("valid_control");
           sessionStorage.setItem("user", this.email_user);
           this.navCtrl.navigateForward("home");
         } else {
+          console.log("failure");
           this.message("failure");
           // this.router.navigateByUrl("/inscription");
         }
