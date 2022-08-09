@@ -251,16 +251,16 @@ export class ViewentryPage implements OnInit {
 
   }
 
-  delete() {
-    this.userService.deleteObjet(this.id).subscribe(
-      (res) => {
-        console.log("SUCCES ===>", res)
-      }
-    )
-    this.ngOnInit();
-    this.navCtrl.navigateBack(this.routerHref);
-    //manque l'affichage du succes
-  }
+  // delete() {
+  //   this.userService.deleteObjet(this.id).subscribe(
+  //     (res) => {
+  //       console.log("SUCCES ===>", res)
+  //     }
+  //   )
+  //   this.ngOnInit();
+  //   this.navCtrl.navigateBack(this.routerHref);
+  //   //manque l'affichage du succes
+  // }
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
