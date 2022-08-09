@@ -1,6 +1,6 @@
 import { FoundlistPageModule } from './../foundlist/foundlist.module';
 
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
@@ -50,7 +50,7 @@ export class ViewentryPage implements OnInit {
 
 
   constructor(
-    private alertController: AlertController,
+    private toastController: ToastController,
     public userService: UserService,
     public http: HttpClient,
     public activatedRouter: ActivatedRoute,
@@ -60,44 +60,28 @@ export class ViewentryPage implements OnInit {
 
   }
 
-  async presentAlert(etat) {
-    switch (etat) {
-      case "delete":
-        const alertDelete = await this.alertController.create({
-          header: 'Confirmer la Suppression',
-          buttons: [
-            {
-              text: 'Annuler',
-              role: 'cancel',
-              handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
-            },
-            {
-              text: 'OK',
-              role: 'confirm',
-              handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
-            }
-          ]
+  async message(aValue) {
+    let info = [
+      { "description": "confirm", "message": "Modification Confirmée", "color": "success" }
+    ]
+    
+    for (let index = 0; index < info.length; index++) {
+      if (aValue == info[index].description) {
+        let toast = await this.toastController.create({
+          header:"",
+          message: info[index].message,
+          color: info[index].color,
+          cssClass: 'toast-custom-class',
+          duration: 5000,
+          position: 'bottom',
+          buttons: [{
+            role: "cancel",
+            icon: 'close'
+          }]
         });
-        await alertDelete.present();
-        var { role } = await alertDelete.onDidDismiss();
-        this.roleMessage = `Dismissed with role: ${role}`;
-        break;
-      case "update":
-        const alertUpdate = await this.alertController.create({
-          header: 'Confirmer la Modification',
-          buttons: [
-            {
-              text: 'OK',
-              role: 'confirm',
-              handler: () => { this.handlerMessagelost = 'Modification Confirmée'; }
-            }
-          ]
-        });
-        await alertUpdate.present();
-        var { role } = await alertUpdate.onDidDismiss();
-        this.roleMessage = `Dismissed with role: ${role}`; break;
+        toast.present();;
+      }
     }
-
   }
   getFileExtension(filename) {
     var ext = /^.+\.([^.]+)$/.exec(filename);
@@ -213,7 +197,6 @@ export class ViewentryPage implements OnInit {
         //ajout de fichier image
         formData.append('photo', this.file);
         formObj.file = formData;
-
         // envoie du fichier sous forme de requete ajax
         try {
           const response = await fetch('http://localhost/ionicserver/image.php', {
@@ -252,7 +235,7 @@ export class ViewentryPage implements OnInit {
           console.log("SUCCES ===", res);
 
         })
-    this.presentAlert("update");
+    this.message("confirm");
     this.navCtrl.navigateBack(this.routerHref);
     //this.ionicFormView.reset();
 
@@ -274,7 +257,6 @@ export class ViewentryPage implements OnInit {
         console.log("SUCCES ===>", res)
       }
     )
-    this.presentAlert("delete");
     this.ngOnInit();
     this.navCtrl.navigateBack(this.routerHref);
     //manque l'affichage du succes

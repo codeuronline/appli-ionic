@@ -104,7 +104,7 @@ export class AuthentificatePage implements OnInit {
         let toast = await this.toastController.create({
           message: info[index].message,
           color: info[index].color,
-          cssClass:'toast',
+          cssClass: 'toast-custom-class',
           duration: 5000,
           position: 'bottom',
           buttons: [{
