@@ -61,7 +61,7 @@
 #### -> Modification à venir 
 ##### -> Séléction d'une liste rapide pour changer le status de l'objet
 ##### -> Suppression de la page "detail d'un objet" au profit de ?????
-##### -> Récupération de mot de passe
+##### -> recuperation de mot de passe
 
 
 
