@@ -142,14 +142,9 @@ export class AuthentificatePage implements OnInit {
           this.message("failure");
           // this.router.navigateByUrl("/inscription");
         }
-
       })
       this.isSubmitted = false;
     }
     this.ionicForm.reset();
-
   }
-
-
-
 }
