@@ -56,12 +56,19 @@
 ### Mise à jour 08/08/2022
 #### -> Nouveau design
 #### -> Refonte des images / logo
-#### -> Cohérence des toasts 
-#### -> Creation  d'un bibliothèque des toasts 
-#### -> Modification à venir 
-##### -> Séléction d'une liste rapide pour changer le status de l'objet
-##### -> Suppression de la page "detail d'un objet" au profit de ?????
-##### -> Récupération de mot de passe
+#### -> Cohérence des toasts -> en cours
+#### -> Creation d'un bibliothèque des toasts -> encours
+#### -> Modification à venir -> ajourné
+##### -> Séléction d'une liste rapide pour changer le status de l'objet -> ajourné
+##### -> Suppression de la page "detail d'un objet" au profit de ????? -> ajourné
+##### -> Récupération de mot de passe -> ajourné
+### Mise à jour du 22/08/2022
+### -> Correction d'un bug aà l'authentification
+### Mise à jour du 23/08/2022
+### -> Ajout d'une fonction recherche dans les objets trouvés/perdus (icone recherche)
+### -> Sur la meme page ajout des modifications de choix de la pertinence de la recherche(Description/Localisation/Date..)
+### -> Traiter la requete sous la clé valeur search sur ionicserver
+
 
 
 
