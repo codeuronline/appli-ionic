@@ -50,17 +50,17 @@
 #### Révision de la cohérence de l'enchainement des pages
 ##### -> La déconnexion n'est accessible seulement qu'à partir de la page home
 ##### -> La suppression n'est accessible seulement que pour les objets qui ont status trouvé dans la page list found
-##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour les dans l'appli
-##### -> Révision du design et de l'affichage des boutons -> toujours encours
+##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour l'appli
+##### -> Révision du design et de l'affichage des boutons -> toujours en cours
 ##### -> Révision de l'affichage des Toasts -> encours
 ### Mise à jour 08/08/2022
 #### -> Nouveau design
+#### -> Refonte des images / logo
 ![new_authentification](https://github.com/codeuronline/appli-ionic/blob/master/ionicfoundlost/foundlost/image_interface/n_accueil.png)
 ![new_errors](https://github.com/codeuronline/appli-ionic/blob/master/ionicfoundlost/foundlost/image_interface/n_accueil.see.png)
 ![new_home](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/n_accueil_home.png)
-#### -> Refonte des images / logo
 #### -> Cohérence des toasts -> en cours
-#### -> Creation d'un bibliothèque des toasts -> encours
+#### -> Creation d'un bibliothèque des toasts -> en cours
 #### -> Modification à venir -> ajourné
 ##### -> Séléction d'une liste rapide pour changer le status de l'objet -> ajourné
 ##### -> Suppression de la page "detail d'un objet" au profit de ????? -> ajourné
@@ -70,7 +70,7 @@
 ### Mise à jour du 23/08/2022
 ### -> Ajout d'une fonction recherche dans les objets trouvés/perdus (icone recherche)
 ### -> Sur la meme page ajout des modifications de choix de la pertinence de la recherche(Description/Localisation/Date..)
-### -> Traiter la requete sous la clé valeur search sur ionicserver
+### -> Traiter la requête sous la clé valeur search sur ionicserver
 
 
 
