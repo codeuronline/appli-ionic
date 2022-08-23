@@ -55,6 +55,9 @@
 ##### -> Révision de l'affichage des Toasts -> encours
 ### Mise à jour 08/08/2022
 #### -> Nouveau design
+![new_authentification](https://github.com/codeuronline/appli-ionic/blob/master/ionicfoundlost/foundlost/image_interface/n_accueil.png)
+![new_errors](https://github.com/codeuronline/appli-ionic/blob/master/ionicfoundlost/foundlost/image_interface/n_accueil.see.png)
+![new_home](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/n_accueil_home.png)
 #### -> Refonte des images / logo
 #### -> Cohérence des toasts -> en cours
 #### -> Creation d'un bibliothèque des toasts -> encours
