@@ -11,6 +11,7 @@ export class HomePage {
   
   constructor(public navCtrl: NavController) {
   }
+ 
 ngInit() {
   this.user=sessionStorage.getItem("user");
   if (this.user == null || this.user == "") {

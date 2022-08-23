@@ -38,6 +38,7 @@ export class FoundPage implements OnInit {
     this.roleMessage = `Dismissed with role: ${role}`;
   }
 
+
   ngOnInit() {
     this.user=sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {

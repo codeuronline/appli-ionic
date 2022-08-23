@@ -5,8 +5,10 @@
         Accueil
       </div>
     </ion-title>
-    <ion-button (click)="destroyUser()" slot="end" color="none">
-      <img class="image" src="../../assets/se-deconnecter.png">
+    <ion-button (click)="destroyUser()" slot="end" color="none" class="objet">
+      <img id="card" src="../../assets/se-deconnecter-on.png" 
+      onmouseover="this.src='../../assets/se-deconnecter-off.png'"
+      onmouseout="this.src='../../assets/se-deconnecter-on.png'">
     </ion-button>
   </ion-toolbar>
 </ion-header>

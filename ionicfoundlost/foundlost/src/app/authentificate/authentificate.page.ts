@@ -21,14 +21,13 @@ export class AuthentificatePage implements OnInit {
   isSubmitted = false;
   showPassword = false;
   passwordToggleIcon = 'eye';
-
   constructor(public apiService: UserService, public formBuilder: FormBuilder, public toastController: ToastController, private router: Router, private alertController: AlertController, public activatedRouter: ActivatedRoute,
     public navCtrl: NavController) { }
 
-  togglePassword(): void {
-    this.showPassword = !this.showPassword;
-    this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
-  }
+    togglePassword(): void {
+      this.showPassword = !this.showPassword;
+      this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
+    }
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Déclaration d'objet trouvé",
@@ -46,12 +45,10 @@ export class AuthentificatePage implements OnInit {
     const { role } = await alert.onDidDismiss();
     this.roleMessage = `Dismissed with role: ${role}`;
   }
-
-
-
   ngOnInit() {
     //this.user = sessionStorage.getItem('user');
     this.ionicForm = this.formBuilder.group({
+
       email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
     })
@@ -91,7 +88,6 @@ export class AuthentificatePage implements OnInit {
 
     this.ionicForm.reset();
   }
-
   async message(aValue) {
     let info = [
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
@@ -116,10 +112,11 @@ export class AuthentificatePage implements OnInit {
       }
     }
   }
+  
 
   control() {
     this.isSubmitted = true;
-    
+
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
 
@@ -132,9 +129,10 @@ export class AuthentificatePage implements OnInit {
         console.log(res);
         console.log("controle")
         if (JSON.parse(res) == true) {
+
           //generer un id de session
           console.log("valid_control");
-          this.message("valid_control");
+          this.message("valid_control"); 
           sessionStorage.setItem("user", this.email_user);
           this.navCtrl.navigateForward("home");
         } else {
@@ -142,9 +140,16 @@ export class AuthentificatePage implements OnInit {
           this.message("failure");
           // this.router.navigateByUrl("/inscription");
         }
+
       })
+
       this.isSubmitted = false;
     }
+
     this.ionicForm.reset();
+
   }
+
+
+
 }
