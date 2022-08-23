@@ -66,7 +66,7 @@
 ##### -> Suppression de la page "detail d'un objet" au profit de ????? -> ajourné
 ##### -> Récupération de mot de passe -> ajourné
 ### Mise à jour du 22/08/2022
-### -> Correction d'un bug aà l'authentification
+### -> Correction d'un bug à l'authentification
 ### Mise à jour du 23/08/2022
 ### -> Ajout d'une fonction recherche dans les objets trouvés/perdus (icone recherche)
 ### -> Sur la meme page ajout des modifications de choix de la pertinence de la recherche(Description/Localisation/Date..)
