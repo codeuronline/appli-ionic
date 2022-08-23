@@ -50,8 +50,8 @@
 #### Révision de la cohérence de l'enchainement des pages
 ##### -> La déconnexion n'est accessible seulement qu'à partir de la page home
 ##### -> La suppression n'est accessible seulement que pour les objets qui ont status trouvé dans la page list found
-##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour les dans l'appli
-##### -> Révision du design et de l'affichage des boutons -> toujours encours
+##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour l'appli
+##### -> Révision du design et de l'affichage des boutons -> toujours en cours
 ##### -> Révision de l'affichage des Toasts -> encours
 ### Mise à jour 08/08/2022
 #### -> Nouveau design
@@ -61,7 +61,7 @@
 #### -> Modification à venir 
 ##### -> Séléction d'une liste rapide pour changer le status de l'objet
 ##### -> Suppression de la page "detail d'un objet" au profit de ?????
-##### -> recuperation de mot de passe
+##### -> Récupération de mot de passe
 
 
 

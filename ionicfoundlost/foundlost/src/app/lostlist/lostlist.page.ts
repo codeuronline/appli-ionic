@@ -11,14 +11,27 @@ export class LostlistPage implements OnInit {
   // Créer deux propriétés
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
-  imgUrl="http://localhost/ionicserver/upload/"
+  imgUrl = "http://localhost/ionicserver/upload/";
+  searchStatus = true;
   entryData = [];
   user = sessionStorage.getItem("user");
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
     this.ngOnInit;
   }
+
+  changeStatusSearch($event)
+  {
+    console.log("hello");
+    console.log(this.searchStatus);
+    this.searchStatus = !this.searchStatus;
+    console.log(this.searchStatus);
+    // let element = document.getElementById("searchOptions");
+    // (this.searchStatus == true) ? element.style.display = "visible": element.style.display = "hidden";
+    
+  }  
   ngOnInit() {
+    console.log(this.searchStatus);
     this.user=sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
@@ -26,6 +39,7 @@ export class LostlistPage implements OnInit {
     this.getEntry();
     
   }
+
   getEntry() {
     this.readAPI(this.bdUrl).subscribe(data => {
       console.log(data);
@@ -46,7 +60,7 @@ export class LostlistPage implements OnInit {
           "filenameWithUrl":this.imgUrl+data[i].filename,
         };
       }
-      console.log(this.entryData);
+  //    console.log(this.entryData);
        // fin boucle for
     }); // fin subscribe 
   }
