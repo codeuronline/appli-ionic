@@ -12,7 +12,7 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-  searchStatus = true;
+  searchStatus = false;
   entryData = [];
   user = sessionStorage.getItem("user");
 
@@ -20,7 +20,7 @@ export class LostlistPage implements OnInit {
     this.ngOnInit;
   }
 
-  changeStatusSearch($event)
+  change($event)
   {
     console.log("hello");
     console.log(this.searchStatus);

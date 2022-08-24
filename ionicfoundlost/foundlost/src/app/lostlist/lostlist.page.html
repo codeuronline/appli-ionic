@@ -12,10 +12,12 @@
 <ion-content>
   <div class="bg-img">
     <br>
+    <ion-item>
     <ion-button>
-      <ion-icon class="search" slot="end" name="search" (change)="changeStatusSearch($event)" ></ion-icon>
+      <ion-icon class="search" slot="end" name="search" [ionChange]="change($event)" ></ion-icon>
     </ion-button>
-    <div id="searchOptions" (*ngIf)="searchStatus">
+    <div id="searchOptions" (*ngIf)="searchStatus==true">
+      {{this.searchStatus}}
       <form action="">
       <label for="keyword">kw</label>
         <input type="search">
@@ -42,6 +44,7 @@
       <input type="checkbox">
       </form>
     </div>
+  </ion-item>
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let data of entryData">
       <ion-item-sliding>
