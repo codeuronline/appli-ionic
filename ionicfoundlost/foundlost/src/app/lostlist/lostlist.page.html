@@ -13,11 +13,11 @@
   <div class="bg-img">
     <br>
     <ion-button>
-      <ion-icon slot="start" name="search" *ionClick="change($event1)" ></ion-icon>
+      <ion-icon slot="start" name="search" (ionClick)="change($event1)" ></ion-icon>
     </ion-button>
     <div *ngIf="searchStatus" id="searchOptions" >
       <form action="">
-      <label for="keyword">kw</label>
+      <label for="keyword">word</label>
         <input type="search">
       <br>
         <label>

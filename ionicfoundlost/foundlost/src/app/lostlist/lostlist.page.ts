@@ -12,7 +12,7 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-  searchStatus = false;
+  searchStatus = new Boolean;
   entryData = [];
   user = sessionStorage.getItem("user");
 
@@ -37,6 +37,7 @@ export class LostlistPage implements OnInit {
       this.navCtrl.navigateBack("authentificate")
     }
     this.getEntry();
+    this.searchStatus = false;
     
   }
 
