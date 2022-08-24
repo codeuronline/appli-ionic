@@ -14,10 +14,9 @@
     <br>
     <ion-item>
     <ion-button>
-      <ion-icon class="search" slot="end" name="search" [ionChange]="change($event)" ></ion-icon>
+      <ion-icon class="search" slot="end" name="search" (change)="changeStatusSearch($event)" ></ion-icon>
     </ion-button>
-    <div id="searchOptions" (*ngIf)="searchStatus==true">
-      {{this.searchStatus}}
+    <div id="searchOptions" (*ngIf)="searchStatus">
       <form action="">
       <label for="keyword">kw</label>
         <input type="search">
@@ -31,7 +30,6 @@
       </label>
       <input type="checkbox">
       <label>
-        <ion-icon name="person"></ion-icon>
       </label>
       <input type="checkbox">
       <label>
