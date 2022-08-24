@@ -13,9 +13,9 @@
   <div class="bg-img">
     <br>
     <ion-button>
-      <ion-icon class="search" slot="end" name="search" (change)="changeStatusSearch($event)" ></ion-icon>
+      <ion-icon slot="start" name="search" *ionClick="change($event1)" ></ion-icon>
     </ion-button>
-    <div id="searchOptions" (*ngIf)="searchStatus">
+    <div *ngIf="searchStatus" id="searchOptions" >
       <form action="">
       <label for="keyword">kw</label>
         <input type="search">
@@ -29,7 +29,6 @@
       </label>
       <input type="checkbox">
       <label>
-        <ion-icon name="person"></ion-icon>
       </label>
       <input type="checkbox">
       <label>
