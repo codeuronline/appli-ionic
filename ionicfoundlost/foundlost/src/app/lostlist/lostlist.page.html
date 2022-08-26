@@ -6,12 +6,11 @@
         &nbsp;OBJETS PERDUS
         
       <!-- </ion-title> -->
-      </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="bg-img">
-    <br>
     <ion-item>
     <ion-button>
       <ion-icon class="search" slot="end" name="search" (change)="changeStatusSearch($event)" ></ion-icon>
@@ -25,10 +24,19 @@
         <ion-icon name="location"></ion-icon>
       </label>
       <input type="checkbox">
+      <label>
+        <ion-icon name="person"></ion-icon>
+      </label>
+      <input type="checkbox">
+      <label>
       </label>
       <input type="checkbox">
       <label>
         <ion-icon name="calendar"></ion-icon>
+      </label>
+      <input type="checkbox">
+      <label>
+        <ion-icon name="mail"></ion-icon>
       </label>
       <input type="checkbox">
       </form>
@@ -50,13 +58,13 @@
             <p>{{ data.location }}</p>
             <p>{{ data.date }}</p>
           </ion-label>
-        <ion-thumbnail  slot="end">
-          <ion-img (*ngIf)="data.filename!=null"  [src]="data.filenameWithUrl" ></ion-img>
-        </ion-thumbnail>
+          <ion-thumbnail slot="end">
+            <ion-img (*ngIf)="data.filename!=null" [src]="data.filenameWithUrl"></ion-img>
+          </ion-thumbnail>
         </ion-item>
       </ion-item-sliding>
     </ion-card>
     <!-- addtask -->
     <!-- test affichage -->
-</div>
+  </div>
 </ion-content>
