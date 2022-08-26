@@ -12,6 +12,7 @@
 <ion-content>
   <div class="bg-img">
     <br>
+    <ion-item>
     <ion-button>
       <!-- <ion-icon slot="start" name="search" (ionClick)="change($event1)" ></ion-icon> -->
       <ion-icon slot="end" name="search" (click)="toggleSearch()"></ion-icon>
@@ -19,7 +20,7 @@
     <div *ngIf="searchStatus">
       <span>
       <form action="">
-      <label for="keyword">word</label>
+      <label for="keyword">kw</label>
         <input type="search">
       <br>
         <label>
@@ -44,6 +45,7 @@
       </form>
     </span>
     </div>
+  </ion-item>
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let data of entryData">
       <ion-item-sliding>
