@@ -237,6 +237,7 @@ export class ViewentryPage implements OnInit {
 
         })
     this.message("confirm");
+    this.ngOnInit();
     this.navCtrl.navigateBack(this.routerHref);
     //this.ionicFormView.reset();
 

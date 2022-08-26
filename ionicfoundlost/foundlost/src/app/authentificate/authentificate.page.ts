@@ -99,7 +99,8 @@ export class AuthentificatePage implements OnInit {
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
       { "description": "valid_control","message":"Identification réussie","color": "success"},
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
-      { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" }]
+      { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
+      { "description": "no_conform", "message": "identification non conforme", "color": "warning" }]
     
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
@@ -124,6 +125,7 @@ export class AuthentificatePage implements OnInit {
     this.isSubmitted = true;
 
     if (!this.ionicForm.valid) {
+      this.message('no_conform');
       console.log('Remplissez les champs requis')
 
       return false;

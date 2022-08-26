@@ -1,5 +1,5 @@
 import { UserService } from './../api/user.service';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -22,38 +22,40 @@ export class FoundlistPage implements OnInit {
   imgUrl="http://localhost/ionicserver/upload/"
   // Un tableau
   entryData = [];
-  constructor(public http: HttpClient,public navCtrl:NavController,private userService: UserService, private alertController:AlertController) {
+  constructor(public http: HttpClient,public navCtrl:NavController,private userService: UserService, private toastController:ToastController) {
    
   }
-  async presentAlert(etat) {
-   
-    const alertDelete = await this.alertController.create({
-      header: 'Confirmer la Suppression',
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'cancel',
-          handler: () => { this.handlerMessagelost = 'Suppression Annulée'; }
-        },
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Suppression Confirmée'; }
-        }
-      ]
-    });
-    await alertDelete.present();
-    var { role } = await alertDelete.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
-  }
-  //doRefresh($event) {
+  async message(aValue) {
+    let info = [
+      { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
+      { "description": "treat", "message": "Traitement en cours", "color": "warning" }
+    ]
+    
+    for (let index = 0; index < info.length; index++) {
+      if (aValue == info[index].description) {
+        let toast = await this.toastController.create({
+          header:"",
+          message: info[index].message,
+          color: info[index].color,
+          cssClass: 'toast-custom-class',
+          duration: 5000,
+          position: 'bottom',
+          buttons: [{
+            role: "cancel",
+            icon: 'close'
+          }]
+        });
+        toast.present();;
+      }
+    }
+  }//doRefresh($event) {
     delete(id) {
       this.userService.deleteObjet(id).subscribe(
         (res) => {
           console.log("SUCCES ===>", res)
         }
       )
-      this.presentAlert("delete");
+      this.message("confirm");
       this.ngOnInit();
       this.navCtrl.navigateBack(this.routerHref);
       //manque l'affichage du succes

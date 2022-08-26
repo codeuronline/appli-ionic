@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
       <!-- <ion-title> -->
-        &nbsp;OBJETS PERDUS
-        <ion-button class="search" slot="end" (click)="toggleSearch()">
-          <ion-icon  name="search"  ></ion-icon>
-        </ion-button>    
+      &nbsp;OBJETS PERDUS
+      <ion-button class="search" slot="end" (click)="toggleSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
       <!-- </ion-title> -->
     </ion-buttons>
   </ion-toolbar>
@@ -14,21 +14,24 @@
 <ion-content>
   <div id="searchOptions" class="bg-img">
     <ion-item>
-    
-    <div *ngIf="searchStatus">
-      <form action="">
-      <label for="keyword"><img class='icone' src="../../assets/keyword.png"></label>
-        <input id="search" [type]="!showCalendar ? 'search' : 'date'">
-      <br>
-        <label>
-        <ion-icon class="location" name="location" (click)="toggleLocation()"></ion-icon>
-      </label>
+
+      <div *ngIf="searchStatus">
+        <form action="">
+          <div class="ion-text-center">
+            <label for="keyword"><img class='icone' src="../../assets/keyword.png"></label>
+            <input id="search" [type]="!showCalendar ? 'search' : 'date'">
+            <br>
+
             <label>
-        <ion-icon class="calendar" name="calendar" (click)="toggleCalendar()"></ion-icon>
-      </label>
-      </form>
-    </div>
-  </ion-item>
+              <ion-icon class="location" name="location" (click)="toggleLocation()"></ion-icon>
+            </label>
+            <label>
+              <ion-icon class="calendar" name="calendar" (click)="toggleCalendar()"></ion-icon>
+            </label>
+          </div>
+        </form>
+      </div>
+    </ion-item>
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let data of entryData">
       <ion-item-sliding>
