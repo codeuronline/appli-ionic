@@ -21,7 +21,13 @@ export class AuthentificatePage implements OnInit {
   isSubmitted = false;
   showPassword = false;
   passwordToggleIcon = 'eye';
-  constructor(public apiService: UserService, public formBuilder: FormBuilder, public toastController: ToastController, private router: Router, private alertController: AlertController, public activatedRouter: ActivatedRoute,
+  constructor(
+    public apiService: UserService,
+    public formBuilder: FormBuilder,
+    public toastController: ToastController,
+    private router: Router,
+    private alertController: AlertController,
+    public activatedRouter: ActivatedRoute,
     public navCtrl: NavController) { }
 
     togglePassword(): void {
@@ -91,9 +97,9 @@ export class AuthentificatePage implements OnInit {
   async message(aValue) {
     let info = [
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
-      { "description": "valid_control","message":"Identification réussi","color": "success"},
+      { "description": "valid_control","message":"Identification réussie","color": "success"},
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
-      { "description": "failure", "message": "Erreur de mot de login/passe", "color": "warning" }]
+      { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" }]
     
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
