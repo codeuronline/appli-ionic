@@ -13,6 +13,8 @@ export class LostlistPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
   searchStatus = true;
+  showLocation = false;
+  showCalendar = false;
   entryData = [];
   user = sessionStorage.getItem("user");
 
@@ -20,33 +22,42 @@ export class LostlistPage implements OnInit {
     this.ngOnInit;
   }
 
+  toggleLocation(): void {
+    this.showLocation = !this.showLocation;
+    console.log("location", this.showLocation);
+    (this.showLocation == true) ? this.showCalendar = false : null;
 
+  }
   toggleSearch(): void {
-    console.log('ici');
+    // console.log('ici');
     this.searchStatus = !this.searchStatus;
     var element = document.getElementById("searchOptions");
-     (this.searchStatus == true) ? element.style.display = "visible": element.style.display = "hidden";
-  
+    (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
+
+  }
+  toggleCalendar(): void {
+    this.showCalendar = !this.showCalendar;
+    console.log("calendar", this.showCalendar);
+    (this.showCalendar == true) ? this.showLocation = false : null;
   }
 
-  change($event1)
-  {
+  change($event1) {
     console.log(this.searchStatus);
     this.searchStatus = !this.searchStatus;
     console.log(this.searchStatus);
     const element = document.getElementById("searchOptions");
-     (this.searchStatus == true) ? element.style.display = "visible": element.style.display = "hidden";
-    
-  }  
+    (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
+
+  }
   ngOnInit() {
-    console.log("searchStatus",this.searchStatus);
-    this.user=sessionStorage.getItem("user");
+    console.log("searchStatus", this.searchStatus);
+    this.user = sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
     this.getEntry();
     this.searchStatus = false;
-    
+
   }
 
   getEntry() {
@@ -66,11 +77,11 @@ export class LostlistPage implements OnInit {
           "email": data[i].email,
           "checkedpicture": data[i].checkedpicture,
           "filename": data[i].picture,
-          "filenameWithUrl":this.imgUrl+data[i].filename,
+          "filenameWithUrl": this.imgUrl + data[i].filename,
         };
       }
-  //    console.log(this.entryData);
-       // fin boucle for
+      //    console.log(this.entryData);
+      // fin boucle for
     }); // fin subscribe 
   }
   readAPI(URL: string) {

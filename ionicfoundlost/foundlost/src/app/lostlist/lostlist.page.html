@@ -12,22 +12,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="bg-img">
+  <div id="searchOptions" class="bg-img">
     <ion-item>
     
-    <div id="searchOptions" *ngIf="searchStatus">
+    <div *ngIf="searchStatus">
       <form action="">
-      <label for="keyword">kw</label>
-        <input type="search">
+      <label for="keyword"><img class='icone' src="../../assets/keyword.png"></label>
+        <input id="search" [type]="!showCalendar ? 'search' : 'date'">
       <br>
         <label>
-        <ion-icon name="location" value="checkLocation"></ion-icon>
+        <ion-icon class="location" name="location" (click)="toggleLocation()"></ion-icon>
       </label>
-      <input type="checkbox">
-      <label>
-        <ion-icon name="calendar"></ion-icon>
+            <label>
+        <ion-icon class="calendar" name="calendar" (click)="toggleCalendar()"></ion-icon>
       </label>
-      <input type="checkbox" value="checkCalendar">
       </form>
     </div>
   </ion-item>

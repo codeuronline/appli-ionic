@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AlertController,NavController } from "@ionic/angular";
+import { ToastController,AlertController,NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-found',
@@ -17,28 +17,35 @@ export class FoundPage implements OnInit {
   defaultDate: "2022-07-11"; 
   user: string;
 
-  constructor(public navCtrl: NavController,private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder) {}
+  constructor(public navCtrl: NavController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) {}
   
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: "Déclaration d'objet trouvé",
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
-        }
-      ]
-    });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
+  today() {
+    return this.defaultDate;
   }
-
-
+  async message(aValue) {
+    let info = [
+      { "description": "confirm", "message": "Modification Confirmée", "color": "success" },
+      { "description": "treat", "message": "Traitement en cours", "color": "warning" }
+    ]
+    
+    for (let index = 0; index < info.length; index++) {
+      if (aValue == info[index].description) {
+        let toast = await this.toastController.create({
+          header:"",
+          message: info[index].message,
+          color: info[index].color,
+          cssClass: 'toast-custom-class',
+          duration: 5000,
+          position: 'bottom',
+          buttons: [{
+            role: "cancel",
+            icon: 'close'
+          }]
+        });
+        toast.present();;
+      }
+    }
+  }
   ngOnInit() {
     this.user=sessionStorage.getItem("user");
     if (this.user == null || this.user == "") {
@@ -81,7 +88,7 @@ export class FoundPage implements OnInit {
             (res) => {
               console.log("SUCCES ===", res);
             })
-        this.presentAlert();
+        this.message("confirm");
         this.ionicForm.reset();
         this.isSubmitted = false;
       }

@@ -62,7 +62,8 @@ export class ViewentryPage implements OnInit {
 
   async message(aValue) {
     let info = [
-      { "description": "confirm", "message": "Modification Confirmée", "color": "success" }
+      { "description": "confirm", "message": "Modification Confirmée", "color": "success" },
+      { "description": "treat", "message": "Traitement en cours", "color": "warning" }
     ]
     
     for (let index = 0; index < info.length; index++) {
@@ -117,7 +118,6 @@ export class ViewentryPage implements OnInit {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicFormView.get('date').setValue(date, { onlyself: true });
   }
-
   getEntry() {
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       console.log('data :', data);
@@ -171,6 +171,7 @@ export class ViewentryPage implements OnInit {
     console.log("file:", this.file);
   }
   async onSubmit() {
+    this.message("treat");
     // creer un object ecoute
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute

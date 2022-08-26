@@ -14,7 +14,7 @@
             <ion-icon name="mail">
             </ion-icon>
           </ion-label>
-          <ion-input type="email" formControlName="email_user" placeholder="Entrer votre e-mail"></ion-input>
+          <ion-input type="email" formControlName="email_user" placeholder="Taper votre e-mail"></ion-input>
         </ion-item>
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.required">
           E-mail requis.
@@ -27,7 +27,7 @@
             <ion-icon name="key"></ion-icon>
           </ion-label>
           <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'"
-            placeholder="Entrer un mot de passe">
+            placeholder="Taper votre mot de passe">
           </ion-input>
           <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
         </ion-item>
