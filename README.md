@@ -53,7 +53,7 @@
 ##### -> Modification de routage dans la barre de navigation différent de celui utilisé pour l'appli
 ##### -> Révision du design et de l'affichage des boutons -> toujours en cours
 ##### -> Révision de l'affichage des Toasts -> encours
-### Mise à jour 08/08/2022
+### Mise à jour -> 08/08/2022
 #### -> Nouveau design
 #### -> Refonte des images / logo
 #### -> Cohérence des toasts 
@@ -61,7 +61,8 @@
 #### -> Modification à venir 
 ##### -> Séléction d'une liste rapide pour changer le status de l'objet
 ##### -> Suppression de la page "detail d'un objet" au profit de ?????
-##### -> Récupération de mot de passe
+### Mise à jour -> 26/08/2022 
+#### -> Déploiement de l'outil de filtrage dans les listes d'objets
 
 
 
