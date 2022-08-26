@@ -4,7 +4,9 @@
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
       <!-- <ion-title> -->
         &nbsp;OBJETS PERDUS
-        
+        <ion-button class="search" slot="end" (click)="toggleSearch()">
+          <ion-icon  name="search"  ></ion-icon>
+        </ion-button>    
       <!-- </ion-title> -->
     </ion-buttons>
   </ion-toolbar>
@@ -12,33 +14,20 @@
 <ion-content>
   <div class="bg-img">
     <ion-item>
-    <ion-button>
-      <ion-icon class="search" slot="end" name="search" (change)="changeStatusSearch($event)" ></ion-icon>
-    </ion-button>
-    <div id="searchOptions" (*ngIf)="searchStatus">
+    
+    <div id="searchOptions" *ngIf="searchStatus">
       <form action="">
       <label for="keyword">kw</label>
         <input type="search">
       <br>
         <label>
-        <ion-icon name="location"></ion-icon>
-      </label>
-      <input type="checkbox">
-      <label>
-        <ion-icon name="person"></ion-icon>
-      </label>
-      <input type="checkbox">
-      <label>
+        <ion-icon name="location" value="checkLocation"></ion-icon>
       </label>
       <input type="checkbox">
       <label>
         <ion-icon name="calendar"></ion-icon>
       </label>
-      <input type="checkbox">
-      <label>
-        <ion-icon name="mail"></ion-icon>
-      </label>
-      <input type="checkbox">
+      <input type="checkbox" value="checkCalendar">
       </form>
     </div>
   </ion-item>

@@ -13,8 +13,6 @@ export class LostlistPage implements OnInit {
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
   searchStatus = true;
-
-
   entryData = [];
   user = sessionStorage.getItem("user");
 
@@ -24,14 +22,14 @@ export class LostlistPage implements OnInit {
 
 
   toggleSearch(): void {
+    console.log('ici');
     this.searchStatus = !this.searchStatus;
-    const element = document.getElementById("searchOptions");
+    var element = document.getElementById("searchOptions");
      (this.searchStatus == true) ? element.style.display = "visible": element.style.display = "hidden";
-    //this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
+  
   }
 
   change($event1)
-
   {
     console.log(this.searchStatus);
     this.searchStatus = !this.searchStatus;
