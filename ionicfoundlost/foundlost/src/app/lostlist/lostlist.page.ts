@@ -12,11 +12,8 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-<<<<<<< HEAD
-  searchStatus = new Boolean;
-=======
   searchStatus = false;
->>>>>>> 306424b7bac9f181ed5ebb9a9f1b029185ab3bf6
+
 
   entryData = [];
   user = sessionStorage.getItem("user");
@@ -25,14 +22,12 @@ export class LostlistPage implements OnInit {
     this.ngOnInit;
   }
 
-<<<<<<< HEAD
+
   toggleSearch(): void {
     this.searchStatus = !this.searchStatus;
     //this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
   }
-=======
 
->>>>>>> 306424b7bac9f181ed5ebb9a9f1b029185ab3bf6
   change($event1)
 
   {
