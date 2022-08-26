@@ -12,7 +12,7 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-  searchStatus = false;
+  searchStatus = true;
 
 
   entryData = [];
@@ -25,13 +25,14 @@ export class LostlistPage implements OnInit {
 
   toggleSearch(): void {
     this.searchStatus = !this.searchStatus;
+    const element = document.getElementById("searchOptions");
+     (this.searchStatus == true) ? element.style.display = "visible": element.style.display = "hidden";
     //this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
   }
 
   change($event1)
 
   {
-    console.log("hello");
     console.log(this.searchStatus);
     this.searchStatus = !this.searchStatus;
     console.log(this.searchStatus);

@@ -13,10 +13,10 @@
     <ion-item>
     <ion-button>
       <!-- <ion-icon slot="start" name="search" (ionClick)="change($event1)" ></ion-icon> -->
-      <ion-icon slot="end" name="search" (click)="toggleSearch()"></ion-icon>
+      <ion-icon class="search" slot="end" name="search" (click)="toggleSearch()"></ion-icon>
     </ion-button>
-    <div *ngIf="searchStatus">
-      <span>
+    <div *ngIf="searchStatus" >
+      <span class="searchStatus">
       <form action="">
       <label for="keyword">kw</label>
         <input type="search">
