@@ -67,9 +67,10 @@
 #### Filtrage par Description/Localisation/ Date opérationnelle
 #### -> à faire : récupération de Mot de passe
 ##### -> Déclencher une procédure pour avertir la personne à retrouver un objet si la correspondance existe 
-##### -> Revoir le présentation de la page detail
+##### -> Revoir le présentation de la page detail/view
 ##### -> Changer le status dans la liste d'objet perdu a trouvé avec un simple glissement
 ##### -> Image par la page view....
+##### -> Revoir l'élément card de filtrage
 
 
 
