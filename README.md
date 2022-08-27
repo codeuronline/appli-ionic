@@ -63,6 +63,14 @@
 ##### -> Suppression de la page "detail d'un objet" au profit de ?????
 ### Mise à jour -> 26/08/2022 
 #### -> Déploiement de l'outil de filtrage dans les listes d'objets
+### Mise à jour -> 27/08/2022
+#### Filtrage par Description/Localisation/ Date opérationnelle
+#### -> à faire : récupération de Mot de passe
+##### -> Déclencher une procédure pour avertir la personne à retrouver un objet si la correspondance existe 
+##### -> Revoir le présentation de la page detail
+##### -> Changer le status dans la liste d'objet perdu a trouvé avec un simple glissement
+##### -> Image par la page view....
+
 
 
 
