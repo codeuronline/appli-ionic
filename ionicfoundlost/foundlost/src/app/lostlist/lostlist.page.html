@@ -18,7 +18,11 @@
         <form action="">
           <div class="ion-text-center">
             <label for="status"><ion-icon [name]="showStatusSearch()"></ion-icon></label>
-            <input id="search" displayFormat="showCalendar==true ? 'YYYY-MM-DD' : null" presentation="showCalendar==true ? 'date' : null" [type]="!showCalendar ? 'search' : 'date'" (keyup)="filter($event)" (click)="filter($event)" [value]="showCalendar==true ? '2022-09-29':''">
+            <input id="search" displayFormat="showCalendar==true ? 'YYYY-MM-DD' : null" 
+                                presentation="showCalendar==true ? 'date' : null" 
+                                [type]="!showCalendar ? 'search' : 'date'" 
+                                (keyup)="filter($event)" (click)="filter($event)" 
+                                [value]="showCalendar==true ? '2022-09-29':''">
           </div>
           <div class="ion-text-center">  
             <label for="description">
