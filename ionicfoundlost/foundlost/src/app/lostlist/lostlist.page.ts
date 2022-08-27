@@ -12,22 +12,36 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
+  
+  input = document.getElementById("search");
   searchStatus = true;
+  showDescription = true;
   showLocation = false;
   showCalendar = false;
   entryData = [];
+  entryDataSearch = [];
   user = sessionStorage.getItem("user");
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
     this.ngOnInit;
   }
 
-  toggleLocation(): void {
-    this.showLocation = !this.showLocation;
-    console.log("location", this.showLocation);
-    (this.showLocation == true) ? this.showCalendar = false : null;
-
-  }
+  showStatusSearch() {
+    var aStatus = "information";
+    if (this.showCalendar == false && this.showLocation == false) {
+      aStatus = 'information';
+    }
+    if (this.showCalendar == true && this.showLocation == false) {
+      aStatus = "calendar";
+    }
+    if (this.showCalendar == false && this.showLocation == true) {
+      aStatus = "location";
+    }
+    
+    return aStatus; 
+    }
+  
+  
   toggleSearch(): void {
     // console.log('ici');
     this.searchStatus = !this.searchStatus;
@@ -35,20 +49,61 @@ export class LostlistPage implements OnInit {
     (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
 
   }
+  toggleLocation(): void {
+    this.showLocation = !this.showLocation;
+    if (this.showLocation== true){
+      this.showCalendar = false;
+      this.showDescription = false}
+    console.log("location", this.showLocation);    
+
+  }
+
   toggleCalendar(): void {
     this.showCalendar = !this.showCalendar;
-    console.log("calendar", this.showCalendar);
-    (this.showCalendar == true) ? this.showLocation = false : null;
-  }
-
-  change($event1) {
-    console.log(this.searchStatus);
-    this.searchStatus = !this.searchStatus;
-    console.log(this.searchStatus);
-    const element = document.getElementById("searchOptions");
-    (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
+    if (this.showCalendar == true) {
+      this.showLocation = false;
+      this.showDescription = false;
+    }
+    console.log("Calendar", this.showCalendar);    
 
   }
+  toggleDescription(): void{
+    this.showDescription = !this.showDescription;
+    if (this.showLocation == true) {
+      this.showCalendar = false;
+      this.showLocation = false;
+    }
+    console.log("description", this.showDescription);    
+
+  }
+   
+  filter(ev): void{
+    // this.entryData.values
+
+    if (this.showCalendar == true) {
+      // comment recuperer la valeur??
+      // alert(ev.target.value);
+      let date = new Date(ev.target.value).toISOString().substring(0, 10);
+      this.entryDataSearch=this.entryData.filter((data)=>data.date.match(ev.target.value))
+    }
+    if (this.showDescription == true) {
+      this.entryDataSearch=this.entryData.filter((data)=>data.description.toLowerCase().match(ev.target.value.toLowerCase()))
+    }
+    if (this.showLocation == true) {
+      this.entryDataSearch=this.entryData.filter((data)=>data.location.toLowerCase().match(ev.target.value.toLowerCase()));
+    }
+    console.log(this.entryDataSearch);    
+    }
+
+  
+  // change($event1) {
+  //   console.log(this.searchStatus);
+  //   this.searchStatus = !this.searchStatus;
+  //   console.log(this.searchStatus);
+  //   const element = document.getElementById("searchOptions");
+  //   (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
+
+  // }
   ngOnInit() {
     console.log("searchStatus", this.searchStatus);
     this.user = sessionStorage.getItem("user");
@@ -78,7 +133,8 @@ export class LostlistPage implements OnInit {
           "checkedpicture": data[i].checkedpicture,
           "filename": data[i].picture,
           "filenameWithUrl": this.imgUrl + data[i].filename,
-        };
+        }
+          this.entryDataSearch=this.entryData;
       }
       //    console.log(this.entryData);
       // fin boucle for

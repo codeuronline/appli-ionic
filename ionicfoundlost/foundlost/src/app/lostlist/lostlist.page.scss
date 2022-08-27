@@ -6,15 +6,18 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  .search,.calendar,.location{
+  .description,.search,.calendar,.location{
     background-color: none;
     color: white;
     border-radius: 15px;;
   }
-  .search:hover,.calendar:hover,.location:hover{
+  .description:hover,.search:hover,.calendar:hover,.location:hover{
   background-color:orange;    
   color:black;
   }
+  .description::after{background-color:orange;    
+    color:black;}
+
   .searchOptions{
     display: none;
   }

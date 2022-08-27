@@ -14,26 +14,34 @@
 <ion-content>
   <div id="searchOptions" class="bg-img">
     <ion-item>
-
       <div *ngIf="searchStatus">
         <form action="">
           <div class="ion-text-center">
-            <label for="keyword"><img class='icone' src="../../assets/keyword.png"></label>
-            <input id="search" [type]="!showCalendar ? 'search' : 'date'">
-            <br>
-
-            <label>
-              <ion-icon class="location" name="location" (click)="toggleLocation()"></ion-icon>
+            <label for="status"><ion-icon [name]="showStatusSearch()"></ion-icon></label>
+            <input id="search" displayFormat="showCalendar==true ? 'YYYY-MM-DD' : null" presentation="showCalendar==true ? 'date' : null" [type]="!showCalendar ? 'search' : 'date'" (keyup)="filter($event)" (click)="filter($event)" [value]="showCalendar==true ? '2022-09-29':''">
+          </div>
+          <div class="ion-text-center">  
+            <label for="description">
+              <ion-button class="description" [disabled]="showDescription==true" (click)="toggleDescription()" color="#002239">
+                <ion-icon  name="information" ></ion-icon>
+            </ion-button>
             </label>
-            <label>
-              <ion-icon class="calendar" name="calendar" (click)="toggleCalendar()"></ion-icon>
+            <label for="location">  
+              <ion-button class="location" [disabled]="showLocation==true" (click)="toggleLocation()" color="#002239">
+                <ion-icon name="location" ></ion-icon>
+              </ion-button>
+            </label>
+            <label for="calendar">
+              <ion-button class="calendar" [disabled]="showCalendar==true" (click)="toggleCalendar()"color="#002239">
+                <ion-icon name="calendar" ></ion-icon>
+              </ion-button>
             </label>
           </div>
         </form>
       </div>
     </ion-item>
     <!-- Liste des taches sous forme de card -->
-    <ion-card *ngFor="let data of entryData">
+    <ion-card *ngFor="let data of entryDataSearch">
       <ion-item-sliding>
         <ion-item-options side="end">
           <ion-item-option color="primary" routerLink="viewentry/{{data.id_object}}" routerDirection="forward">
