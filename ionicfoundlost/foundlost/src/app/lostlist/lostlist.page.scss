@@ -14,9 +14,12 @@
   .search_light{
     color:orange;
   }
+  #search::placeholder{
+    text-align: center;
+  }
   .description:hover,.search:hover,.calendar:hover,.location:hover{
-  background-color:orange;    
-  color:black;
+    background-color:orange;    
+    color:black;
   }
   .description::after{background-color:orange;    
     color:black;}

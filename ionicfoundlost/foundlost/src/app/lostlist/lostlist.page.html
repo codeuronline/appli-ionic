@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
       <!-- <ion-title> -->
       &nbsp;OBJETS PERDUS
-      <ion-button class="search" slot="end" (click)="toggleSearch()" placeholder="Filtrer par description'">
+      <ion-button class="search" slot="end" (click)="toggleSearch()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
       <!-- </ion-title> -->
@@ -22,7 +22,7 @@
                                 presentation="showCalendar==true ? 'date' : null" 
                                 [type]="showCalendar==false ? 'search' : 'date'" 
                                 (keyup)="filter($event)" (click)="filter($event)" 
-                                [value]="showCalendar==true ? '2022-08-29':''">
+                                [value]="showCalendar==true ? '2022-08-29':''" [placeholder]="selectPlaceholder()">
           </div>
           <div class="ion-text-center">  
             <label for="description">
