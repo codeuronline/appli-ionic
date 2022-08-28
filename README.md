@@ -71,6 +71,9 @@
 ##### -> Changer le status dans la liste d'objet perdu a trouvé avec un simple glissement
 ##### -> Image par la page view....
 ##### -> Revoir l'élément card de filtrage
+### Mise à jour -> 28/08/2022
+##### -> Mise en place des éléments si on pour mot de pass perdu case Recover
+##### -> Mise en place du captcha / et de la vérification du password
 
 
 
