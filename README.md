@@ -64,6 +64,7 @@
 ### Mise à jour -> 26/08/2022 
 #### -> Déploiement de l'outil de filtrage dans les listes d'objets
 ![filtrage](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/n_list_lost_filter.png)
+![toast](https://raw.githubusercontent.com/codeuronline/appli-ionic/master/ionicfoundlost/foundlost/image_interface/n_toast.png)
 ### Mise à jour -> 27/08/2022
 #### Filtrage par Description/Localisation/ Date opérationnelle
 #### -> à faire : récupération de Mot de passe
