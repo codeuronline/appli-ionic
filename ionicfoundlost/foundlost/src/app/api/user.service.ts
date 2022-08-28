@@ -27,6 +27,7 @@ export class UserService {
     console.log(number)
     return this.http.delete('http://localhost/ionicserver/manage-data.php?key=delete&id_task='+number,{responseType: 'text' });
   }
+  
   updateForm(data,number) {
     return this.http.put('http://localhost/ionicserver/manage-data.php?key=update&id_task=' + number, data, { responseType: 'text' });
   }
@@ -37,6 +38,9 @@ export class UserService {
     return this.http.post("http://localhost/ionicserver/manage-data.php?key=user", data,{responseType: 'text' });
   }
   
+  recoverUser(data) {
+    return this.http.post("http://localhost/ionicserver/manage-data.php?key=recover", data,{responseType: 'text' });
+  }
   connexion(data) {
     return this.http.post("http://localhost/ionicserver/manage-data.php?key=connexion", data,{responseType:'text'});
   }

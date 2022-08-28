@@ -26,71 +26,96 @@ export class AuthentificatePage implements OnInit {
     public apiService: UserService,
     public formBuilder: FormBuilder,
     public toastController: ToastController,
-    private router: Router,
-    private alertController: AlertController,
+  //  private router: Router,
+  //  private alertController: AlertController,
     public activatedRouter: ActivatedRoute,
     public navCtrl: NavController) { }
 
-    togglePassword(): void {
-      this.showPassword = !this.showPassword;
-      this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+    this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
   }
   toggleRecover(): void {
     this.showRecover = !this.showRecover;
-  }
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: "Déclaration d'objet trouvé",
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
-        }
-      ]
-    });
 
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
   }
+  // async presentAlert() {
+  //   const alert = await this.alertController.create({
+  //     header: "Déclaration d'objet trouvé",
+  //     buttons: [
+  //       {
+  //         text: 'OK',
+  //         role: 'confirm',
+  //         handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+
+  //   const { role } = await alert.onDidDismiss();
+  //   this.roleMessage = `Dismissed with role: ${role}`;
+  // }
   ngOnInit() {
     //this.user = sessionStorage.getItem('user');
-    this.ionicForm = this.formBuilder.group({
 
-      email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
-    })
-
+    if (this.showRecover == false) {
+      this.ionicForm = this.formBuilder.group({
+        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
+      })
+    } else {
+      this.ionicForm = this.formBuilder.group({
+        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        captcha: ['', [Validators.required, Validators.pattern(/[0-9]{1,2,3,4,5}/)]]
+      })
+    }
   }
-
   get errorControl() {
     return this.ionicForm.controls;
   }
 
   submitForm() {
     this.isSubmitted = true;
+    //tester si showrecover est coché
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
       return false;
     } else {
       console.log(this.ionicForm.value)
+      if (this.showRecover == true) {
+        this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
+          console.log(typeof (JSON.parse(JSON.stringify(res))));
+          console.log("SUCCES ===", res);
+          if (JSON.parse(res) == false) {
+            console.log("error_mail");
+            this.message("error_mail");
+          } else {
+            this.email_user = this.ionicForm.get('email_user').value;
+            console.log("ValidateRegister");
+            this.message("ValidateRegister");
+            this.navCtrl.navigateForward("home");
+          }
+        })
+      } else {
+        this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
+          console.log(typeof (JSON.parse(JSON.stringify(res))));
+          console.log("SUCCES ===", res);
+          if (JSON.parse(res) == false) {
+            console.log("error_mail");
+            this.message("error_mail");
+          } else {
+            this.email_user = this.ionicForm.get('email_user').value;
+            console.log("ValidateRegister");
+            this.message("validateRegister");
+            this.navCtrl.navigateForward("home");
+          }
+        })
+      }
 
-      this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
-        console.log(typeof(JSON.parse(JSON.stringify(res))));
-        console.log("SUCCES ===", res);
-        if (JSON.parse(res) == false) {
-          console.log("error_mail");
-          this.message("error_mail");
-        } else {
-          this.email_user = this.ionicForm.get('email_user').value;
-          console.log("ValidateRegister");
-          this.message("validateRegister");
-          this.navCtrl.navigateForward("home");
-        }
-      })
       this.isSubmitted = false;
     }
     this.ionicForm.reset();
@@ -98,15 +123,15 @@ export class AuthentificatePage implements OnInit {
   async message(aValue) {
     let info = [
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
-      { "description": "valid_control","message":"Identification réussie","color": "success"},
+      { "description": "valid_control", "message": "Identification réussie", "color": "success" },
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
       { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
       { "description": "no_conform", "message": "Identification non conforme", "color": "warning" },
       { "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
       { "description": "recover_error_mdp", "Message": "Erreur: Mot de passe non similaire", "color": "warning" },
       { "description": "recover_error_email", "Message": "Erreur: Email non défini", "color": "warning" },
-      ]
-    
+    ]
+
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
         let toast = await this.toastController.create({
@@ -145,7 +170,7 @@ export class AuthentificatePage implements OnInit {
         if (JSON.parse(res) == true) {
           //generer un id de session
           console.log("valid_control");
-          this.message("valid_control"); 
+          this.message("valid_control");
           sessionStorage.setItem("user", this.email_user);
           this.navCtrl.navigateForward("home");
         } else {
