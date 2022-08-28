@@ -49,6 +49,25 @@
         <ion-button expand="block" type="reset" class="color" color="#002239">
           <ion-icon name="refresh-circle-outline"></ion-icon>
         </ion-button>
+        <label for="recover">Recover</label>
+        <input type="checkbox" [checked]="showRecover==true" (click)="toggleRecover()"> 
+       
+        
+        <span class="recover" *ngIf="showRecover==true">
+         <img src="http://localhost/ionicserver/captcha.php" alt="">
+         <ion-input type="text" placeholder="Recopier le Captcha">
+          <img class="icone" src="../../assets/captcha.png" alt="">
+         </ion-input>
+          <ion-input formControlName="passwordVerify" [type]="showPassword ? 'text' : 'password'"
+            placeholder="Retaper votre mot de passe">
+            <ion-label>
+              <ion-icon name="key"></ion-icon>
+            </ion-label>
+          </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && controlPassword()">
+            Mot de pass différent.
+          </span>
+        </span>
       </form>
     </ion-card>
   </div>

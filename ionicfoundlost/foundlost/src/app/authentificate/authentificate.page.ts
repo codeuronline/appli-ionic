@@ -20,6 +20,7 @@ export class AuthentificatePage implements OnInit {
   ionicForm: FormGroup;
   isSubmitted = false;
   showPassword = false;
+  showRecover = false;
   passwordToggleIcon = 'eye';
   constructor(
     public apiService: UserService,
@@ -33,7 +34,10 @@ export class AuthentificatePage implements OnInit {
     togglePassword(): void {
       this.showPassword = !this.showPassword;
       this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
-    }
+  }
+  toggleRecover(): void {
+    this.showRecover = !this.showRecover;
+  }
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Déclaration d'objet trouvé",
@@ -66,11 +70,10 @@ export class AuthentificatePage implements OnInit {
   }
 
   submitForm() {
-
     this.isSubmitted = true;
-
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
+      this.message('no_conform');
       return false;
     } else {
       console.log(this.ionicForm.value)
@@ -88,10 +91,8 @@ export class AuthentificatePage implements OnInit {
           this.navCtrl.navigateForward("home");
         }
       })
-
       this.isSubmitted = false;
     }
-
     this.ionicForm.reset();
   }
   async message(aValue) {
@@ -100,7 +101,11 @@ export class AuthentificatePage implements OnInit {
       { "description": "valid_control","message":"Identification réussie","color": "success"},
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
       { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
-      { "description": "no_conform", "message": "identification non conforme", "color": "warning" }]
+      { "description": "no_conform", "message": "Identification non conforme", "color": "warning" },
+      { "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
+      { "description": "recover_error_mdp", "Message": "Erreur: Mot de passe non similaire", "color": "warning" },
+      { "description": "recover_error_email", "Message": "Erreur: Email non défini", "color": "warning" },
+      ]
     
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
@@ -119,17 +124,18 @@ export class AuthentificatePage implements OnInit {
       }
     }
   }
-  
+  controlPassword(ev) {
+    if (this.password === ev.target.value) return true;
+  }
 
   control() {
     this.isSubmitted = true;
-
     if (!this.ionicForm.valid) {
       this.message('no_conform');
       console.log('Remplissez les champs requis')
-
       return false;
     } else {
+      //ionicform ->valid
       this.email_user = this.ionicForm.get('email_user').value;
       console.log(this.ionicForm.value)
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
@@ -137,7 +143,6 @@ export class AuthentificatePage implements OnInit {
         console.log(res);
         console.log("controle")
         if (JSON.parse(res) == true) {
-
           //generer un id de session
           console.log("valid_control");
           this.message("valid_control"); 
@@ -148,16 +153,9 @@ export class AuthentificatePage implements OnInit {
           this.message("failure");
           // this.router.navigateByUrl("/inscription");
         }
-
       })
-
       this.isSubmitted = false;
     }
-
     this.ionicForm.reset();
-
   }
-
-
-
 }
