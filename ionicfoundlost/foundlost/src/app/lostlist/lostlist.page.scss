@@ -9,7 +9,10 @@
   .description,.search,.calendar,.location{
     background-color: none;
     color: white;
-    border-radius: 15px;;
+    border-radius: 15px;
+  }
+  .search_light{
+    color:orange;
   }
   .description:hover,.search:hover,.calendar:hover,.location:hover{
   background-color:orange;    

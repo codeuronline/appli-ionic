@@ -77,6 +77,13 @@ export class LostlistPage implements OnInit {
 
   }
    
+  selectPlaceholder(){
+    let placeHolder
+    (this.showDescription == true) ? placeHolder = "Filtrer par description" : null;
+    (this.showLocation == true) ? placeHolder = "Filtrer par endroit" : null;
+    (this.showCalendar == true) ? placeHolder = "Filtrer par Date" : null;
+    return placeHolder;
+  }
   filter(ev): void{
     // this.entryData.values
 

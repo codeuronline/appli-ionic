@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
       <!-- <ion-title> -->
       &nbsp;OBJETS PERDUS
-      <ion-button class="search" slot="end" (click)="toggleSearch()">
+      <ion-button class="search" slot="end" (click)="toggleSearch()" placeholder="Filtrer par description'">
         <ion-icon name="search"></ion-icon>
       </ion-button>
       <!-- </ion-title> -->
@@ -17,12 +17,12 @@
       <div *ngIf="searchStatus">
         <form action="">
           <div class="ion-text-center">
-            <label for="status"><ion-icon [name]="showStatusSearch()"></ion-icon></label>
+            <label for="status"><ion-icon class="search_light" [name]="showStatusSearch()"></ion-icon></label>
             <input id="search" displayFormat="showCalendar==true ? 'YYYY-MM-DD' : null" 
                                 presentation="showCalendar==true ? 'date' : null" 
-                                [type]="!showCalendar ? 'search' : 'date'" 
+                                [type]="showCalendar==false ? 'search' : 'date'" 
                                 (keyup)="filter($event)" (click)="filter($event)" 
-                                [value]="showCalendar==true ? '2022-09-29':''">
+                                [value]="showCalendar==true ? '2022-08-29':''">
           </div>
           <div class="ion-text-center">  
             <label for="description">
