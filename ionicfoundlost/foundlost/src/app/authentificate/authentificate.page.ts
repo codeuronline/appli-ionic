@@ -17,6 +17,8 @@ export class AuthentificatePage implements OnInit {
   email_user: string;
   user: string;
   password: string;
+  passwordVerify: string;
+  captcha: BigInteger;
   ionicForm: FormGroup;
   isSubmitted = false;
   showPassword = false;
@@ -162,6 +164,11 @@ export class AuthentificatePage implements OnInit {
     } else {
       //ionicform ->valid
       this.email_user = this.ionicForm.get('email_user').value;
+      if (this.showRecover == true) {
+        this.captcha = this.ionicForm.get('captcha').value;
+        this.passwordVerify = this.ionicForm.get('passworVerify').value;
+        
+      }
       console.log(this.ionicForm.value)
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
         console.log("SUCCES ===", res);
