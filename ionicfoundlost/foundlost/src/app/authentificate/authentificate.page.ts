@@ -20,6 +20,7 @@ export class AuthentificatePage implements OnInit {
   passwordVerify: string;
   captcha: BigInteger;
   ionicForm: FormGroup;
+  ionicFormVerify: FormGroup;
   isSubmitted = false;
   showPassword = false;
   showRecover = false;
@@ -67,7 +68,7 @@ export class AuthentificatePage implements OnInit {
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
       })
     } else {
-      this.ionicForm = this.formBuilder.group({
+      this.ionicFormVerify = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
         passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
