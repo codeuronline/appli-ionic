@@ -31,9 +31,7 @@ export class UserService {
   updateForm(data,number) {
     return this.http.put('http://localhost/ionicserver/manage-data.php?key=update&id_task=' + number, data, { responseType: 'text' });
   }
-  // getObject(number) {
-  //   return this.http.get('http://localhost/ionicserver/retrieve-data.php?key=' + number,{responseType: 'text'});
-  // }
+  
   createUser(data) {
     return this.http.post("http://localhost/ionicserver/manage-data.php?key=user", data,{responseType: 'text' });
   }
