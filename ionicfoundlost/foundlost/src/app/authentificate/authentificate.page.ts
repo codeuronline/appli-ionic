@@ -23,6 +23,7 @@ export class AuthentificatePage implements OnInit {
   showPassword = false;
   showRecover = false;
   passwordToggleIcon = 'eye';
+  
   constructor(
     public apiService: UserService,
     public formBuilder: FormBuilder,
@@ -36,36 +37,18 @@ export class AuthentificatePage implements OnInit {
     this.showPassword = !this.showPassword;
     this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
   }
+
   toggleRecover(): void {
     this.showRecover = !this.showRecover;
-
   }
-  // async presentAlert() {
-  //   const alert = await this.alertController.create({
-  //     header: "Déclaration d'objet trouvé",
-  //     buttons: [
-  //       {
-  //         text: 'OK',
-  //         role: 'confirm',
-  //         handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-
-  //   const { role } = await alert.onDidDismiss();
-  //   this.roleMessage = `Dismissed with role: ${role}`;
-  // }
   ngOnInit() {
-    //this.user = sessionStorage.getItem('user');
-
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
       })
     } else {
+      //marche pas
       this.ionicFormVerify = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
@@ -75,7 +58,9 @@ export class AuthentificatePage implements OnInit {
     }
   }
   get errorControl() {
-    return this.ionicForm.controls;
+    let statusForm;
+    (this.showRecover == true)?statusForm = this.ionicFormVerify.controls:statusForm=this.ionicForm.controls;
+    return statusForm;
   }
 
   submitForm() {
