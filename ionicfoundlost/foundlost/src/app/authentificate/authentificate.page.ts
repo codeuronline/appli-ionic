@@ -33,7 +33,7 @@ export class AuthentificatePage implements OnInit {
   //  private router: Router,
   //  private alertController: AlertController,
     public activatedRouter: ActivatedRoute,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController) { this.ngOnInit(); }
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
