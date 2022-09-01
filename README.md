@@ -74,9 +74,10 @@
 ##### -> Image par la page view....
 ##### -> Revoir l'élément card de filtrage
 ### Mise à jour -> 28/08/2022
-##### -> Mise en place des éléments si on pour mot de pass perdu case Recover
+##### -> Mise en place des éléments si on a perdu son mot de pass  mot de pass perdu case Recover
 ##### -> Mise en place du captcha / et de la vérification du password
-
+### Mise à jour  -> 01/09/2022
+#### ->  confirmation via mail du reset password avec + une cle pour redefinir le mot de pass
 
 
 
