@@ -20,7 +20,6 @@ export class AuthentificatePage implements OnInit {
   passwordVerify: string;
   captcha: BigInteger;
   ionicForm: FormGroup;
-  ionicFormVerify: FormGroup;
   isSubmitted = false;
   showPassword = false;
   showRecover = false;
@@ -30,8 +29,6 @@ export class AuthentificatePage implements OnInit {
     public apiService: UserService,
     public formBuilder: FormBuilder,
     public toastController: ToastController,
-  //  private router: Router,
-  //  private alertController: AlertController,
     public activatedRouter: ActivatedRoute,
     public navCtrl: NavController) { this.ngOnInit(); }
 
@@ -47,27 +44,27 @@ export class AuthentificatePage implements OnInit {
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]]
+        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        
       })
     } else {
       //marche pas
-      this.ionicFormVerify = this.formBuilder.group({
+      this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
         passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        captcha: ['', [Validators.required, Validators.pattern(/[0-9]{1,2,3,4,5}/)]]
+        captcha: ['', [Validators.required, Validators.pattern(/[0-9]{1,2,3,4,5}/)]],
       })
     }
   }
   get errorControl() {
-    let statusForm;
-    (this.showRecover == true)?statusForm = this.ionicFormVerify.controls:statusForm=this.ionicForm.controls;
-    return statusForm;
+       return this.ionicForm.controls;
   }
 
   submitForm() {
     this.isSubmitted = true;
     //tester si showrecover est coché
+    console.log(this.ionicForm);
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
@@ -152,13 +149,12 @@ export class AuthentificatePage implements OnInit {
       this.email_user = this.ionicForm.get('email_user').value;
       if (this.showRecover == true) {
         this.captcha = this.ionicForm.get('captcha').value;
-        this.passwordVerify = this.ionicForm.get('passworVerify').value;
+        this.passwordVerify = this.ionicForm.get('passwordVerify').value;
         
       }
-      console.log(this.ionicForm.value)
+      //console.log(this.ionicForm.value)
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
         console.log("SUCCES ===", res);
-        console.log(res);
         console.log("controle")
         if (JSON.parse(res) == true) {
           //generer un id de session
