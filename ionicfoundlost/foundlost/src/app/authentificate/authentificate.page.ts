@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray,Validators } from "@angular/forms";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -30,7 +30,7 @@ export class AuthentificatePage implements OnInit {
     public formBuilder: FormBuilder,
     public toastController: ToastController,
     public activatedRouter: ActivatedRoute,
-    public navCtrl: NavController) { this.ngOnInit(); }
+    public navCtrl: NavController) { }
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
@@ -39,6 +39,7 @@ export class AuthentificatePage implements OnInit {
 
   toggleRecover(): void {
     this.showRecover = !this.showRecover;
+    this.ngOnInit();
   }
   ngOnInit() {
     if (this.showRecover == false) {
@@ -52,8 +53,8 @@ export class AuthentificatePage implements OnInit {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        captcha: ['', [Validators.required, Validators.pattern(/[0-9]{1,2,3,4,5}/)]],
+        passwordVerify: ['', [Validators.required,Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        captcha: ['', [Validators.required ]],
       })
     }
   }
@@ -64,7 +65,7 @@ export class AuthentificatePage implements OnInit {
   submitForm() {
     this.isSubmitted = true;
     //tester si showrecover est coché
-    console.log(this.ionicForm);
+    console.log(this.ionicForm.value);
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
@@ -140,6 +141,7 @@ export class AuthentificatePage implements OnInit {
 
   control() {
     this.isSubmitted = true;
+    console.log(this.ionicForm)
     if (!this.ionicForm.valid) {
       this.message('no_conform');
       console.log('Remplissez les champs requis')
@@ -147,6 +149,7 @@ export class AuthentificatePage implements OnInit {
     } else {
       //ionicform ->valid
       this.email_user = this.ionicForm.get('email_user').value;
+      console.log(this.ionicForm);
       if (this.showRecover == true) {
         this.captcha = this.ionicForm.get('captcha').value;
         this.passwordVerify = this.ionicForm.get('passwordVerify').value;
