@@ -97,6 +97,7 @@ export class AuthentificatePage implements OnInit {
             this.email_user = this.ionicForm.get('email_user').value;
             console.log("ValidateRegister");
             this.message("validateRegister");
+            sessionStorage.setItem("user", this.email_user);
             this.navCtrl.navigateForward("home");
           }
         })
@@ -113,7 +114,7 @@ export class AuthentificatePage implements OnInit {
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
       { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
       { "description": "no_conform", "message": "Identification non conforme", "color": "warning" },
-      { "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
+      //{ "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
       { "description": "recover_error_mdp", "Message": "Erreur: Mot de passe non similaire", "color": "warning" },
       { "description": "recover_error_email", "Message": "Erreur: Email non défini", "color": "warning" },
     ]
