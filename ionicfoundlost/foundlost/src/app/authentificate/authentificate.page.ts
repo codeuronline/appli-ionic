@@ -41,7 +41,9 @@ export class AuthentificatePage implements OnInit {
     this.showRecover = !this.showRecover;
     this.ngOnInit();
   }
+
   ngOnInit() {
+    //en fonction de la checkbox on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
