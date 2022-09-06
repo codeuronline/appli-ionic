@@ -77,7 +77,9 @@
 ##### -> Mise en place des éléments si on a perdu son mot de pass  mot de pass perdu case Recover
 ##### -> Mise en place du captcha / et de la vérification du password
 ### Mise à jour  -> 01/09/2022
-#### ->  confirmation via mail du reset password avec + une cle pour redefinir le mot de pass
+#### ->  à envisager confirmation via mail du reset password avec + une cle pour redefinir le mot de pass
+### -> Mise à jour  -> 05/09/2022
+#### -> Recover fonctionne
 
 
 
