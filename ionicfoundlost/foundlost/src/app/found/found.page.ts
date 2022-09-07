@@ -15,13 +15,14 @@ export class FoundPage implements OnInit {
   ionicForm: FormGroup;
   defaultValue: 1;//status
   defaultDate: "2022-07-11"; 
-  user: string;
+  user: String;
 
   constructor(public navCtrl: NavController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) {}
   
   today() {
     return this.defaultDate;
   }
+
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Modification Confirmée", "color": "success" },

@@ -43,7 +43,7 @@ export class AuthentificatePage implements OnInit {
   }
 
   ngOnInit() {
-    //en fonction de la checkbox on oriente sur l'un des formulaires  de verification
+    //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -60,6 +60,7 @@ export class AuthentificatePage implements OnInit {
       })
     }
   }
+  // recupere les erreurs du formulaire
   get errorControl() {
        return this.ionicForm.controls;
   }
