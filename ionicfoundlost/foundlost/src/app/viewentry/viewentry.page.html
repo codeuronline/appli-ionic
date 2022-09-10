@@ -12,7 +12,9 @@
 <ion-content class="img-bg">
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
-      <ion-label><ion-icon name="information"></ion-icon></ion-label>
+      <ion-label>
+        <ion-icon name="information"></ion-icon>
+      </ion-label>
       <ion-input formControlName="description" type="text" [value]="entryData.description" required
         [disabled]="entryData.status==1" placeholder="description"></ion-input>
     </ion-item>
@@ -38,12 +40,16 @@
         [disabled]="entryData.status==1" placeholder="Localisation"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label><ion-icon name="id-card"></ion-icon></ion-label>
+      <ion-label>
+        <ion-icon name="id-card"></ion-icon>
+      </ion-label>
       <ion-input formControlName="firstname" type="text" [value]="entryData.firstname" required
         [disabled]="entryData.status==1" placeholder="Prénom"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label><ion-icon name="id-card"></ion-icon></ion-label>
+      <ion-label>
+        <ion-icon name="id-card"></ion-icon>
+      </ion-label>
       <ion-input formControlName="lastname" type="text" [value]="entryData.lastname" required
         [disabled]="entryData.status==1" placeholder="Nom"></ion-input>
     </ion-item>
@@ -72,7 +78,17 @@
     </ion-item>
     <ion-row>
       <ion-col>
-        <ion-button  type="submit" class="color" color="#002239" expand="block"[disabled]="entryData.status==1"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+        <ion-item-options side="end">
+          <ion-item-option>
+            <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+            Modifier
+          </ion-item-option>
+        </ion-item-options>
+        <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
   </form>

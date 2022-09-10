@@ -5,8 +5,7 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <div class="bg-img">
-    <br>
-     <div class="logo">&nbsp;</div>
+    <div class="logo">&nbsp;</div>
     <ion-card>
       <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
         <ion-item lines="full">
@@ -42,23 +41,31 @@
           - 1 caractère spécial au minimum
         </span>
         <ion-button expand="block" type="submit" class="color" color="#002239">
-          <ion-icon name="person-add" class="ion-text-center"></ion-icon>
+          <ion-button-option>
+          <ion-icon slot="top" name="person-add" class="ion-text-center"></ion-icon>
+          User +
+        </ion-button-option>
         </ion-button>
-        <ion-button  expand="block" (click)="control()" class="color"color="#002239" [disabled]="showRecover==true">
-          <ion-icon name="log-in"></ion-icon>
+        <ion-button expand="block" (click)="control()" class="color" color="#002239" [disabled]="showRecover==true"
+          *ngIf="showRecover==false">
+           <ion-button-option>
+                <ion-icon slot="top" name="log-in" class="ion-text-center"></ion-icon>
+              Se connecter
+            </ion-button-option>
         </ion-button>
-        <ion-button expand="block" type="reset" class="color" color="#002239">
-          <ion-icon name="refresh-circle-outline"></ion-icon>
+        <ion-button expand="block" type="reset" class="color" color="#002239" *ngIf="showRecover==false">
+          <ion-icon slot="top" name="refresh-circle-outline" class="ion-text-center"></ion-icon>
+          Effacer
         </ion-button>
         <label for="recover">Recover</label>
-        <input type="checkbox" [checked]="showRecover==true" (click)="toggleRecover()"> 
+        <input type="checkbox" [checked]="showRecover==true" (click)="toggleRecover()">
         <span class="recover" *ngIf="showRecover==true">
-         <img src="http://localhost/ionicserver/captcha.php" alt="">
-         <ion-input formControlName="captcha" type="number" placeholder="Recopier le Captcha">
-          <img class="icone" src="../../assets/captcha.png" alt="">
-         </ion-input>
+          <img src="http://localhost/ionicserver/captcha.php" alt="">
+          <ion-input formControlName="captcha" type="number" placeholder="Recopier le Captcha">
+            <img class="icone" src="../../assets/captcha.png" alt="">
+          </ion-input>
           <ion-input formControlName="passwordVerify" [type]="showPassword ? 'text' : 'password'"
-            placeholder="Retaper votre mot de passe" >
+            placeholder="Retaper votre mot de passe">
             <ion-label>
               <ion-icon name="key"></ion-icon>
             </ion-label>
