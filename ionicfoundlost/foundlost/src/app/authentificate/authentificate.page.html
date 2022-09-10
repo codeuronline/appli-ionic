@@ -54,15 +54,18 @@
             </ion-button-option>
         </ion-button>
         <ion-button expand="block" type="reset" class="color" color="#002239" *ngIf="showRecover==false">
+          <ion-button-option>
           <ion-icon slot="top" name="refresh-circle-outline" class="ion-text-center"></ion-icon>
           Effacer
+        </ion-button-option>
         </ion-button>
         <label for="recover">Recover</label>
         <input type="checkbox" [checked]="showRecover==true" (click)="toggleRecover()">
         <span class="recover" *ngIf="showRecover==true">
-          <img src="http://localhost/ionicserver/captcha.php" alt="">
+          <img class="captcha" id="captcha" src="http://localhost/ionicserver/captcha.php" alt="">
           <ion-input formControlName="captcha" type="number" placeholder="Recopier le Captcha">
-            <img class="icone" src="../../assets/captcha.png" alt="">
+            <button type="button" (click)="document.getElementById('captcha').src='http://localhost/ionicserver/captcha.php';">Rafraichir</button>
+            <img class="icone" src="../../assets/captcha.png" alt=""(click)="changeCaptcha()">
           </ion-input>
           <ion-input formControlName="passwordVerify" [type]="showPassword ? 'text' : 'password'"
             placeholder="Retaper votre mot de passe">
@@ -76,5 +79,18 @@
         </span>
       </form>
     </ion-card>
+    <!-- <ion-card>
+      <ion-item>
+        <ion-item-options>
+          <ion-item-option color="primary"  (click)="submit()">
+            <ion-icon slot="top" name="person-add"></ion-icon>Add
+          </ion-item-option>
+          <ion-item-option>
+            <ion-icon slot="top" name="log-in"></ion-icon>log
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item>
+    </ion-card> -->
   </div>
+ 
 </ion-content>

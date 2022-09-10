@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, FormArray,Validators } from "@angular/forms";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
@@ -42,6 +42,9 @@ export class AuthentificatePage implements OnInit {
     this.ngOnInit();
   }
 
+  changeCaptcha() {
+    
+  }
   ngOnInit() {
     //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
