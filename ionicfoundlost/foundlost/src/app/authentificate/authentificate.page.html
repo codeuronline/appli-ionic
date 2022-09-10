@@ -64,9 +64,12 @@
         <span class="recover" *ngIf="showRecover==true">
           <img class="captcha" id="captcha" src="http://localhost/ionicserver/captcha.php" alt="">
           <ion-input formControlName="captcha" type="number" placeholder="Recopier le Captcha">
-            <button type="button" (click)="document.getElementById('captcha').src='http://localhost/ionicserver/captcha.php';">Rafraichir</button>
-            <img class="icone" src="../../assets/captcha.png" alt=""(click)="changeCaptcha()">
+            <ion-button type="submit" (click)="reloadCaptcha()">
+              <img class="icone" src="../../assets/captcha.png" alt=""></ion-button>
           </ion-input>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.passwordVerify.errors?.required">
+            Captacha non retapé
+          </span>
           <ion-input formControlName="passwordVerify" [type]="showPassword ? 'text' : 'password'"
             placeholder="Retaper votre mot de passe">
             <ion-label>

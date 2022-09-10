@@ -42,9 +42,7 @@ export class AuthentificatePage implements OnInit {
     this.ngOnInit();
   }
 
-  changeCaptcha() {
-    
-  }
+  
   ngOnInit() {
     //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
