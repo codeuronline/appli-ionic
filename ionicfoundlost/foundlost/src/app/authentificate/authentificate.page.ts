@@ -15,6 +15,7 @@ export class AuthentificatePage implements OnInit {
   handlerMessagelost = '';
   roleMessage = '';
   email_user: string;
+  user_id: string;
   user: string;
   password: string;
   passwordVerify: string;
@@ -94,15 +95,21 @@ export class AuthentificatePage implements OnInit {
         this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
           console.log("SUCCES ===", res);
-          if (JSON.parse(res) == false) {
-            console.log("error_mail");
-            this.message("error_mail");
-          } else {
+          let value = JSON.parse(res);
+          if (value){
             this.email_user = this.ionicForm.get('email_user').value;
+            this.user_id = value;
             console.log("ValidateRegister");
             this.message("validateRegister");
             sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id",this.user_id);
             this.navCtrl.navigateForward("home");
+
+          } else {
+
+            console.log("error_mail");
+            this.message("error_mail");
+            
           }
         })
       }
@@ -164,11 +171,16 @@ export class AuthentificatePage implements OnInit {
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
         console.log("SUCCES ===", res);
         console.log("controle")
-        if (JSON.parse(res) == true) {
+        let value = JSON.parse(res);
+        if (value) {
           //generer un id de session
           console.log("valid_control");
           this.message("valid_control");
+          this.user_id = value;
           sessionStorage.setItem("user", this.email_user);
+          sessionStorage.setItem("user_id", this.user_id);
+          // une connexion on recupere 
+         // sessionStorage.setItem('user_id', this.user_id);
           this.navCtrl.navigateForward("home");
         } else {
           console.log("failure");

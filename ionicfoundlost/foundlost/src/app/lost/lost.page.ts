@@ -16,24 +16,10 @@ export class LostPage implements OnInit {
   defaultValue: 0;
   defaultDate: "2022-07-11";
   user: string;
+  user_id: string;
 
   constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
   
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: "Déclaration d'objet perdu",
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
-        }
-      ]
-    });
-    await alert.present();
-    const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
-  }
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Création confirmé", "color": "success" },
@@ -61,6 +47,7 @@ export class LostPage implements OnInit {
 
   ngOnInit() {
     this.user = sessionStorage.getItem("user");
+    this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -102,6 +89,7 @@ export class LostPage implements OnInit {
             })
         this.message("confirm");
         this.ionicForm.reset();
+        this.ngOnInit();
         this.isSubmitted = false;
       }
     }

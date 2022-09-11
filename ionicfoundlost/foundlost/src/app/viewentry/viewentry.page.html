@@ -10,6 +10,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="img-bg">
+  <!--definir le contexte d'affichage en fonction de l'utilisteur
+  si l'utilisateur est celui qui a creer la declaration-->
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
       <ion-label>
@@ -78,17 +80,21 @@
     </ion-item>
     <ion-row>
       <ion-col>
-        <ion-item-options side="end">
-          <ion-item-option>
+        <!-- <ion-item-options side="end"> -->
+          <!-- <ion-item-option>
             <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
-              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <ion-icon slot="top" name="checkmark-circle-outline"></ion-icon>
+              Modifier
             </ion-button>
-            Modifier
           </ion-item-option>
-        </ion-item-options>
-        <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-item-options> -->
+        <ion-button type="submit" class="color" color="#002239"  [disabled]="entryData.status==1" >
+          <div>
+            <ion-icon name="checkmark-circle-outline"></ion-icon><br>
+            <span class="text-icon">Modifier</span>
+        </div>
         </ion-button>
+      
       </ion-col>
     </ion-row>
   </form>

@@ -6,14 +6,17 @@
       </div>
     </ion-title>
     <ion-button (click)="destroyUser()" slot="end" color="none" class="objet">
-      <img id="card" src="../../assets/se-deconnecter-on.png"
-        onmouseover="this.src='../../assets/se-deconnecter-off.png'"
-        onmouseout="this.src='../../assets/se-deconnecter-on.png'">
+      <div>
+        <img id="card" src="../../assets/se-deconnecter-on.png"
+          onmouseover="this.src='../../assets/se-deconnecter-off.png'"
+          onmouseout="this.src='../../assets/se-deconnecter-on.png'">
+      </div>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="bg-img">
+    hello {{user}}{{email_user}}
     <div class="logo">&nbsp;</div>
     <ion-title class="ion-text-center ion-text-shadow">Faire une Déclaration</ion-title>
     <ion-card expand="block" class="add-button">

@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class FoundlistPage implements OnInit {
   id_object = null;
   user: string;
+  user_id: string;
   roleMessage = "";
   handlerMessagelost = "";
   routerHref = "home";
@@ -63,7 +64,8 @@ export class FoundlistPage implements OnInit {
   //}
 
   ngOnInit() {
-    this.user=sessionStorage.getItem("user");
+    this.user = sessionStorage.getItem("user");
+    this.user_id =sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -86,7 +88,8 @@ export class FoundlistPage implements OnInit {
           "email": data[i].email,
           "checkedpicture": data[i].checkedpicture,
           "filename": data[i].picture,
-          "filenameWithUrl":this.imgUrl+data[i].filename,
+          "filenameWithUrl": this.imgUrl + data[i].filename,
+          "user_id": this.user_id,
         };
       } // fin boucle for
     }); // fin subscribe 
