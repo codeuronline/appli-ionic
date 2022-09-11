@@ -16,7 +16,7 @@ export class AuthentificatePage implements OnInit {
   roleMessage = '';
   email_user: string;
   user_id: string;
-  user: string;
+  //user: string;
   password: string;
   passwordVerify: string;
   captcha: BigInteger;
@@ -80,15 +80,19 @@ export class AuthentificatePage implements OnInit {
       if (this.showRecover == true) {
         this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
-          console.log("SUCCES ===", res);
-          if (JSON.parse(res) == false) {
+          console.log("SUCCES Recover ===", res);
+          let value = JSON.parse(res);
+          if (value) {
+            this.email_user = this.ionicForm.get('email_user').value;
+            this.user_id = value;
+            console.log("ValidateRegister");
+            this.message("validateRegister");
+            sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id",this.user_id);
+            this.navCtrl.navigateForward("home");
+          } else {
             console.log("error_mail");
             this.message("error_mail");
-          } else {
-            this.email_user = this.ionicForm.get('email_user').value;
-            console.log("ValidateRegister");
-            this.message("ValidateRegister");
-            this.navCtrl.navigateForward("home");
           }
         })
       } else {
@@ -104,9 +108,7 @@ export class AuthentificatePage implements OnInit {
             sessionStorage.setItem("user", this.email_user);
             sessionStorage.setItem("user_id",this.user_id);
             this.navCtrl.navigateForward("home");
-
           } else {
-
             console.log("error_mail");
             this.message("error_mail");
             

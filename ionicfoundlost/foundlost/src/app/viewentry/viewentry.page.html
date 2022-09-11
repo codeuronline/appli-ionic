@@ -10,6 +10,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="img-bg">
+  <div *ngIf="user_id == entryData.user_id; else showOver">
   <!--definir le contexte d'affichage en fonction de l'utilisteur
   si l'utilisateur est celui qui a creer la declaration-->
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
@@ -98,5 +99,9 @@
       </ion-col>
     </ion-row>
   </form>
+</div>
+<ng-template #showOver>
+
+</ng-template>
 </ion-content>
 <!-- <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/> -->
