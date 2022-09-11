@@ -78,12 +78,12 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       if (this.showRecover == true) {
+        this.email_user = this.ionicForm.get('email_user').value;
         this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
           console.log("SUCCES Recover ===", res);
           let value = JSON.parse(res);
           if (value) {
-            this.email_user = this.ionicForm.get('email_user').value;
             this.user_id = value;
             console.log("ValidateRegister");
             this.message("validateRegister");
