@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LostPage implements OnInit {
   isSubmitted = false;
-  handlerMessagelost = '';
   roleMessage = '';
   ionicForm: FormGroup;
   defaultValue: 0;
@@ -18,8 +17,11 @@ export class LostPage implements OnInit {
   user: string;
   user_id: string;
 
-  constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
+  constructor(public navCtrl: NavController,public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
   
+  today() {
+    return this.defaultDate;
+  }
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Création confirmé", "color": "success" },
@@ -61,6 +63,7 @@ export class LostPage implements OnInit {
       email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
+      user_id:this.user_id,
     });
   }
   get errorControl() {

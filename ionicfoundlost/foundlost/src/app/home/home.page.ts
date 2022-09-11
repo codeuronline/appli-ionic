@@ -11,6 +11,7 @@ export class HomePage {
   user_id: string;
   
   constructor(public navCtrl: NavController) {
+    this.ngInit();
   }
  
 ngInit() {

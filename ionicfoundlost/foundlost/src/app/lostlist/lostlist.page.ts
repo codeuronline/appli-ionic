@@ -21,6 +21,7 @@ export class LostlistPage implements OnInit {
   entryData = [];
   entryDataSearch = [];
   user = sessionStorage.getItem("user");
+  user_id = sessionStorage.getItem("user_id");
 
   constructor(public http: HttpClient, private navCtrl: NavController) {
     this.ngOnInit;
@@ -114,6 +115,7 @@ export class LostlistPage implements OnInit {
   ngOnInit() {
     console.log("searchStatus", this.searchStatus);
     this.user = sessionStorage.getItem("user");
+    this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -140,6 +142,7 @@ export class LostlistPage implements OnInit {
           "checkedpicture": data[i].checkedpicture,
           "filename": data[i].picture,
           "filenameWithUrl": this.imgUrl + data[i].filename,
+          "user_id": data[i].user_id,
         }
           this.entryDataSearch=this.entryData;
       }
