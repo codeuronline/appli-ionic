@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -10,29 +10,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LostPage implements OnInit {
   isSubmitted = false;
-  handlerMessagelost = '';
   roleMessage = '';
   ionicForm: FormGroup;
   defaultValue: 0;
   defaultDate: "2022-07-11";
   user: string;
+  user_id: string;
 
-  constructor(public navCtrl: NavController, private alertController: AlertController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
+  constructor(public navCtrl: NavController,public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
   
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: "Déclaration d'objet perdu",
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm',
-          handler: () => { this.handlerMessagelost = 'Déclaration confirmée'; }
-        }
-      ]
-    });
-    await alert.present();
-    const { role } = await alert.onDidDismiss();
-    this.roleMessage = `Dismissed with role: ${role}`;
+  today() {
+    return this.defaultDate;
   }
   async message(aValue) {
     let info = [
@@ -61,6 +49,7 @@ export class LostPage implements OnInit {
 
   ngOnInit() {
     this.user = sessionStorage.getItem("user");
+    this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -74,6 +63,7 @@ export class LostPage implements OnInit {
       email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
+      user_id:this.user_id,
     });
   }
   get errorControl() {
@@ -102,6 +92,7 @@ export class LostPage implements OnInit {
             })
         this.message("confirm");
         this.ionicForm.reset();
+        this.ngOnInit();
         this.isSubmitted = false;
       }
     }

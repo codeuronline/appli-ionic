@@ -7,13 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user : string;
+  user: string;
+  user_id: string;
   
   constructor(public navCtrl: NavController) {
+    this.ngInit();
   }
  
 ngInit() {
-  this.user=sessionStorage.getItem("user");
+  this.user = sessionStorage.getItem("user");
+  this.user_id =sessionStorage.getItem("user_id");
+  // this.user_id = sessionStorage.getItem("user_id");
   if (this.user == null || this.user == "") {
     this.navCtrl.navigateBack("authentificate")
   }   
@@ -21,6 +25,7 @@ ngInit() {
 destroyUser() {
     this.user = "";
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
     this.navCtrl.navigateBack("authentificate");
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController,AlertController,NavController } from "@ionic/angular";
 
 @Component({
@@ -10,18 +10,20 @@ import { ToastController,AlertController,NavController } from "@ionic/angular";
 })
 export class FoundPage implements OnInit {
   isSubmitted = false;
-  handlerMessagelost = '';
+ 
   roleMessage = '';
   ionicForm: FormGroup;
   defaultValue: 1;//status
   defaultDate: "2022-07-11"; 
-  user: string;
+  user: String;
+  user_id: String;
 
   constructor(public navCtrl: NavController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) {}
   
   today() {
     return this.defaultDate;
   }
+
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Modification Confirmée", "color": "success" },
@@ -47,7 +49,8 @@ export class FoundPage implements OnInit {
     }
   }
   ngOnInit() {
-    this.user=sessionStorage.getItem("user");
+    this.user = sessionStorage.getItem("user");
+    this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -61,6 +64,7 @@ export class FoundPage implements OnInit {
       email: [this.user, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
+      user_id:this.user_id,
     });
 
   }
@@ -90,6 +94,7 @@ export class FoundPage implements OnInit {
             })
         this.message("confirm");
         this.ionicForm.reset();
+        this.ngOnInit();
         this.isSubmitted = false;
       }
     }

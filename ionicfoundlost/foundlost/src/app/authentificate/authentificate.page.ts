@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, FormArray,Validators } from "@angular/forms";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
@@ -15,7 +15,8 @@ export class AuthentificatePage implements OnInit {
   handlerMessagelost = '';
   roleMessage = '';
   email_user: string;
-  user: string;
+  user_id: string;
+  //user: string;
   password: string;
   passwordVerify: string;
   captcha: BigInteger;
@@ -42,8 +43,9 @@ export class AuthentificatePage implements OnInit {
     this.ngOnInit();
   }
 
+  
   ngOnInit() {
-    //en fonction de la checkbox on oriente sur l'un des formulaires  de verification
+    //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -60,6 +62,7 @@ export class AuthentificatePage implements OnInit {
       })
     }
   }
+  // recupere les erreurs du formulaire
   get errorControl() {
        return this.ionicForm.controls;
   }
@@ -75,32 +78,40 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       if (this.showRecover == true) {
+        this.email_user = this.ionicForm.get('email_user').value;
         this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
-          console.log("SUCCES ===", res);
-          if (JSON.parse(res) == false) {
+          console.log("SUCCES Recover ===", res);
+          let value = JSON.parse(res);
+          if (value) {
+            this.user_id = value;
+            console.log("ValidateRegister");
+            this.message("validateRegister");
+            sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id",this.user_id);
+            this.navCtrl.navigateForward("home");
+          } else {
             console.log("error_mail");
             this.message("error_mail");
-          } else {
-            this.email_user = this.ionicForm.get('email_user').value;
-            console.log("ValidateRegister");
-            this.message("ValidateRegister");
-            this.navCtrl.navigateForward("home");
           }
         })
       } else {
         this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
           console.log("SUCCES ===", res);
-          if (JSON.parse(res) == false) {
-            console.log("error_mail");
-            this.message("error_mail");
-          } else {
+          let value = JSON.parse(res);
+          if (value){
             this.email_user = this.ionicForm.get('email_user').value;
+            this.user_id = value;
             console.log("ValidateRegister");
             this.message("validateRegister");
             sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id",this.user_id);
             this.navCtrl.navigateForward("home");
+          } else {
+            console.log("error_mail");
+            this.message("error_mail");
+            
           }
         })
       }
@@ -162,11 +173,16 @@ export class AuthentificatePage implements OnInit {
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
         console.log("SUCCES ===", res);
         console.log("controle")
-        if (JSON.parse(res) == true) {
+        let value = JSON.parse(res);
+        if (value) {
           //generer un id de session
           console.log("valid_control");
           this.message("valid_control");
+          this.user_id = value;
           sessionStorage.setItem("user", this.email_user);
+          sessionStorage.setItem("user_id", this.user_id);
+          // une connexion on recupere 
+         // sessionStorage.setItem('user_id', this.user_id);
           this.navCtrl.navigateForward("home");
         } else {
           console.log("failure");
