@@ -83,7 +83,8 @@ export class AuthentificatePage implements OnInit {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
           console.log("SUCCES Recover ===", res);
           let value = JSON.parse(res);
-          if (value) {
+          console.log(value.match(/^([0-9]){2}$/))
+          if (value.match(/^([0-9]){2}$/)) {
             this.user_id = value;
             console.log("ValidateRegister");
             this.message("validateRegister");
@@ -100,7 +101,8 @@ export class AuthentificatePage implements OnInit {
           console.log(typeof (JSON.parse(JSON.stringify(res))));
           console.log("SUCCES ===", res);
           let value = JSON.parse(res);
-          if (value){
+          console.log(value.match(/^([0-9]){2}$/))
+          if (value.match(/^([0-9]){2}$/)){
             this.email_user = this.ionicForm.get('email_user').value;
             this.user_id = value;
             console.log("ValidateRegister");
@@ -174,7 +176,8 @@ export class AuthentificatePage implements OnInit {
         console.log("SUCCES ===", res);
         console.log("controle")
         let value = JSON.parse(res);
-        if (value) {
+        console.log(value.match(/^([0-9]){2}$/))
+        if (value.match(/^([0-9]){2}$/)) {
           //generer un id de session
           console.log("valid_control");
           this.message("valid_control");
