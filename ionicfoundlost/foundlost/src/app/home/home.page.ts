@@ -15,7 +15,6 @@ export class HomePage {
   }
  
 ngInit() {
- 
   this.user = sessionStorage.getItem("user");
   this.user_id =sessionStorage.getItem("user_id");
   // this.user_id = sessionStorage.getItem("user_id");
