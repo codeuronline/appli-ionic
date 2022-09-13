@@ -1,6 +1,6 @@
 import { FoundlistPageModule } from './../foundlist/foundlist.module';
 
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
@@ -25,6 +25,7 @@ export class ViewentryPage implements OnInit {
   handlerMessagelost = '';
   roleMessage = '';
   user: String;
+  user_id: String;
   //  ELEMENT de fichier à télécharger //
   id = this.activatedRouter.snapshot.paramMap.get('id');
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
@@ -40,7 +41,7 @@ export class ViewentryPage implements OnInit {
     email: null,
     checkedpicture: 0,
     filename: null,
-    // file: null,
+    user_id: String,
   };
 
 
@@ -90,6 +91,7 @@ export class ViewentryPage implements OnInit {
   }
   ngOnInit() {
     this.user = sessionStorage.getItem("user");
+    this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
@@ -243,6 +245,12 @@ export class ViewentryPage implements OnInit {
 
     // formObj recoit l'etat des valeurs du formulaire
 
+  }
+  destroyUser() {
+    this.user = "";
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
+    this.navCtrl.navigateBack("authentificate");
   }
 
   goBack() {

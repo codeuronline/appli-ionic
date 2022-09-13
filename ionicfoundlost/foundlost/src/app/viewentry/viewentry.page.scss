@@ -27,7 +27,7 @@ ion-toggle {
   .button-valid{
     padding: 0px;
      background-color: #022135;
-     border-radius: 15px;
+     //border-radius: 15px;
      color: white;
      font-size: x-small;
  
@@ -44,19 +44,20 @@ ion-toggle {
   background-color: #5d61b9;
   text-transform: lowercase;
   border: 3px none #5d61b9;
-  border-radius: 15px;
-  font-size: x-small;
+ //border-radius: 15px;
+  font-size: small;
 }
 .color:hover{
 color: white;
 background-color: #5d61b9;
 border: 3px solid white;
-border-radius:15px;
-font-size: x-small;
 }
 
 .text-icon{
   font-size:small;
+}
+.text-icon-user{
+  font-size: x-small;
 }
 // .text{
 //   height: 4em;

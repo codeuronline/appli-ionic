@@ -7,18 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user: string;
-  user_id: string;
+  user = sessionStorage.getItem("user");
+  user_id = sessionStorage.getItem("user_id");
   
   constructor(public navCtrl: NavController) {
     this.ngInit();
   }
  
 ngInit() {
+ 
   this.user = sessionStorage.getItem("user");
   this.user_id =sessionStorage.getItem("user_id");
   // this.user_id = sessionStorage.getItem("user_id");
-  if (this.user == null || this.user == "") {
+  console.log(this.user);
+  if (this.user == null) {
     this.navCtrl.navigateBack("authentificate")
   }   
  }

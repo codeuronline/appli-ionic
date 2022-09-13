@@ -9,23 +9,105 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./foundlist.page.scss'],
 })
 export class FoundlistPage implements OnInit {
-  id_object = null;
-  user: string;
-  user_id: string;
-  roleMessage = "";
-  handlerMessagelost = "";
+  bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=found";
+  imgUrl = "http://localhost/ionicserver/upload/"
   routerHref = "home";
-
+  input = document.getElementById("search");
+  searchStatus = true;
+  showDescription = true;
+  showLocation = false;
+  showCalendar = false;
+  entryData = [];
+  entryDataSearch = [];
+  user = sessionStorage.getItem("user");
+  user_id = sessionStorage.getItem("user_id");
 
 // Créer deux propriétés
   // URL du serveur backend
-  bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=found";
-  imgUrl="http://localhost/ionicserver/upload/"
+
   // Un tableau
-  entryData = [];
+
+
   constructor(public http: HttpClient,public navCtrl:NavController,private userService: UserService, private toastController:ToastController) {
-   
+    this.ngOnInit();
   }
+  showStatusSearch() {
+    var aStatus = "information";
+    if (this.showCalendar == false && this.showLocation == false) {
+      aStatus = 'information';
+    }
+    if (this.showCalendar == true && this.showLocation == false) {
+      aStatus = "calendar";
+    }
+    if (this.showCalendar == false && this.showLocation == true) {
+      aStatus = "location";
+    }
+    
+    return aStatus;
+  }
+
+  toggleSearch(): void {
+    // console.log('ici');
+    this.searchStatus = !this.searchStatus;
+    var element = document.getElementById("searchOptions");
+    (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
+
+  }
+  toggleLocation(): void {
+    this.showLocation = !this.showLocation;
+    if (this.showLocation== true){
+      this.showCalendar = false;
+      this.showDescription = false}
+    console.log("location", this.showLocation);    
+
+  }
+
+  toggleCalendar(): void {
+    this.showCalendar = !this.showCalendar;
+    if (this.showCalendar == true) {
+      this.showLocation = false;
+      this.showDescription = false;
+    }
+    console.log("Calendar", this.showCalendar);    
+
+  }
+  toggleDescription(): void{
+    this.showDescription = !this.showDescription;
+    if (this.showLocation == true) {
+      this.showCalendar = false;
+      this.showLocation = false;
+    }
+    console.log("description", this.showDescription);    
+
+  }
+   
+  selectPlaceholder(){
+    let placeHolder = "";
+    (this.showDescription == true) ? placeHolder = "Filtrer par description" : null;
+    (this.showLocation == true) ? placeHolder = "Filtrer par endroit" : null;
+    (this.showCalendar == true) ? placeHolder = "Filtrer par Date" : null;
+    return placeHolder;
+  }
+  
+  filter(ev): void{
+    // this.entryData.values
+
+    if (this.showCalendar == true) {
+      // comment recuperer la valeur??
+      // alert(ev.target.value);
+      let date = new Date(ev.target.value).toISOString().substring(0, 10);
+      this.entryDataSearch=this.entryData.filter((data)=>data.date.match(ev.target.value))
+    }
+    if (this.showDescription == true) {
+      this.entryDataSearch=this.entryData.filter((data)=>data.description.toLowerCase().match(ev.target.value.toLowerCase()))
+    }
+    if (this.showLocation == true) {
+      this.entryDataSearch=this.entryData.filter((data)=>data.location.toLowerCase().match(ev.target.value.toLowerCase()));
+    }
+    console.log(this.entryDataSearch);    
+    }
+
+
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
@@ -49,7 +131,8 @@ export class FoundlistPage implements OnInit {
         toast.present();;
       }
     }
-  }//doRefresh($event) {
+  }
+  //doRefresh($event) {
     delete(id) {
       this.userService.deleteObjet(id).subscribe(
         (res) => {
@@ -62,14 +145,21 @@ export class FoundlistPage implements OnInit {
       //manque l'affichage du succes
     }  
   //}
+  destroyUser() {
+    this.user = "";
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
+    this.navCtrl.navigateBack("authentificate");
+  }
 
-  ngOnInit() {
-    this.user = sessionStorage.getItem("user");
-    this.user_id =sessionStorage.getItem("user_id");
-    if (this.user == null || this.user == "") {
-      this.navCtrl.navigateBack("authentificate")
-    }
-    this.getEntry();
+  ngOnInit() { console.log("searchStatus", this.searchStatus);
+  this.user = sessionStorage.getItem("user");
+  this.user_id = sessionStorage.getItem("user_id");
+  if (this.user == null || this.user == "") {
+    this.navCtrl.navigateBack("authentificate")
+  }
+  this.getEntry();
+  this.searchStatus = false;
   }
   getEntry() {
     this.readAPI(this.bdUrl).subscribe(data => {
@@ -89,8 +179,9 @@ export class FoundlistPage implements OnInit {
           "checkedpicture": data[i].checkedpicture,
           "filename": data[i].picture,
           "filenameWithUrl": this.imgUrl + data[i].filename,
-          "user_id": this.user_id,
-        };
+          "user_id": data[i].user_id,
+        }
+        this.entryDataSearch = this.entryData;
       } // fin boucle for
     }); // fin subscribe 
   }

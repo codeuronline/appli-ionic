@@ -16,6 +16,7 @@
     background: no-repeat center/40% url('../../assets/logo-fl.png');
     background-size: cover;
   }
+
 .add-button{
   background: transparent;
 }
@@ -24,29 +25,20 @@
     padding:0px;
     color: white;
     background-color: #5d61b9;
-    // text-transform: uppercase;
+    text-transform: lowercase;
     border: 3px none #5d61b9;
-    //border-radius: 15px;
-    //font-size: large;
+  
+    font-size: small;
   }
   .color:hover{
   color: white;
   background-color: #5d61b9;
   border: 3px solid white;
-  //border-radius:15px;
-  //font-size: large;
   }
   
 .ion-text-shadow{
   text-shadow: 2px 2px black;
-}
-#card {
-  width: 50px;
-  height: 50px;
-  background-image: url("../../assets/se-deconnecter-on.png");
-  }
-#card:hover {
-  background-image: url("../../assets/se-deconnecter-off.png");
+  font-size:xx-large;
 }
 
 .containerDouble{
@@ -55,8 +47,11 @@
   justify-content: center;
   justify-items: center;
 }
+.text-icon-user{
+  font-size: x-small;
+}
 .text-icon{
-  font-size:x-small;
+  font-size: small;
 }
 
 

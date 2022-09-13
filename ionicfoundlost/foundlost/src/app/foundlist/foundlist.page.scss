@@ -1,4 +1,4 @@
-.bg-img {
+ .bg-img {
     padding: 1px;
     height: 100%;
     width: 100%;
@@ -6,5 +6,55 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  
-  
+  .description,.search,.calendar,.location{
+    background-color: none;
+    color: white;
+    // border-radius: 15px;
+  }
+  .search_light{
+    color:orange;
+  }
+  #search::placeholder{
+    text-align: center;
+  }
+  .description:hover,.search:hover,.calendar:hover,.location:hover{
+    background-color:orange;    
+    color:black;
+  }
+  .description::after{background-color:orange;    
+    color:black;}
+
+  .searchOptions{
+    display: none;
+  }
+  .icone{
+    background-color: none;
+    width: 25px;
+    height: 25px;
+  }
+  .icon-element{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: small;
+  }
+  .icon-text{
+    padding-top: 0px;
+    margin-top:  0px;
+    font-size: small;
+  }
+  .color {
+    padding:0px;
+    color: white;
+    background-color: #5d61b9;
+    text-transform: lowercase;
+    border: 3px none #5d61b9;
+   
+   
+  }
+  .color:hover{
+  color: white;
+  background-color: #5d61b9;
+  border: 3px solid white;
+  text-transform: lowercase;
+  }
+ 

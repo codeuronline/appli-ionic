@@ -66,11 +66,10 @@ export class AuthentificatePage implements OnInit {
   get errorControl() {
        return this.ionicForm.controls;
   }
-
   submitForm() {
     this.isSubmitted = true;
     //tester si showrecover est coché
-    console.log(this.ionicForm.value);
+    //
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
@@ -78,13 +77,18 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       if (this.showRecover == true) {
+        console.log("teste",this.ionicForm.value)
         this.email_user = this.ionicForm.get('email_user').value;
+        console.log(this.email_user)
         this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
-          console.log(typeof (JSON.parse(JSON.stringify(res))));
+          console.log(typeof (JSON.parse(res)));
           console.log("SUCCES Recover ===", res);
+          console.log("email_user => ",this.email_user);
           let value = JSON.parse(res);
-          if (value) {
+          //console.log(value.match(/^([0-9]){1,5}$/))
+          if (value.match(/^([0-9]){1,5}$/)) {
             this.user_id = value;
+            console.log("email_user =>",this.email_user);
             console.log("ValidateRegister");
             this.message("validateRegister");
             sessionStorage.setItem("user", this.email_user);
@@ -96,22 +100,29 @@ export class AuthentificatePage implements OnInit {
           }
         })
       } else {
+        console.log("test ",this.ionicForm.value)
+        this.email_user = this.ionicForm.get('email_user').value;
+        console.log(this.email_user)
         this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
-          console.log(typeof (JSON.parse(JSON.stringify(res))));
-          console.log("SUCCES ===", res);
+          console.log(typeof (JSON.parse(res)));
+          console.log("SUCCES Creation ===", res);
           let value = JSON.parse(res);
-          if (value){
-            this.email_user = this.ionicForm.get('email_user').value;
-            this.user_id = value;
-            console.log("ValidateRegister");
-            this.message("validateRegister");
-            sessionStorage.setItem("user", this.email_user);
-            sessionStorage.setItem("user_id",this.user_id);
-            this.navCtrl.navigateForward("home");
-          } else {
+          //  console.log(value.match(/^([0-9]){1,5}$/))
+          if (JSON.parse(res) == false) {
             console.log("error_mail");
             this.message("error_mail");
+          } else {
+            if (JSON.parse(res).match(/^([0-9]){1,5}$/)) {
+              this.user_id = value;
+              console.log("ValidateRegister");
+              // console.log(this.ionicForm.get('email_user'));
+            this.message("validateRegister");
+            sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id", this.user_id);
+            this.navCtrl.navigateForward("home");
+              
             
+            }
           }
         })
       }
@@ -171,10 +182,11 @@ export class AuthentificatePage implements OnInit {
       }
       //console.log(this.ionicForm.value)
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
-        console.log("SUCCES ===", res);
+        console.log("SUCCES Connexion ===", res);
         console.log("controle")
         let value = JSON.parse(res);
-        if (value) {
+        //console.log(value.match(/^([0-9]){1,5}$/))
+        if (value.match(/^([0-9]){1,5}$/)) {
           //generer un id de session
           console.log("valid_control");
           this.message("valid_control");

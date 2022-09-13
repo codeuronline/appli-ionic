@@ -12,7 +12,6 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-  
   input = document.getElementById("search");
   searchStatus = true;
   showDescription = true;
@@ -85,6 +84,7 @@ export class LostlistPage implements OnInit {
     (this.showCalendar == true) ? placeHolder = "Filtrer par Date" : null;
     return placeHolder;
   }
+
   filter(ev): void{
     // this.entryData.values
 
@@ -121,7 +121,13 @@ export class LostlistPage implements OnInit {
     }
     this.getEntry();
     this.searchStatus = false;
-
+  }
+  
+  destroyUser() {
+    this.user = "";
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
+    this.navCtrl.navigateBack("authentificate");
   }
 
   getEntry() {
