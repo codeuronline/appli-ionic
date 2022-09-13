@@ -107,8 +107,21 @@ export class AuthentificatePage implements OnInit {
           console.log(typeof (JSON.parse(res)));
           console.log("SUCCES Creation ===", res);
           let value = JSON.parse(res);
+<<<<<<< HEAD
           //  console.log(value.match(/^([0-9]){1,5}$/))
           if (JSON.parse(res) == false) {
+=======
+          console.log(value.match(/^([0-9]){1,5}$/))
+          if (value.match(/^([0-9]){1,5}$/)){
+            this.email_user = this.ionicForm.get('email_user').value;
+            this.user_id = value;
+            console.log("ValidateRegister");
+            this.message("validateRegister");
+            sessionStorage.setItem("user", this.email_user);
+            sessionStorage.setItem("user_id",this.user_id);
+            this.navCtrl.navigateForward("home");
+          } else {
+>>>>>>> ba12467cb4952cc45b19a319eb5376c9170b8be9
             console.log("error_mail");
             this.message("error_mail");
           } else {
@@ -185,7 +198,11 @@ export class AuthentificatePage implements OnInit {
         console.log("SUCCES Connexion ===", res);
         console.log("controle")
         let value = JSON.parse(res);
+<<<<<<< HEAD
         //console.log(value.match(/^([0-9]){1,5}$/))
+=======
+        console.log(value.match(/^([0-9]){1,5}$/))
+>>>>>>> ba12467cb4952cc45b19a319eb5376c9170b8be9
         if (value.match(/^([0-9]){1,5}$/)) {
           //generer un id de session
           console.log("valid_control");
