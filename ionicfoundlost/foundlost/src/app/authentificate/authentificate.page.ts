@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Query } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { FormGroup, FormBuilder, FormArray,Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class AuthentificatePage implements OnInit {
   showPassword = false;
   showRecover = false;
   passwordToggleIcon = 'eye';
-  
+
   constructor(
     public apiService: UserService,
     public formBuilder: FormBuilder,
@@ -43,28 +43,28 @@ export class AuthentificatePage implements OnInit {
     this.ngOnInit();
   }
 
-  
+
   ngOnInit() {
     //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        
+
       })
     } else {
       //marche pas
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        passwordVerify: ['', [Validators.required,Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        captcha: ['', [Validators.required ]],
+        passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        captcha: ['', [Validators.required]],
       })
     }
   }
   // recupere les erreurs du formulaire
   get errorControl() {
-       return this.ionicForm.controls;
+    return this.ionicForm.controls;
   }
   submitForm() {
     this.isSubmitted = true;
@@ -77,22 +77,22 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       if (this.showRecover == true) {
-        console.log("teste",this.ionicForm.value)
+        console.log("test", this.ionicForm.value)
         this.email_user = this.ionicForm.get('email_user').value;
         console.log(this.email_user)
         this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
           console.log(typeof (JSON.parse(res)));
           console.log("SUCCES Recover ===", res);
-          console.log("email_user => ",this.email_user);
+          console.log("email_user => ", this.email_user);
           let value = JSON.parse(res);
           //console.log(value.match(/^([0-9]){1,5}$/))
           if (value.match(/^([0-9]){1,5}$/)) {
             this.user_id = value;
-            console.log("email_user =>",this.email_user);
+            console.log("email_user =>", this.email_user);
             console.log("ValidateRegister");
             this.message("validateRegister");
             sessionStorage.setItem("user", this.email_user);
-            sessionStorage.setItem("user_id",this.user_id);
+            sessionStorage.setItem("user_id", this.user_id);
             this.navCtrl.navigateForward("home");
           } else {
             console.log("error_mail");
@@ -100,7 +100,7 @@ export class AuthentificatePage implements OnInit {
           }
         })
       } else {
-        console.log("test ",this.ionicForm.value)
+        console.log("test ", this.ionicForm.value)
         this.email_user = this.ionicForm.get('email_user').value;
         console.log(this.email_user)
         this.apiService.createUser(this.ionicForm.value).subscribe((res) => {
@@ -116,12 +116,10 @@ export class AuthentificatePage implements OnInit {
               this.user_id = value;
               console.log("ValidateRegister");
               // console.log(this.ionicForm.get('email_user'));
-            this.message("validateRegister");
-            sessionStorage.setItem("user", this.email_user);
-            sessionStorage.setItem("user_id", this.user_id);
-            this.navCtrl.navigateForward("home");
-              
-            
+              this.message("validateRegister");
+              sessionStorage.setItem("user", this.email_user);
+              sessionStorage.setItem("user_id", this.user_id);
+              this.navCtrl.navigateForward("home");
             }
           }
         })
@@ -178,7 +176,7 @@ export class AuthentificatePage implements OnInit {
       if (this.showRecover == true) {
         this.captcha = this.ionicForm.get('captcha').value;
         this.passwordVerify = this.ionicForm.get('passwordVerify').value;
-        
+
       }
       //console.log(this.ionicForm.value)
       this.apiService.connexion(this.ionicForm.value).subscribe((res) => {
@@ -194,7 +192,7 @@ export class AuthentificatePage implements OnInit {
           sessionStorage.setItem("user", this.email_user);
           sessionStorage.setItem("user_id", this.user_id);
           // une connexion on recupere 
-         // sessionStorage.setItem('user_id', this.user_id);
+          // sessionStorage.setItem('user_id', this.user_id);
           this.navCtrl.navigateForward("home");
         } else {
           console.log("failure");
