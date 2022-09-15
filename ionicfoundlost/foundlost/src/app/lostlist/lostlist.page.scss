@@ -35,7 +35,10 @@
   .icon-element{
     padding-bottom: 0px;
     margin-bottom: 0px;
-    font-size: xx-small;
+    
+    width :25px;
+    height: 25px;
+    //font-size: x-small;
   }
   .icon-text{
     padding-top: 0px;
@@ -46,10 +49,10 @@
     padding:0px;
     color: white;
     background-color: #5d61b9;
-    //text-transform: lowercase;
+    text-transform: lowercase;
     border: 3px none #5d61b9;
     //border-radius: 15px;
-    font-size: small;
+    font-size: x-small;
   }
   .color:hover{
   color: white;
@@ -58,4 +61,5 @@
   //border-radius:15px;
   font-size: small;
   }
+  
  

@@ -11,7 +11,6 @@
           onmouseout="this.src='../../assets/se-deconnecter-on.png'"> -->
         <ion-icon name="person"></ion-icon>&nbsp;
         {{user.substr(0, user.indexOf('@'))}}
-      
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -21,19 +20,19 @@
     <div class="logo">&nbsp;</div>
     <div class="ion-text-center ion-text-shadow">Faire une Déclaration</div>
     <ion-card expand="block" class="add-button">
-      <ion-button expand="block" (click)="goTo('lost')" class="color" color="#002239"> J'ai perdu un objet</ion-button>
+      <ion-button expand="block" (click)="goTo('lost')" class="color-button" color="#002239"> J'ai perdu un objet</ion-button>
     </ion-card>
     <ion-card expand="block" class="add-button">
-      <ion-button expand="block" (click)="goTo('found')" class="color" color="#002239"> J'ai trouvé un objet
+      <ion-button expand="block" (click)="goTo('found')" class="color-button" color="#002239"> J'ai trouvé un objet
       </ion-button>
     </ion-card>
     <div class="ion-text-center ion-text-shadow"> Listes d'objets</div>
     <div class="containerDouble">
-      <ion-button expand="block" class="color" routerLink="/lostlist" routerDirection="forward" color="#002239">
-        <ion-icon name="sad"></ion-icon> Perdus
+      <ion-button expand="block" class="color-button" routerLink="/lostlist" routerDirection="forward" color="#002239">
+        <ion-icon class="icon-color-sad" name="sad"></ion-icon> Perdus
       </ion-button>
-      <ion-button expand="block" class="color" routerLink="/foundlist" routerDirection="forward" color="#002239">
-        <ion-icon name="happy"></ion-icon> Trouvés
+      <ion-button expand="block" class="color-button" routerLink="/foundlist" routerDirection="forward" color="#002239">
+        <ion-icon class="icon-color-happy" name="happy"></ion-icon> Trouvés
       </ion-button>
     </div>
 

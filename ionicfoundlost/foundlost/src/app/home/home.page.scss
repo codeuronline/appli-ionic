@@ -53,5 +53,31 @@
 .text-icon{
   font-size: small;
 }
+.color-button{
+  padding: 0px;
+  color: white;
+  background-color: #5d61b9;
+  border: 3px none #5d61b9;
+  text-transform:lowercase;
+  .icon-color-sad,.icon-color-happy{
+    color:white;
+  }
+    
+  // font-size: large;
+ // border-radius: 15px;
+}
 
+
+.color-button:hover{
+  color: white;
+  background-color: #5d61b9;
+  border: 3px solid white;
+  .icon-color-sad:hover{
+    color: red;
+  }
+  .icon-color-happy:hover{
+    color:green;
+  }
+    
+}
 

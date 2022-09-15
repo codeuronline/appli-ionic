@@ -97,4 +97,10 @@ export class LostPage implements OnInit {
       }
     }
   }
+  destroyUser() {
+    this.user = "";
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
+    this.navCtrl.navigateBack("authentificate");
+  }
 }
