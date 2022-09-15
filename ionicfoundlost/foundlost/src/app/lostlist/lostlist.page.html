@@ -31,7 +31,7 @@
             <label for="status">
               <ion-icon class="search_light" [name]="showStatusSearch()"></ion-icon>
             </label>
-            <input id="search" displayFormat="showCalendar==true ? 'YYYY-MM-DD' : null"
+            <input id="search" [displayFormat]="showCalendar==true ? 'YYYY-MM-DD' : null"
               presentation="showCalendar==true ? 'date' : null" [type]="showCalendar==false ? 'search' : 'date'"
               (keyup)="filter($event)" (click)="filter($event)" [value]="showCalendar==true ? '2022-08-29':''"
               [placeholder]="selectPlaceholder()">
