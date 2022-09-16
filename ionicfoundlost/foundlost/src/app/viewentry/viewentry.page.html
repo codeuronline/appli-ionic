@@ -11,9 +11,9 @@
       </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content  [fullscreen]="true" *ngIf="user_id==entryData.user_id">
+<ion-content  [fullscreen]="true" >
   <!-- fonction de l'utilisteur -->
-  <div class="img-bg">
+  <div class="img-bg" *ngIf="user_id==entryData.user_id">
   <!-- si l'utilisateur est celui qui a creer la declaration-->
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
@@ -102,12 +102,13 @@
 <ion-content  [fullscreen]="true" *ngIf="user_id!=entryData.user_id">
   <div class="img-bg">
   <ion-card>
-    <ion-item>
-      {{entryData.description}}
-      {{entryData.firstname}}
-      {{entryData.lastname}}
-    </ion-item>
-  </ion-card>
+      <ion-item>
+        <ion-icon name="information"> </ion-icon>{{entryData.description}}
+      </ion-item>
+  <ion-item>
+    <ion-icon name="id-card"></ion-icon>{{entryData.lastname}} {{entryData.firstname}}
+  </ion-item>  
+</ion-card>
 </div>
 </ion-content>
 
