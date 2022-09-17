@@ -14,52 +14,99 @@
 <ion-content [fullscreen]="true">
   <!-- fonction de l'utilisteur -->
   <div class="bg-img">
-    <div *ngIf="user_id ==entryData.user_id; else elsemodif">
-    {{user_id}}//{{entryData.user_id}}
-    <ion-card>
-      <ion-item lines="full">
-        <ion-label><ion-icon name="information"></ion-icon></ion-label>
-        {{entryData.description}}
-      </ion-item>
-    </ion-card>
-  </div>
-</div>
-  <ng-template #elsemodif>
+    <div *ngIf="user_id !==entryData.user_id; else elsemodif">
       {{user_id}}//{{entryData.user_id}}
-      <form  [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
+      <ion-card>
         <ion-item lines="full">
           <ion-label>
             <ion-icon name="information"></ion-icon>
           </ion-label>
-          <ion-input formControlName="description" type="text" [value]="entryData.description" required
-            placeholder="description"></ion-input>
+          {{entryData.description}}
         </ion-item>
         <ion-item lines="full">
-          <ion-label>Status : {{etat}}</ion-label> 
-          <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
-          <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status"
-            [checked]="etat" required>
+          <ion-label>Status : {{etat}}</ion-label>
+          <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)" disabled></ion-toggle>  -->
+          <ion-toggle [value]="entryData.status" [checked]="etat" [disabled]="user_id !=entryData.user_id">
           </ion-toggle>
         </ion-item>
-        <ion-row>
-          <ion-col> 
-            <ion-item-options side="end">
-            <ion-item-option>
-                <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
-                  <ion-icon slot="top" name="checkmark-circle-outline"></ion-icon>
-                  Modifier
-                </ion-button>
-              </ion-item-option>
-            </ion-item-options>
-            <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
-              <div>
-                <ion-icon name="checkmark-circle-outline"></ion-icon><br>
-                <span class="text-icon">Modifier</span>
-              </div>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </form>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="id-card"></ion-icon>
+          </ion-label>
+          {{entryData.firstname}} {{entryData.lastname}}
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="calendar-number"></ion-icon>
+          </ion-label>
+          <!-- {{tranformDate(entryData.date)}} -->{{entryData.date}}
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="location"></ion-icon>
+          </ion-label>
+        {{entryData.location}}
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label>
+            <ion-icon name="mail"></ion-icon>
+          </ion-label>
+        {{entryData.email}}
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
+  <ng-template #elsemodif>
+    {{user_id}}//{{entryData.user_id}}
+    <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
+      <ion-item lines="full">
+        <ion-label>
+          <div>
+            <ion-icon name="information"></ion-icon>
+          </div>
+        </ion-label>
+        <ion-input formControlName="description" type="text" value={{entryData.description}} required
+          placeholder="description"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Status : {{etat}}</ion-label>
+        <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
+        <!-- <ion-toggle value="entryData.status" [checked]="etat"> -->
+        <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat">
+        </ion-toggle>
+        <!-- </ion-toggle> -->
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <ion-icon name="location"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="location" type="text" [value]="entryData.location" required
+          placeholder="Localisation">{{entryData.location}}</ion-input>
+      </ion-item>
+      <ion-item slot="start" lines="full">
+        <ion-label>
+          <ion-icon name="calendar-number"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="date" displayFormat="YYYY-MM-DD" presentation="date" type="date"
+          (ionChange)="getDate($event)" [value]="entryData.date" required>
+          <!--  -->
+        </ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <ion-icon name="mail"></ion-icon>
+        </ion-label>
+        <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
+      </ion-item>
+
+      <ion-button type="submit" class="color" color="#002239" expand="full">
+        <div>
+          <ion-icon name="checkmark-circle-outline"></ion-icon><br>
+          <span class="text-icon">Modifier</span>
+        </div>
+      </ion-button>
+
+    </form>
   </ng-template>
 </ion-content>
 
@@ -151,19 +198,7 @@
 </div>
 </ion-content>
 
-<ion-content  [fullscreen]="true" *ngIf="user_id!=entryData.user_id">
-   <div class="bg-img">
-  <ion-card> -->
-<!-- <ion-item>
-        <ion-icon name="information"> </ion-icon>{{entryData.description}}
-      </ion-item>
-  <ion-item>
-    <ion-icon name="id-card"></ion-icon>{{entryData.lastname}} {{entryData.firstname}}
-  </ion-item>   -->
-<!-- </ion-card>
-</div>
-</ion-content> -->
 
 
-<!-- definir le contexte d'affichage en 
+ definir le contexte d'affichage en 
   <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/>  -->

@@ -136,6 +136,29 @@ export class ViewentryPage implements OnInit {
     });
     // fin boucle for
   }
+  displayPlaceHolder(valeur) {
+    const tabValeur=["description","location","firstname","lastname","date","email"]
+    switch (valeur) {
+      case tabValeur[0]:
+      return (this.entryData.description.length > 0) ? '' : "Description de l'objet";
+        break;
+      case tabValeur[1]:
+      return (this.entryData.location.length > 0) ? '' : "Localisation de l'objet ${this.etat}";
+        break;
+      case tabValeur[2]:
+      return (this.entryData.firstname.length > 0) ? '' : "prénom";
+        break;
+        case tabValeur[3]:
+        return (this.entryData.lastname.length > 0) ? '' : "nom";
+        break;
+      case tabValeur[4]:
+        return (this.entryData.date.length > 0) ? '' : "date";
+        break;
+      case tabValeur[5]:
+        return (this.entryData.email.length > 0) ? '' : "email";
+        break;
+    }
+  }
   get errorControl() {
     return this.ionicFormView.controls;
   }
