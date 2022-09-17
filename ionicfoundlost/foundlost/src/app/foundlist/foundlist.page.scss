@@ -35,11 +35,13 @@
   .icon-element{
     padding-bottom: 0px;
     margin-bottom: 0px;
-    font-size: x-small;
+    text-transform: lowercase;
+    font-size: small;
   }
   .icon-text{
     padding-top: 0px;
     margin-top:  0px;
+    text-transform: lowercase;
     font-size: x-small;
   }
   .color {

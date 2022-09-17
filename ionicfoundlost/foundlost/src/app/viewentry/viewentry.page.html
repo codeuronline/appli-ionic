@@ -13,7 +13,8 @@
 </ion-header>
 <ion-content  [fullscreen]="true" >
   <!-- fonction de l'utilisteur -->
-  <div class="img-bg" *ngIf="user_id==entryData.user_id">
+  
+  <div class="bg-img" *ngIf="user_id==entryData.user_id">
   <!-- si l'utilisateur est celui qui a creer la declaration-->
   <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
@@ -25,7 +26,7 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label>Status : {{etat}}</ion-label>
-      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle> -->
+      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
       <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat"
         required></ion-toggle>
     </ion-item>
@@ -79,15 +80,15 @@
       </span>
     </ion-item>
     <ion-row>
-      <ion-col>
-        <!-- <ion-item-options side="end"> -->
-        <!-- <ion-item-option>
+      <ion-col> -->
+        <ion-item-options side="end">
+        <ion-item-option>
             <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
               <ion-icon slot="top" name="checkmark-circle-outline"></ion-icon>
               Modifier
             </ion-button>
           </ion-item-option>
-        </ion-item-options> -->
+        </ion-item-options>
         <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
           <div>
             <ion-icon name="checkmark-circle-outline"></ion-icon><br>
@@ -99,8 +100,9 @@
   </form>
 </div>
 </ion-content>
+
 <ion-content  [fullscreen]="true" *ngIf="user_id!=entryData.user_id">
-  <div class="img-bg">
+   <div class="bg-img">
   <ion-card>
       <ion-item>
         <ion-icon name="information"> </ion-icon>{{entryData.description}}
@@ -112,6 +114,6 @@
 </div>
 </ion-content>
 
-<!-- 
-  definir le contexte d'affichage en 
-  <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/> -->
+
+  <!-- definir le contexte d'affichage en 
+  <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/>  -->
