@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="sucess">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
-      <!-- <ion-title> -->
+      <ion-back-button slot="start" defaultHref="/home" text="Accueil" routerDirection="backward"></ion-back-button>
       <ion-button class="search" (click)="toggleSearch()">
         <div>
           <ion-icon class="icon-element" name="search"></ion-icon>
@@ -11,8 +10,10 @@
           </p>
         </div>
       </ion-button>
-      <ion-button class="color" slot="end" (click)="destroyUser()" color="#002239">
-        <ion-icon name="person"></ion-icon> {{user_id}}//{{user.substr(0, user.indexOf('@'))}}
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="color"  (click)="destroyUser()" color="#002239">
+        <ion-icon name="person"></ion-icon> {{user.substr(0, user.indexOf('@'))}}
         <!-- {{entryData.user_id}} -->
       </ion-button>
       <!-- </ion-title> -->

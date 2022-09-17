@@ -1,22 +1,31 @@
 <ion-header>
   <ion-toolbar color="#002230">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="{{routerHref}}" (tap)="goBack()" text="Retour" slot="start"
-        routerDirection="backward"></ion-back-button> 
-      </ion-buttons>&nbsp;OBJET :{{entryData.id_object}}
-      <ion-button class="color" slot="end" (click)="destroyUser()"color="#002239">
-        <ion-icon name="person"></ion-icon> {{user_id}}// {{entryData.user_id}}
-        {{user.substr(0, user.indexOf('@'))}}
-        <!-- {{entryData.user_id}} -->
-      </ion-button>
+      <ion-back-button slot="start" (tap)="goBack()" defaultHref="{{routerHref}}" routerDirection="backward" text="Retour" >
+      </ion-back-button>
+    </ion-buttons>&nbsp;OBJET :{{entryData.id_object}}
+    <ion-button slot="end" class="color" (click)="destroyUser()" color="#002239">
+      <ion-icon name="person"></ion-icon> {{user.substr(0, user.indexOf('@'))}}
+      <!-- {{entryData.user_id}} -->
+    </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-content  [fullscreen]="true" >
+<ion-content [fullscreen]="true">
   <!-- fonction de l'utilisteur -->
-  
-  <div class="bg-img" *ngIf="user_id==entryData.user_id">
-  <!-- si l'utilisateur est celui qui a creer la declaration-->
-  <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
+  <div class="bg-img" *ngIf="user_id ==entryData.user_id; else elsetag">
+    ici
+  </div>
+  <ion-content #elsetag>
+    <div class="bg-img">
+      else labas
+    </div>
+  </ion-content>
+</ion-content>
+
+
+<!-- <div class="bg-img" *ngIf="user_id==entryData.user_id"> -->
+<!-- si l'utilisateur est celui qui a creer la declaration-->
+<!-- <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
     <ion-item lines="full">
       <ion-label>
         <ion-icon name="information"></ion-icon>
@@ -25,9 +34,9 @@
          placeholder="description"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label>Status : {{etat}}</ion-label>
-      <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
-      <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat"
+      <ion-label>Status : {{etat}}</ion-label> -->
+<!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
+<!-- <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat"
         required></ion-toggle>
     </ion-item>
     <ion-item slot="start" lines="full">
@@ -80,7 +89,7 @@
       </span>
     </ion-item>
     <ion-row>
-      <ion-col> -->
+      <ion-col> 
         <ion-item-options side="end">
         <ion-item-option>
             <ion-button type="submit" class="color" color="#002239" expand="block" [disabled]="entryData.status==1">
@@ -103,17 +112,17 @@
 
 <ion-content  [fullscreen]="true" *ngIf="user_id!=entryData.user_id">
    <div class="bg-img">
-  <ion-card>
-      <ion-item>
+  <ion-card> -->
+<!-- <ion-item>
         <ion-icon name="information"> </ion-icon>{{entryData.description}}
       </ion-item>
   <ion-item>
     <ion-icon name="id-card"></ion-icon>{{entryData.lastname}} {{entryData.firstname}}
-  </ion-item>  
-</ion-card>
+  </ion-item>   -->
+<!-- </ion-card>
 </div>
-</ion-content>
+</ion-content> -->
 
 
-  <!-- definir le contexte d'affichage en 
+<!-- definir le contexte d'affichage en 
   <input type="fichier" id="fichier" (change)="envoiFichier($event.target.files)"/>  -->
