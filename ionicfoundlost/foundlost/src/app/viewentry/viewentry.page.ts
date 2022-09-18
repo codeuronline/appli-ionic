@@ -100,22 +100,21 @@ export class ViewentryPage implements OnInit {
     console.log(this.id);
     this.getEntry();
     this.fileNew = false;
-    this.myValue = (this.entryData.status == 1) ? true : null;
+    this.myValue = (this.entryData.status == 1) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.ionicFormView = this.formBuilder.group({
-      id_object: this.id,
-      status: this.myValue,
-      description: null,
-      location: null,//new FormControl([ null, this.entryData.location, [Validators.required, Validators.maxLength(25)]),
-      date: null,
-      firstname: null,//new FormControl([this.entryData.firstname, [Validators.required, Validators.maxLength(25)]]),
-      lastname: null,//new FormControl([this.entryData.lastname, [Validators.required, Validators.maxLength(25)]]),
-      email: null,//new FormControl([this.entryData.email, [Validators.required, Validators.email]]),
-      checkedpicture: null,
-      filename: null,
-      //file: null,
-    });
+      description: [this.entryData.description, [Validators.required]],
+      status: [this.entryData.status],
+      location: [this.entryData.location, [Validators.required, Validators.maxLength(25)]],
+      date: [this.entryData.date, [Validators.required]],
+      firstname: [this.entryData.firstname, [Validators.required, Validators.maxLength(25)]],
+      lastname: [this.entryData.lastname, [Validators.required, Validators.maxLength(25)]],
+      email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      checkedpicture: [false],
+      filename: [''],
+      user_id:[this.user_id],
+    });;
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
   }
   getDate(e) {
@@ -130,17 +129,16 @@ export class ViewentryPage implements OnInit {
         if (this.id == data[i].id_object) {
           data[i].newUrlImg = (data[i].filename == null) ? this.imgUrl + this.imgEmpty : this.imgUrl + data[i].filename;
           this.entryData = data[i];
-
+          
         }
       };
       console.log("entrydata:", this.entryData);
       this.etatStatus();
-
       // console.log('entrydata[0]:', this.entryData[0]);
     });
     // fin boucle for
   }
-
+  
   get errorControl() {
     return this.ionicFormView.controls;
   }
@@ -177,6 +175,7 @@ export class ViewentryPage implements OnInit {
     console.log("filename", this.filename);
     console.log("file:", this.file);
   }
+
   async onSubmit() {
     this.message("treat");
     // creer un object ecoute
@@ -184,12 +183,13 @@ export class ViewentryPage implements OnInit {
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
-    formObj.status = this.entryData.status;
-    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
+    formObj.status = (this.ionicFormView.get('status').value != null) ? this.ionicFormView.get('status').value : this.entryData.status;
+    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
+    formObj.user_id = this.user_id;
 
     // cas si le toggle picture est activé  
     if (this.myOptionPicture == true) {

@@ -78,21 +78,14 @@
     {{user_id}}//{{entryData.user_id}}
     <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
       <ion-item>
-        <!-- <ion-button expand="full">-->
-        <!-- <ion-icon lazy="true" slot="start" name="image"></ion-icon> -->
-        <!-- </ion-button> -->
         <img src={{entryData.newUrlImg}}> 
-        <!-- <input type="file" (change)="onFileChange($event)" id="file" accept="image/png, image/jpeg"
-          placeholder="photo" /> -->
       </ion-item>
     
       <ion-item lines="full">
         <ion-label>
-          <div>
             <ion-icon name="information"></ion-icon>
-          </div>
         </ion-label>
-        <ion-input type="text" [value]="entryData.description" required
+        <ion-input formControlName="description" type="text" [value]="entryData.description" required
           placeholder="description"></ion-input>
       </ion-item>
       <ion-item lines="full">
@@ -107,13 +100,13 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input type="text" [value]="entryData.location" required></ion-input>
+        <ion-input formControlName="location" type="text" [value]="entryData.location" required></ion-input>
       </ion-item>
       <ion-item slot="start" lines="full">
         <ion-label>
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
-        <ion-input type="date" displayFormat="YYYY-MM-DD" presentation="date" 
+        <ion-input formControlName="date" type="date" displayFormat="YYYY-MM-DD" presentation="date" 
           (ionChange)="getDate($event)" value={{entryData.date}} required>
           <!--  -->
         </ion-input>
@@ -122,14 +115,13 @@
         <ion-label>
           <ion-icon name="mail"></ion-icon>
         </ion-label>
-        <ion-input type="email" [value]="entryData.email" required></ion-input>
+        <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label>
           <ion-icon name="image"></ion-icon>
         </ion-label>
-        <ion-toggle (ionChange)="myChangePhoto($event)"
-          value="entryData.checkedpicture" checked="{{myOptionPicture}}"></ion-toggle>
+        <ion-toggle (ionChange)="myChangePhoto($event)" value="entryData.checkedpicture" checked="{{myOptionPicture}}"></ion-toggle>
         <span *ngIf="myOptionPicture">
           <ion-item>
             <ion-button expand="full">
