@@ -130,7 +130,7 @@ export class ViewentryPage implements OnInit {
         if (this.id == data[i].id_object) {
           data[i].newUrlImg = (data[i].filename == null) ? this.imgUrl + this.imgEmpty : this.imgUrl + data[i].filename;
           this.entryData = data[i];
-          
+
         }
       };
       console.log("entrydata:", this.entryData);
@@ -140,7 +140,7 @@ export class ViewentryPage implements OnInit {
     });
     // fin boucle for
   }
-  
+
   get errorControl() {
     return this.ionicFormView.controls;
   }
@@ -184,8 +184,8 @@ export class ViewentryPage implements OnInit {
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
-    formObj.status = (this.ionicFormView.get('status').value != null) ? this.ionicFormView.get('status').value : this.entryData.status;
-    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
+    formObj.status = this.entryData.status;
+    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
