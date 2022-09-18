@@ -80,6 +80,7 @@
 #### ->  à envisager confirmation via mail du reset password avec + une cle pour redefinir le mot de pass
 ### -> Mise à jour  -> 05/09/2022
 #### -> Recover fonctionne
-
-
-
+### Mise à jour du 18/09/2022
+### -> refonte de viewentry en fonction de l'id_user 
+#### si l'objet appartient à l'id_user : affichage de l'objet en full modification
+#### si l'objet n'appartient pas l'id_user : vue de l'objet sans possibilité de modification
