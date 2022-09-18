@@ -184,7 +184,7 @@ export class ViewentryPage implements OnInit {
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
-    formObj.status = (this.myValue == true) ? 1 : 0;
+    formObj.status = (this.ionicFormView.get('status').value != null) ? this.ionicFormView.get('status').value : this.entryData.status;
     formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
