@@ -26,7 +26,7 @@
         <ion-item lines="full">
           <ion-label>Status : {{etat}}</ion-label>
           <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)" disabled></ion-toggle>  -->
-          <ion-toggle [value]="entryData.status" [checked]="etat" [disabled]="user_id !=entryData.user_id">
+          <ion-toggle [value]="entryData.status" [checked]="entryData.status==1" [disabled]="user_id !=entryData.user_id">
           </ion-toggle>
         </ion-item>
         <ion-item lines="full">
@@ -45,13 +45,21 @@
           <ion-label>
             <ion-icon name="location"></ion-icon>
           </ion-label>
-        {{entryData.location}}
+          {{entryData.location}}
         </ion-item>
         <ion-item lines="full">
           <ion-label>
             <ion-icon name="mail"></ion-icon>
           </ion-label>
-        {{entryData.email}}
+          {{entryData.email}}
+        </ion-item>
+        <ion-item>
+          <!-- <ion-button expand="full">-->
+          <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+          <!-- </ion-button> -->
+          <img src={{entryData.newUrlImg}}> 
+          <!-- <input type="file" (change)="onFileChange($event)" id="file" accept="image/png, image/jpeg"
+            placeholder="photo" /> -->
         </ion-item>
       </ion-card>
     </div>
@@ -65,14 +73,14 @@
             <ion-icon name="information"></ion-icon>
           </div>
         </ion-label>
-        <ion-input formControlName="description" type="text" value={{entryData.description}} required
+        <ion-input type="text" [value]="entryData.description" required
           placeholder="description"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label>Status : {{etat}}</ion-label>
         <!-- <ion-toggle checked={{myValue}} (ionChange)="myChange($event)"></ion-toggle>  -->
         <!-- <ion-toggle value="entryData.status" [checked]="etat"> -->
-        <ion-toggle formControlName="status" (ionChange)="myChange($event)" [value]="entryData.status" [checked]="etat">
+        <ion-toggle  (ionChange)="myChange($event)" [value]="entryData.status" [checked]="entryData.status==1">
         </ion-toggle>
         <!-- </ion-toggle> -->
       </ion-item>
@@ -80,15 +88,14 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input formControlName="location" type="text" [value]="entryData.location" required
-          placeholder="Localisation">{{entryData.location}}</ion-input>
+        <ion-input type="text" [value]="entryData.location" required></ion-input>
       </ion-item>
       <ion-item slot="start" lines="full">
         <ion-label>
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
-        <ion-input formControlName="date" displayFormat="YYYY-MM-DD" presentation="date" type="date"
-          (ionChange)="getDate($event)" [value]="entryData.date" required>
+        <ion-input type="date" displayFormat="YYYY-MM-DD" presentation="date" 
+          (ionChange)="getDate($event)" value={{entryData.date}} required>
           <!--  -->
         </ion-input>
       </ion-item>
@@ -96,16 +103,33 @@
         <ion-label>
           <ion-icon name="mail"></ion-icon>
         </ion-label>
-        <ion-input formControlName="email" type="email" [value]="entryData.email" required></ion-input>
+        <ion-input type="email" [value]="entryData.email" required></ion-input>
       </ion-item>
-
+      <ion-item lines="full">
+        <ion-label>
+          <ion-icon name="image"></ion-icon>
+        </ion-label>
+        <ion-toggle (ionChange)="myChangePhoto($event)"
+          value="entryData.checkedpicture" checked="{{myOptionPicture}}"></ion-toggle>
+        <span *ngIf="myOptionPicture">
+          <ion-item>
+            <ion-button expand="full">
+              <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+            </ion-button>
+            <input type="file" (change)="onFileChange($event)" id="file" accept="image/png, image/jpeg"
+              placeholder="photo">
+          </ion-item>
+          <!-- <ion-item>
+            <img src={{entryData.newUrlImg}}> 
+          </ion-item> -->
+        </span>
+      </ion-item>
       <ion-button type="submit" class="color" color="#002239" expand="full">
         <div>
           <ion-icon name="checkmark-circle-outline"></ion-icon><br>
           <span class="text-icon">Modifier</span>
         </div>
       </ion-button>
-
     </form>
   </ng-template>
 </ion-content>

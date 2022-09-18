@@ -28,6 +28,8 @@ export class ViewentryPage implements OnInit {
   user_id: String;
   //  ELEMENT de fichier à télécharger //
   id = this.activatedRouter.snapshot.paramMap.get('id');
+  imgEmpty = "object_vide.png";
+  imgUrl = "http://localhost/ionicserver/upload/";
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
   ionicFormView: FormGroup;
   entryData = {
@@ -66,11 +68,11 @@ export class ViewentryPage implements OnInit {
       { "description": "confirm", "message": "Modification Confirmée", "color": "success" },
       { "description": "treat", "message": "Traitement en cours", "color": "warning" }
     ]
-    
+
     for (let index = 0; index < info.length; index++) {
       if (aValue == info[index].description) {
         let toast = await this.toastController.create({
-          header:"",
+          header: "",
           message: info[index].message,
           color: info[index].color,
           cssClass: 'toast-custom-class',
@@ -126,7 +128,9 @@ export class ViewentryPage implements OnInit {
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
         if (this.id == data[i].id_object) {
+          data[i].newUrlImg = (data[i].filename == null) ? this.imgUrl + this.imgEmpty : this.imgUrl + data[i].filename;
           this.entryData = data[i];
+          
         }
       };
       console.log("entrydata:", this.entryData);
@@ -136,29 +140,7 @@ export class ViewentryPage implements OnInit {
     });
     // fin boucle for
   }
-  displayPlaceHolder(valeur) {
-    const tabValeur=["description","location","firstname","lastname","date","email"]
-    switch (valeur) {
-      case tabValeur[0]:
-      return (this.entryData.description.length > 0) ? '' : "Description de l'objet";
-        break;
-      case tabValeur[1]:
-      return (this.entryData.location.length > 0) ? '' : "Localisation de l'objet ${this.etat}";
-        break;
-      case tabValeur[2]:
-      return (this.entryData.firstname.length > 0) ? '' : "prénom";
-        break;
-        case tabValeur[3]:
-        return (this.entryData.lastname.length > 0) ? '' : "nom";
-        break;
-      case tabValeur[4]:
-        return (this.entryData.date.length > 0) ? '' : "date";
-        break;
-      case tabValeur[5]:
-        return (this.entryData.email.length > 0) ? '' : "email";
-        break;
-    }
-  }
+  
   get errorControl() {
     return this.ionicFormView.controls;
   }
@@ -203,8 +185,7 @@ export class ViewentryPage implements OnInit {
     formObj.id_object = this.entryData.id_object;
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
-    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
-    formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
+    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
