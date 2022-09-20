@@ -20,6 +20,9 @@ export class ViewentryPage implements OnInit {
   filename: String;
   extension: String;
   fileNew: Boolean;
+  firstname: string;
+  date: Date;
+  location: string;
   routerHref = "home";
   isSubmitted = false;
   handlerMessagelost = '';
@@ -59,6 +62,7 @@ export class ViewentryPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
     public navCtrl: NavController) {
+    this.ngOnInit();
 
 
   }
@@ -99,6 +103,9 @@ export class ViewentryPage implements OnInit {
     }
     console.log(this.id);
     this.getEntry();
+    this.firstname = this.entryData.firstname;
+    this.date = this.entryData.date;
+    this.location = this.entryData.location;
     this.fileNew = false;
     this.myValue = (this.entryData.status == 1) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
@@ -106,10 +113,10 @@ export class ViewentryPage implements OnInit {
     this.ionicFormView = this.formBuilder.group({
       description: [this.entryData.description, [Validators.required]],
       status: [this.entryData.status],
-      location: [this.entryData.location, [Validators.required, Validators.maxLength(25)]],
-      date: [this.entryData.date, [Validators.required]],
-      firstname: [this.entryData.firstname, [Validators.required, Validators.maxLength(25)]],
-      lastname: [this.entryData.lastname, [Validators.required, Validators.maxLength(25)]],
+      location: [this.location, [Validators.required, Validators.maxLength(25)]],
+      date: [this.entryData.date],
+      firstname: [this.entryData.firstname],
+      lastname: [this.entryData.lastname],
       email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [false],
       filename: [''],
