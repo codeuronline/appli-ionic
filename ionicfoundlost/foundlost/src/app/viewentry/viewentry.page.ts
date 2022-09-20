@@ -19,10 +19,11 @@ export class ViewentryPage implements OnInit {
   file: File;
   filename: String;
   extension: String;
+  description: String;
   fileNew: Boolean;
-  firstname: string;
+  firstname: String;
   date: Date;
-  location: string;
+  location: String;
   routerHref = "home";
   isSubmitted = false;
   handlerMessagelost = '';
@@ -38,12 +39,12 @@ export class ViewentryPage implements OnInit {
   entryData = {
     id_object: null,
     status: null,
-    description: null,
-    location: null,
-    date: null,
-    firstname: null,
-    lastname: null,
-    email: null,
+    description: String,
+    location: String,
+    date: Date,
+    firstname: String,
+    lastname: String,
+    email: String,
     checkedpicture: 0,
     filename: null,
     user_id: String,
@@ -62,7 +63,7 @@ export class ViewentryPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
     public navCtrl: NavController) {
-    this.ngOnInit();
+    this.getEntry();
 
 
   }
@@ -96,16 +97,14 @@ export class ViewentryPage implements OnInit {
     return ext == null ? "" : ext[1];
   }
   ngOnInit() {
+    this.getEntry();
     this.user = sessionStorage.getItem("user");
     this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
-    console.log(this.id);
-    this.getEntry();
-    this.firstname = this.entryData.firstname;
-    this.date = this.entryData.date;
-    this.location = this.entryData.location;
+    console.log("slug transmis-> id :",this.id);
+    console.log("ngOnInit->",this.entryData)
     this.fileNew = false;
     this.myValue = (this.entryData.status == 1) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
@@ -113,7 +112,7 @@ export class ViewentryPage implements OnInit {
     this.ionicFormView = this.formBuilder.group({
       description: [this.entryData.description, [Validators.required]],
       status: [this.entryData.status],
-      location: [this.location, [Validators.required, Validators.maxLength(25)]],
+      location: [this.entryData.location, [Validators.required, Validators.maxLength(25)]],
       date: [this.entryData.date],
       firstname: [this.entryData.firstname],
       lastname: [this.entryData.lastname],
@@ -123,6 +122,7 @@ export class ViewentryPage implements OnInit {
       user_id:[this.user_id],
     });;
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
+    console.log("formulaire ->",this.ionicFormView);
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -130,7 +130,7 @@ export class ViewentryPage implements OnInit {
   }
   getEntry() {
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
-      console.log('data :', data);
+      console.log('133_geetEntry_data :', data);
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
         if (this.id == data[i].id_object) {
@@ -139,7 +139,7 @@ export class ViewentryPage implements OnInit {
           
         }
       };
-      console.log("entrydata:", this.entryData);
+      console.log("142_getEntry_entrydata:", this.entryData);
       this.etatStatus();
       // console.log('entrydata[0]:', this.entryData[0]);
     });
@@ -164,7 +164,7 @@ export class ViewentryPage implements OnInit {
   }
 
   etatStatus() {
-    if (this.entryData.status == 1) {
+    if (this.entryData.status == true) {
       this.etat = "Trouvé";
     } else {
       this.etat = "Perdu";
