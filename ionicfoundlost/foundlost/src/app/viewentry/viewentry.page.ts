@@ -35,21 +35,20 @@ export class ViewentryPage implements OnInit {
   imgEmpty = "object_vide.png";
   imgUrl = "http://localhost/ionicserver/upload/";
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=";
-  ionicFormView: FormGroup;
   entryData = {
     id_object: null,
     status: null,
-    description: String,
-    location: String,
-    date: Date,
-    firstname: String,
-    lastname: String,
-    email: String,
+    description: null,
+    location: null,
+    date: null,
+    firstname: null,
+    lastname: null,
+    email: null,
     checkedpicture: 0,
     filename: null,
     user_id: String,
   };
-
+  ionicFormView: FormGroup;
 
   etat = new String;
   myValue = new Boolean;
@@ -63,7 +62,9 @@ export class ViewentryPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
     public navCtrl: NavController) {
-    this.getEntry();
+    
+    //this.ionicFormView = this.entryData;
+    this.initTheIonicView();
 
 
   }
@@ -97,7 +98,6 @@ export class ViewentryPage implements OnInit {
     return ext == null ? "" : ext[1];
   }
   ngOnInit() {
-    this.getEntry();
     this.user = sessionStorage.getItem("user");
     this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
@@ -109,18 +109,6 @@ export class ViewentryPage implements OnInit {
     this.myValue = (this.entryData.status == 1) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
-    this.ionicFormView = this.formBuilder.group({
-      description: [this.entryData.description, [Validators.required]],
-      status: [this.entryData.status],
-      location: [this.entryData.location, [Validators.required, Validators.maxLength(25)]],
-      date: [this.entryData.date],
-      firstname: [this.entryData.firstname],
-      lastname: [this.entryData.lastname],
-      email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
-      checkedpicture: [false],
-      filename: [''],
-      user_id:[this.user_id],
-    });;
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
     console.log("formulaire ->",this.ionicFormView);
   }
@@ -128,6 +116,25 @@ export class ViewentryPage implements OnInit {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicFormView.get('date').setValue(date, { onlyself: true });
   }
+  initTheIonicView() {
+    this.getEntry();
+    console.log(this.entryData);
+    this.description = this.entryData.description;
+    console.log("description: ",this.description)
+    this.ionicFormView = this.formBuilder.group({
+      description: [this.description],
+      status: [this.entryData.status],
+      location: [this.entryData.location,],
+      date: ["2022-09-11"],
+      firstname: [this.entryData.firstname],
+      lastname: [this.entryData.lastname],
+      email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      checkedpicture: [this.entryData.checkedpicture],
+      filename:  [this.entryData.filename],
+      user_id:[this.user_id],
+    });;
+  }
+
   getEntry() {
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       console.log('133_geetEntry_data :', data);
@@ -136,13 +143,15 @@ export class ViewentryPage implements OnInit {
         if (this.id == data[i].id_object) {
           data[i].newUrlImg = (data[i].filename == null) ? this.imgUrl + this.imgEmpty : this.imgUrl + data[i].filename;
           this.entryData = data[i];
-          
+         
         }
       };
-      console.log("142_getEntry_entrydata:", this.entryData);
+      console.log("getEntry_readData:", this.entryData);
+      // this.ionicFormView.set('description').value =this.entryData.description;
       this.etatStatus();
       // console.log('entrydata[0]:', this.entryData[0]);
     });
+    return this.entryData;
     // fin boucle for
   }
   
