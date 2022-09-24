@@ -85,8 +85,7 @@
         <ion-label>
             <ion-icon name="information"></ion-icon>
         </ion-label>
-        <ion-input formControlName="description" type="text" required
-          placeholder="description"></ion-input>
+        <ion-input  type="text" required value={{entryData.description}} placeholder="description" ></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label>Status : {{etat}}</ion-label>
@@ -100,13 +99,13 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input formControlName="location" type="text" required></ion-input>
+        <ion-input type="text" value={{entryData.location}} required></ion-input>
       </ion-item>
       <ion-item slot="start" lines="full">
         <ion-label>
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
-        <ion-input formControlName="date" type="date" displayFormat="YYYY-MM-DD" presentation="date" 
+        <ion-input value={{entryData.date}} type="date" displayFormat="YYYY-MM-DD" presentation="date" 
           (ionChange)="getDate($event)" required>
           <!--  -->
         </ion-input>
@@ -115,20 +114,20 @@
         <ion-label>
           <ion-icon name="id-card"></ion-icon>
         </ion-label>
-        <ion-input formControlName="firstname" type="text" required placeholder="Prénom"></ion-input>
+        <ion-input value={{entryData.firstname}} type="text" required placeholder="Prénom"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label>
           <ion-icon name="id-card"></ion-icon>
         </ion-label>
-        <ion-input formControlName="lastname" type="text" required placeholder="Nom"></ion-input>
+        <ion-input value={{entryData.lastname}} type="text" required placeholder="Nom"></ion-input>
       </ion-item>
       
       <ion-item lines="full">
         <ion-label>
           <ion-icon name="mail"></ion-icon>
         </ion-label>
-        <ion-input formControlName="email" type="email" required></ion-input>
+        <ion-input type="email" required value={{entryData.email}}></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label>

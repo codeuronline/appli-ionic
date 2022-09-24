@@ -44,16 +44,14 @@ export class ViewentryPage implements OnInit {
     firstname: null,
     lastname: null,
     email: null,
-    checkedpicture: 0,
+    checkedpicture: 1,
     filename: null,
-    user_id: String,
+    user_id: null,
   };
-  ionicFormView: FormGroup;
-
   etat = new String;
   myValue = new Boolean;
   myOptionPicture = new Boolean;
-
+  ionicFormView: FormGroup;
 
   constructor(
     private toastController: ToastController,
@@ -103,6 +101,7 @@ export class ViewentryPage implements OnInit {
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
+    this.entryData=this.getEntry();
     console.log("slug transmis-> id :",this.id);
     console.log("ngOnInit->",this.entryData)
     this.fileNew = false;
@@ -110,21 +109,12 @@ export class ViewentryPage implements OnInit {
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
-    console.log("formulaire ->",this.ionicFormView);
-  }
-  getDate(e) {
-    let date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.ionicFormView.get('date').setValue(date, { onlyself: true });
-  }
-  initTheIonicView() {
-    this.getEntry();
-    console.log(this.entryData);
-    this.description = this.entryData.description;
-    console.log("description: ",this.description)
+    console.log("formulaire ->", this.ionicFormView); 
+    
     this.ionicFormView = this.formBuilder.group({
-      description: [this.description],
+      description: [this.entryData.description],
       status: [this.entryData.status],
-      location: [this.entryData.location,],
+      location: [this.entryData.location],
       date: ["2022-09-11"],
       firstname: [this.entryData.firstname],
       lastname: [this.entryData.lastname],
@@ -132,7 +122,33 @@ export class ViewentryPage implements OnInit {
       checkedpicture: [this.entryData.checkedpicture],
       filename:  [this.entryData.filename],
       user_id:[this.user_id],
-    });;
+    });
+    console.log("nginit-getentrydata",this.entryData);
+    this.ionicFormView.patchValue({ 'description': this.entryData.description, "email": this.entryData.email });
+    console.log('ionicview',this.ionicFormView)
+  }
+  getDate(e) {
+    let date = new Date(e.target.value).toISOString().substring(0, 10);
+    this.ionicFormView.get('date').setValue(date, { onlyself: true });
+  }
+
+  initTheIonicView() {
+    // this.getEntry();
+    // console.log(this.entryData);
+    // this.description = this.entryData.description;
+    // console.log("description: ",this.description)
+    // this.ionicFormView = this.formBuilder.group({
+    //   description: [this.description],
+    //   status: [this.entryData.status],
+    //   location: [this.entryData.location,],
+    //   date: ["2022-09-11"],
+    //   firstname: [this.entryData.firstname],
+    //   lastname: [this.entryData.lastname],
+    //   email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+    //   checkedpicture: [this.entryData.checkedpicture],
+    //   filename:  [this.entryData.filename],
+    //   user_id:[this.user_id],
+    // });
   }
 
   getEntry() {
@@ -143,14 +159,15 @@ export class ViewentryPage implements OnInit {
         if (this.id == data[i].id_object) {
           data[i].newUrlImg = (data[i].filename == null) ? this.imgUrl + this.imgEmpty : this.imgUrl + data[i].filename;
           this.entryData = data[i];
-         
+        
         }
       };
       console.log("getEntry_readData:", this.entryData);
-      // this.ionicFormView.set('description').value =this.entryData.description;
+     //this.ionicFormView.set('description').value =this.entryData.description;
       this.etatStatus();
       // console.log('entrydata[0]:', this.entryData[0]);
     });
+    console.log(this.entryData);
     return this.entryData;
     // fin boucle for
   }
