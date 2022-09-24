@@ -46,6 +46,7 @@ export class ViewentryPage implements OnInit {
     email: null,
     checkedpicture: 1,
     filename: null,
+    newUrlImg: null,
     user_id: null,
   };
   etat = new String;
@@ -62,7 +63,6 @@ export class ViewentryPage implements OnInit {
     public navCtrl: NavController) {
     
     //this.ionicFormView = this.entryData;
-    this.initTheIonicView();
 
 
   }
@@ -96,12 +96,13 @@ export class ViewentryPage implements OnInit {
     return ext == null ? "" : ext[1];
   }
   ngOnInit() {
+    this.getEntry();
     this.user = sessionStorage.getItem("user");
     this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
-    this.entryData=this.getEntry();
+    
     console.log("slug transmis-> id :",this.id);
     console.log("ngOnInit->",this.entryData)
     this.fileNew = false;
@@ -112,19 +113,22 @@ export class ViewentryPage implements OnInit {
     console.log("formulaire ->", this.ionicFormView); 
     
     this.ionicFormView = this.formBuilder.group({
-      description: [this.entryData.description],
+      description: [null],
       status: [this.entryData.status],
-      location: [this.entryData.location],
-      date: ["2022-09-11"],
+      location: [null],
+      date: [null],
       firstname: [this.entryData.firstname],
       lastname: [this.entryData.lastname],
-      email: [this.user, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      email: [null, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [this.entryData.checkedpicture],
       filename:  [this.entryData.filename],
       user_id:[this.user_id],
     });
     console.log("nginit-getentrydata",this.entryData);
-    this.ionicFormView.patchValue({ 'description': this.entryData.description, "email": this.entryData.email });
+    this.ionicFormView.patchValue({ 'description': this.entryData.description });
+    this.ionicFormView.patchValue({ 'location': this.entryData.location });
+    this.ionicFormView.patchValue({ 'date': this.entryData.date });
+    this.ionicFormView.patchValue({ 'email': this.entryData.email });
     console.log('ionicview',this.ionicFormView)
   }
   getDate(e) {
@@ -167,8 +171,7 @@ export class ViewentryPage implements OnInit {
       this.etatStatus();
       // console.log('entrydata[0]:', this.entryData[0]);
     });
-    console.log(this.entryData);
-    return this.entryData;
+    console.log("cc",this.entryData);
     // fin boucle for
   }
   
