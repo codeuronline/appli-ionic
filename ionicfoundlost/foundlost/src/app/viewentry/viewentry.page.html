@@ -99,7 +99,7 @@
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input type="text" value={{entryData.location}} required></ion-input>
+        <ion-input formControlName="location" type="text" [value]="entryData.location"  required></ion-input>
       </ion-item>
       <ion-item slot="start" lines="full">
         <ion-label>
