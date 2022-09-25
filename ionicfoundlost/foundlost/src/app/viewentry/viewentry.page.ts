@@ -61,7 +61,7 @@ export class ViewentryPage implements OnInit {
     public activatedRouter: ActivatedRoute,
     public formBuilder: FormBuilder,
     public navCtrl: NavController) {
-    
+
     //this.ionicFormView = this.entryData;
 
 
@@ -96,20 +96,20 @@ export class ViewentryPage implements OnInit {
     return ext == null ? "" : ext[1];
   }
   ngOnInit() {
-    
+
     this.user = sessionStorage.getItem("user");
     this.user_id = sessionStorage.getItem("user_id");
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
-    this.getEntry();
+    this.entryData= this.getEntry();
     console.log("ngOnInit->", this.entryData);
-    this.fileNew = false;
-    this.myValue = (this.entryData.status == 1) ? true : false;
+    this.myValue = (this.entryData.status == 1 ) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
+    this.fileNew = false;
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
-    console.log(this.entryData);  
+    console.log(this.etat, this.myValue);
     console.log("formulaire rempli ->", this.ionicFormView);
     this.ionicFormView = this.formBuilder.group({
       description: [this.entryData.description],
@@ -118,19 +118,19 @@ export class ViewentryPage implements OnInit {
       date: [this.entryData.date],
       firstname: [this.entryData.firstname],
       lastname: [this.entryData.lastname],
-      email: [this.entryData.email,[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+      email: [this.entryData.email, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
       checkedpicture: [this.entryData.checkedpicture],
       filename: [this.entryData.filename],
-      user_id:[this.user_id],
+      user_id: [this.user_id],
     });
-    
+
   }
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicFormView.get('date').setValue(date, { onlyself: true });
   }
 
-    getEntry() {
+  getEntry() {
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
@@ -139,7 +139,7 @@ export class ViewentryPage implements OnInit {
           this.entryData = data[i];
         }
       };
-      console.log("getEntry_readData:", this.entryData);
+      console.log(":", this.entryData);
       this.ionicFormView = this.formBuilder.group({
         description: [this.entryData.description],
         status: [this.entryData.status],
@@ -147,16 +147,16 @@ export class ViewentryPage implements OnInit {
         date: [this.entryData.date],
         firstname: [this.entryData.firstname],
         lastname: [this.entryData.lastname],
-        email: [this.entryData.email,[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
+        email: [this.entryData.email, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
         checkedpicture: [this.entryData.checkedpicture],
         filename: [this.entryData.filename],
-        user_id:[this.user_id],
+        user_id: [this.user_id],
       });
-      this.etatStatus();     
+      this.etatStatus();
     });
     return this.entryData;
   }
-  
+
   get errorControl() {
     return this.ionicFormView.controls;
   }
@@ -170,12 +170,21 @@ export class ViewentryPage implements OnInit {
     }
 
   }
+  toggleStatus() {
+    this.myValue = !this.myValue;
+    if (this.myValue == true) {
+      this.etat = "Trouvé";
+    }
+    if (this.myValue == false) {
+      this.etat = "Perdu";
+    }
+  }
   myChangePhoto($event) {
     this.myOptionPicture = !this.myOptionPicture
   }
 
   etatStatus() {
-    if (this.entryData.status == true ||this.entryData.status=="1") {
+    if (this.entryData.status == true || this.entryData.status == "1") {
       this.etat = "Trouvé";
     } else {
       this.etat = "Perdu";
@@ -200,15 +209,16 @@ export class ViewentryPage implements OnInit {
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
-    console.log(this.myValue,this.etat);
+    console.log("etat des toggle:",this.myValue, this.etat);
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
-    formObj.status = (this.ionicFormView.get('status').value != null) ? (this.ionicFormView.get('status').value== true) ? "0":"1" : this.entryData.status;
-    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
+    formObj.status = (this.ionicFormView.get('status').value != null) ? (this.ionicFormView.get('status').value == true) ? "1" : "0" : this.entryData.status;
+    formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     formObj.user_id = this.user_id;
+    console.log('formulaire submit=>', formObj);
 
     // cas si le toggle picture est activé  
     if (this.myOptionPicture == true) {
