@@ -109,7 +109,7 @@ export class ViewentryPage implements OnInit {
     this.fileNew = false;
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
-    console.log(this.etat, this.myValue);
+    console.log(this.etat,this.myValue);
     console.log("formulaire rempli ->", this.ionicFormView);
     this.ionicFormView = this.formBuilder.group({
       description: [this.entryData.description],

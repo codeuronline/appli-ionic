@@ -71,7 +71,7 @@
       </ion-item>
       <ion-item lines="full">
         <ion-label>Status : {{etat}}</ion-label>
-        <ion-toggle formControlName="status" (ionChange)="myChange($event)" (click)="toggleStatus()" [checked]="myValue==true">
+        <ion-toggle formControlName="status" (ionChange)="myChange($event)" checked={{myValue}}>
         </ion-toggle>
       </ion-item>
       <ion-item lines="full">
