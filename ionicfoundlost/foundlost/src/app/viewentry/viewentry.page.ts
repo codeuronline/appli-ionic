@@ -175,7 +175,7 @@ export class ViewentryPage implements OnInit {
   }
 
   etatStatus() {
-    if (this.entryData.status == true) {
+    if (this.entryData.status == true ||this.entryData.status=="1") {
       this.etat = "Trouvé";
     } else {
       this.etat = "Perdu";
@@ -200,9 +200,9 @@ export class ViewentryPage implements OnInit {
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
-  
+    console.log(this.myValue,this.etat);
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
-    formObj.status = (this.ionicFormView.get('status').value != null) ? this.ionicFormView.get('status').value : this.entryData.status;
+    formObj.status = (this.ionicFormView.get('status').value != null) ? (this.ionicFormView.get('status').value== true) ? "0":"1" : this.entryData.status;
     formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date; 
     formObj.location = (this.ionicFormView.get('location').value != null) ? this.ionicFormView.get('location').value : this.entryData.location;
     formObj.firstname = (this.ionicFormView.get('firstname').value != null) ? this.ionicFormView.get('firstname').value : this.entryData.firstname;

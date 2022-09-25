@@ -4,7 +4,7 @@
       <ion-back-button slot="start" (click)="goBack()" defaultHref="{{routerHref}}" routerDirection="backward"
         text="Retour">
       </ion-back-button>
-    </ion-buttons>&nbsp;OBJET :{{entryData.id_object}}
+    </ion-buttons>&nbsp;OBJET : {{entryData.id_object}}
     <ion-button slot="end" class="color" (click)="destroyUser()" color="#002239">
       <ion-icon name="person"></ion-icon> {{user.substr(0, user.indexOf('@'))}}
       <!-- {{entryData.user_id}} -->
@@ -58,7 +58,6 @@
     </div>
   </div>
   <ng-template #elsemodif>
-    {{user_id}}//{{entryData.user_id}}
     <form [formGroup]="ionicFormView" (ngSubmit)="onSubmit()" novalidate>
       <ion-item>
         <img src={{entryData.newUrlImg}}> 
@@ -71,14 +70,14 @@
       </ion-item>
       <ion-item lines="full">
         <ion-label>Status : {{etat}}</ion-label>
-        <ion-toggle formControlName="status" (ionChange)="myChange($event)" [checked]="entryData.status==1">
+        <ion-toggle formControlName="status" (ionChange)="myChange($event)" [checked]="myValue==true">
         </ion-toggle>
       </ion-item>
       <ion-item lines="full">
         <ion-label>
           <ion-icon name="location"></ion-icon>
         </ion-label>
-        <ion-input formControlName="location" type="text" required>{{entryData.location}}</ion-input>
+        <ion-input formControlName="location" type="text" required></ion-input>
       </ion-item>
       <ion-item slot="start" lines="full">
         <ion-label>
