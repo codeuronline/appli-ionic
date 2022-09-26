@@ -12,7 +12,7 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button class="color" slot="end" (click)="destroyUser()" color="#002239">
+      <ion-button class="color" (click)="destroyUser()" color="#002239">
         <ion-icon name="person"></ion-icon> {{user.substr(0, user.indexOf('@'))}}
       </ion-button>
     </ion-buttons>
@@ -75,7 +75,7 @@
         </ion-item-options>
         <ion-item lines="none">
           <ion-label>
-            <h2><ion-icon *ngIf="data.user_id==this.user_id" name="trash"></ion-icon> {{ data.description }} 
+            <h2><ion-icon class="search_light" *ngIf="data.user_id==this.user_id" name="trash"></ion-icon> {{ data.description }} 
             </h2>
             <p>{{ data.location }}</p>
             <p>{{ data.date }}</p>

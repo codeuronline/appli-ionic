@@ -24,7 +24,7 @@
   <div id="searchOptions" class="bg-img">
     <ion-item>
       <ion-label class="ion-text-center">
-        Liste d'objets Trouvés
+        Liste d'objets Perdus
       </ion-label>
     </ion-item>
     <ion-item>
@@ -76,7 +76,7 @@
           </ion-item-options>
           <ion-item lines="none">
             <ion-label>
-              <h2><ion-icon *ngIf="data.user_id==this.user_id" name="trash"></ion-icon> {{ data.description }}</h2>
+              <h2><ion-icon class="search_light" *ngIf="data.user_id==this.user_id" name="trash"></ion-icon> {{ data.description }}</h2>
               <p>{{ data.location }}</p>
               <p>{{ data.date }}</p>
             </ion-label>
