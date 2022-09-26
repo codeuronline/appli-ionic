@@ -63,6 +63,11 @@
     <!-- Liste des taches sous forme de card -->
     <ion-card *ngFor="let data of entryDataSearch">
       <ion-item-sliding>
+        <ion-item-options side="start" *ngIf="data.user_id==this.user_id">
+          <ion-item-option color="danger" (click)="delete(data.id_object)">
+            <ion-icon name="trash" slot="top"></ion-icon>supprimer
+          </ion-item-option>
+        </ion-item-options>
         <ion-item-options side="end">
           <ion-item-option color="primary" routerLink="viewentry/{{data.id_object}}" routerDirection="forward">
             <ion-icon name="eye" slot="top"></ion-icon>Détail
@@ -70,7 +75,8 @@
         </ion-item-options>
         <ion-item lines="none">
           <ion-label>
-            <h2>{{ data.description }}</h2>
+            <h2><ion-icon *ngIf="data.user_id==this.user_id" name="trash"></ion-icon> {{ data.description }} 
+            </h2>
             <p>{{ data.location }}</p>
             <p>{{ data.date }}</p>
           </ion-label>

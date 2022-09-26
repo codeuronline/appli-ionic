@@ -1,6 +1,7 @@
+import { UserService } from './../api/user.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lostlist',
@@ -14,6 +15,7 @@ export class LostlistPage implements OnInit {
   imgUrl = "http://localhost/ionicserver/upload/";
   input = document.getElementById("search");
   searchStatus = true;
+  routerHref = "home";
   showDescription = true;
   showLocation = false;
   showCalendar = false;
@@ -22,7 +24,7 @@ export class LostlistPage implements OnInit {
   user = sessionStorage.getItem("user");
   user_id = sessionStorage.getItem("user_id");
 
-  constructor(public http: HttpClient, private navCtrl: NavController) {
+  constructor(public http: HttpClient, private navCtrl: NavController,private toastController:ToastController,private userService:UserService) {
     this.ngOnInit;
   }
 
@@ -159,5 +161,39 @@ export class LostlistPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
-
+  async message(aValue) {
+    let info = [
+      { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
+      { "description": "treat", "message": "Traitement en cours", "color": "warning" }
+    ]
+    
+    for (let index = 0; index < info.length; index++) {
+      if (aValue == info[index].description) {
+        let toast = await this.toastController.create({
+          header:"",
+          message: info[index].message,
+          color: info[index].color,
+          cssClass: 'toast-custom-class',
+          duration: 5000,
+          position: 'bottom',
+          buttons: [{
+            role: "cancel",
+            icon: 'close'
+          }]
+        });
+        toast.present();;
+      }
+    }
+  }
+  delete(id) {
+    this.userService.deleteObjet(id).subscribe(
+      (res) => {
+        console.log("SUCCES ===>", res)
+      }
+    )
+    this.message("confirm");
+    this.ngOnInit();
+    this.navCtrl.navigateBack(this.routerHref);
+    //manque l'affichage du succes
+  }  
 }
