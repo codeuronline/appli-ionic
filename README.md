@@ -88,4 +88,6 @@
 #### -> refonte de listlost et listfound
 #### si l'objet appartient à l'id_user une poubelle apparait devant l'objet et peut etre supprimé en faisant glissé l'objet vers sa gauche
 #### si l'objet appartient à l'id_user il peut modifié les éléments de descriptions de l'objet en faisant glissé l'objet vers sa droite
+#### -> à suivre: mise à jour de l'image en live
+#### -> revoir enrtyData <> avec objet json et tableau à travers une méthode group de formbuilder 
 
