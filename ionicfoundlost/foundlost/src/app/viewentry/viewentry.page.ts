@@ -164,11 +164,11 @@ export class ViewentryPage implements OnInit {
     this.myValue = !this.myValue;
     if (this.myValue == true) {
       this.etat = "Trouvé";
-    }
-    if (this.myValue == false) {
+    }else{
+    
       this.etat = "Perdu";
     }
-console.log(this.etat,this.myValue)
+  console.log(this.etat,this.myValue)
   }
 
   myChangePhoto($event) {
