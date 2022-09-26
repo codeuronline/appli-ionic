@@ -84,3 +84,8 @@
 ### -> refonte de viewentry en fonction de l'id_user 
 #### si l'objet appartient à l'id_user : affichage de l'objet en full modification
 #### si l'objet n'appartient pas l'id_user : vue de l'objet sans possibilité de modification
+### Mise à jour du 26/09/2022
+#### -> refonte de listlost et listfound
+#### si l'objet appartient à l'id_user une poubelle apparait devant l'objet et peut etre supprimé en faisant glissé l'objet vers sa gauche
+#### si l'objet appartient à l'id_user il peut modifié les éléments de descriptions de l'objet en faisant glissé l'objet vers sa droite
+
