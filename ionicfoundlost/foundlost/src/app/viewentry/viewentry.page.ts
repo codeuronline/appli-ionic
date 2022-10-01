@@ -53,7 +53,7 @@ export class ViewentryPage implements OnInit {
   myValue = new Boolean;
   myOptionPicture = new Boolean;
   ionicFormView: FormGroup;
-
+  buttonStatus= document.getElementById("modifier"); 
   constructor(
     private toastController: ToastController,
     public userService: UserService,
@@ -102,9 +102,10 @@ export class ViewentryPage implements OnInit {
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
+  
     this.entryData= this.getEntry();
     console.log("ngOnInit->", this.entryData);
-    this.myValue = (this.entryData.status == 1 ) ? true : false;
+    this.myValue = (this.entryData.status == 1 || this.entryData.status==true ) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.fileNew = false;
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
@@ -125,12 +126,14 @@ export class ViewentryPage implements OnInit {
     });
 
   }
+  
   getDate(e) {
     let date = new Date(e.target.value).toISOString().substring(0, 10);
     this.ionicFormView.get('date').setValue(date, { onlyself: true });
   }
 
   getEntry() {
+
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
@@ -160,13 +163,15 @@ export class ViewentryPage implements OnInit {
   get errorControl() {
     return this.ionicFormView.controls;
   }
-  myChange($event) {
-    this.myValue = !this.myValue;
+
+ myChange($event) {    
+  this.myValue = !this.myValue;
     if (this.myValue == true) {
+    
       this.etat = "Trouvé";
     }else{
+     this.etat = "Perdu";
     
-      this.etat = "Perdu";
     }
   console.log(this.etat,this.myValue)
   }
@@ -194,7 +199,13 @@ export class ViewentryPage implements OnInit {
     console.log("filename", this.filename);
     console.log("file:", this.file);
   }
-
+  upgradeButton() {
+    if (this.ionicFormView.valueChanges) {
+      return false
+    } else { return true }
+    
+  }
+  
   async onSubmit() {
     this.message("treat");
     // creer un object ecoute
