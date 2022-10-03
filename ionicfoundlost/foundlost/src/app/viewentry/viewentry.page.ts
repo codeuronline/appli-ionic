@@ -102,16 +102,15 @@ export class ViewentryPage implements OnInit {
     if (this.user == null || this.user == "") {
       this.navCtrl.navigateBack("authentificate")
     }
-  
     this.entryData= this.getEntry();
-    console.log("ngOnInit->", this.entryData);
+    //console.log("ngOnInit->", this.entryData);
     this.myValue = (this.entryData.status == 1 || this.entryData.status==true ) ? true : false;
     this.etat = (this.myValue == true) ? "Trouvé" : "Perdu";
     this.fileNew = false;
     this.routerHref = (this.entryData.status == 1) ? 'foundlist' : 'lostlist';
     this.myOptionPicture = (this.entryData.checkedpicture == 1) ? true : false;
-    console.log(this.etat,this.myValue);
-    console.log("formulaire rempli ->", this.ionicFormView);
+    // console.log(this.etat,this.myValue);
+    // console.log("formulaire rempli ->", this.ionicFormView);
     this.ionicFormView = this.formBuilder.group({
       description: [this.entryData.description],
       status: [this.entryData.status],
@@ -133,7 +132,6 @@ export class ViewentryPage implements OnInit {
   }
 
   getEntry() {
-
     this.readAPI(this.bdUrl + this.id).subscribe(data => {
       data = JSON.parse(JSON.stringify(data));
       for (let i = 0; i < Object.keys(data).length; i++) {
@@ -173,7 +171,7 @@ export class ViewentryPage implements OnInit {
      this.etat = "Perdu";
     
     }
-  console.log(this.etat,this.myValue)
+  //console.log(this.etat,this.myValue)
   }
 
   myChangePhoto($event) {
@@ -183,8 +181,10 @@ export class ViewentryPage implements OnInit {
   etatStatus() {
     if (this.entryData.status == true || this.entryData.status == "1") {
       this.etat = "Trouvé";
+      this.myValue = true;
     } else {
       this.etat = "Perdu";
+      this.myValue = false;
     }
   }
   readAPI(URL: string) {
@@ -196,15 +196,15 @@ export class ViewentryPage implements OnInit {
     this.filename = "object_" + this.id + "." + this.getFileExtension(oldfilenemame);
     this.file = $event.target.files[0];
     this.fileNew = true;
-    console.log("filename", this.filename);
-    console.log("file:", this.file);
+    //console.log("filename", this.filename);
+    //console.log("file:", this.file);
   }
-  upgradeButton() {
-    if (this.ionicFormView.valueChanges) {
-      return false
-    } else { return true }
+  // upgradeButton() {
+  //   if (this.ionicFormView.valueChanges) {
+  //     return false
+  //   } else { return true }
     
-  }
+  // }
   
   async onSubmit() {
     this.message("treat");
@@ -212,7 +212,7 @@ export class ViewentryPage implements OnInit {
     let formObj = this.ionicFormView.value;
     // test les changement selon l'ecoute
     formObj.id_object = this.entryData.id_object;
-    console.log("etat des toggle:",this.myValue, this.etat);
+    //console.log("etat des toggle:",this.myValue, this.etat);
     formObj.description = (this.ionicFormView.get('description').value != null) ? this.ionicFormView.get('description').value : this.entryData.description;
     formObj.status = (this.myValue == true) ? 1 : 0;
     formObj.date = (this.ionicFormView.get('date').value != null) ? this.ionicFormView.get('date').value : this.entryData.date;
@@ -221,7 +221,7 @@ export class ViewentryPage implements OnInit {
     formObj.lastname = (this.ionicFormView.get('lastname').value != null) ? this.ionicFormView.get('lastname').value : this.entryData.lastname;
     formObj.email = (this.ionicFormView.get('email').value != null) ? this.ionicFormView.get('email').value : this.entryData.email;
     formObj.user_id = this.user_id;
-    console.log('formulaire submit=>', formObj);
+    //console.log('formulaire submit=>', formObj);
 
     // cas si le toggle picture est activé  
     if (this.myOptionPicture == true) {
