@@ -140,7 +140,7 @@ export class ViewentryPage implements OnInit {
           this.entryData = data[i];
         }
       };
-      console.log(":", this.entryData);
+      console.log("entryData :", this.entryData);
       this.ionicFormView = this.formBuilder.group({
         description: [this.entryData.description],
         status: [this.entryData.status],
