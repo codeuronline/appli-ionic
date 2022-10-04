@@ -90,4 +90,5 @@
 #### si l'objet appartient à l'id_user il peut modifier les éléments de descriptions de l'objet en faisant glissé l'objet vers sa droite
 #### -> à suivre: mise à jour de l'image en live
 #### -> revoir enrtyData <> avec objet json et tableau à travers une méthode group de formbuilder 
-
+### Mise à jour du 04/10/2022
+#### -> mise à jour de la fonction delete avec un parametre de plus pour traitement back
