@@ -185,8 +185,8 @@ export class LostlistPage implements OnInit {
       }
     }
   }
-  delete(id) {
-    this.userService.deleteObjet(id).subscribe(
+  delete(id,user_id=this.user_id) {
+    this.userService.deleteObjet(id,user_id).subscribe(
       (res) => {
         console.log("SUCCES ===>", res)
       }
