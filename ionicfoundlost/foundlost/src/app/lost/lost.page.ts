@@ -19,9 +19,9 @@ export class LostPage implements OnInit {
 
   constructor(public navCtrl: NavController,public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) { }
   
-  today() {
-    return this.defaultDate;
-  }
+  // today() {
+  //   return this.defaultDate;
+  // }
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Création confirmé", "color": "success" },

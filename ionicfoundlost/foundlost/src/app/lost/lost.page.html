@@ -33,7 +33,7 @@
           <ion-icon name="calendar-number"></ion-icon>
         </ion-label>
         <ion-input displayFormat="YYYY-MM-DD" presentation="date" type="date" (ionChange)="getDate($event)"
-          formControlName="date" [value]="defaultDate" color="#002239"></ion-input>
+          formControlName="date" color="#002239"></ion-input>
       </ion-item>
       <!-- Error messages Date-->
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
