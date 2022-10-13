@@ -93,5 +93,5 @@
 ### Mise à jour du 04/10/2022
 #### -> mise à jour de la fonction delete avec un parametre de plus pour traitement back
 ### Mise à jour du 13/10/2022
-#### -> toggle switch perdu/trouvé affiche le bone état et sa modification est bien prise en compte dans le cas où le propriétaire de la déclaration modifie son état
+#### -> toggle switch perdu/trouvé affiche le bon état et sa modification est bien prise en compte dans le cas où le propriétaire de la déclaration modifie son état
 
