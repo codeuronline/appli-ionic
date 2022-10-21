@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastController,AlertController,NavController } from "@ionic/angular";
+import { ToastController,NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-found',
@@ -20,8 +20,6 @@ export class FoundPage implements OnInit {
 
   constructor(public navCtrl: NavController, public apiService: UserService, public formBuilder: FormBuilder,private toastController: ToastController) {}
   
-
-
   async message(aValue) {
     let info = [
       { "description": "confirm", "message": "Modification Confirmée", "color": "success" },
