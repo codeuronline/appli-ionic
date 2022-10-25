@@ -158,7 +158,7 @@ export class LostlistPage implements OnInit {
   }
   // fonction permettant d'envoyer  un toast selon le message voulu
   async message(aValue) {
-    // tableau des valeurs recensés donnant lieu à nun Toast
+    // tableau des valeurs recensées donnant lieu à un Toast
     let info = [
       { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
       { "description": "treat", "message": "Traitement en cours", "color": "warning" }
@@ -182,15 +182,19 @@ export class LostlistPage implements OnInit {
       }
     }
   }
-  delete(id,user_id=this.user_id) {
+  // fonction supprimant l'objet 
+  delete(id, user_id = this.user_id) {
+    // on solicite la méthode deleteObjetc dans userService
     this.userService.deleteObjet(id,user_id).subscribe(
       (res) => {
         console.log("SUCCES ===>", res)
       }
     )
+    // affiche le toast de confirmation
     this.message("confirm");
+    //on reiniatilise la page
     this.ngOnInit();
+    // et on se positionne a la page precedents
     this.navCtrl.navigateBack(this.routerHref);
-    //manque l'affichage du succes
   }  
 }
