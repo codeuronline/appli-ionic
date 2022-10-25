@@ -94,15 +94,17 @@ export class LostlistPage implements OnInit {
     // this.entryData.values
 
     if (this.showCalendar == true) {
-      // comment recuperer la valeur??
-      // alert(ev.target.value);
+      // date est une nouvelle date de l'element renvoye par le formulaire  qu'on sous une chaine de caractere en ISO et qu'on prélève la sous chaine commenant a l'indice 0 et se terminany a 10
       let date = new Date(ev.target.value).toISOString().substring(0, 10);
+      //filtre le tableau entryData en selectionnant la date et la correspondance des elements saisis
       this.entryDataSearch=this.entryData.filter((data)=>data.date.match(ev.target.value))
     }
     if (this.showDescription == true) {
+      //filtre le tableau entryData en selectionnant la description et la correspondance des elements saisis
       this.entryDataSearch=this.entryData.filter((data)=>data.description.toLowerCase().match(ev.target.value.toLowerCase()))
     }
     if (this.showLocation == true) {
+      //filtre le tableau entryData en selectionnant la localisation et la correspondance des elements saisis
       this.entryDataSearch=this.entryData.filter((data)=>data.location.toLowerCase().match(ev.target.value.toLowerCase()));
     }
     console.log(this.entryDataSearch);    
@@ -131,8 +133,11 @@ export class LostlistPage implements OnInit {
     this.readAPI(this.bdUrl).subscribe(data => {
       console.log(data);
       data = JSON.parse(JSON.stringify(data))
+      //on parcourt l'ensemble de ces clées de l'objet tableau data
       for (let i = 0; i < Object.keys(data).length; i++) {
+        //pour chaque élement on enrichit d'un champ supplémentaire filename s'il n'est pas défini avec une adresse d'image vide
         data[i].filename = (data[i].filename == undefined) ? "object_vide.png" : data[i].filename;
+        // on affecte chaque elements de la liste de entrydata
         this.entryData[i] = {
           "id_object": data[i].id_object,
           "status": data[i].status,
@@ -147,12 +152,13 @@ export class LostlistPage implements OnInit {
           "filenameWithUrl": this.imgUrl + data[i].filename,
           "user_id": data[i].user_id,
         }
+        // on copie entryData dans l'entryDataSearch afin de manipuler les données que dans EnrtyDataSearch et avoir une sauveagrde intact des EntryData de data
           this.entryDataSearch=this.entryData;
       }
-      //    console.log(this.entryData);
-      // fin boucle for
+      
     }); // fin subscribe 
   }
+  // fonction qui lit l'adresse URL  dans le http
   readAPI(URL: string) {
     return this.http.get(URL);
   }

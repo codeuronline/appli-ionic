@@ -6,6 +6,9 @@
       </ion-back-button>
     </ion-buttons>&nbsp;OBJET :{{entryData.id_object}}
     <ion-button slot="end" class="color" (click)="destroyUser()" color="#002239">
+      <!-- on part du nom energister dans user 
+        puis on prend la sous chaine commençant à la position 0 jusqu'à la position de @ puisque user est une email
+       -->
       <ion-icon name="person"></ion-icon> &nbsp;{{user.substr(0, user.indexOf('@'))}}
     </ion-button>
   </ion-toolbar>
@@ -23,8 +26,6 @@
           <!-- <input type="file" (change)="onFileChange($event)" id="file" accept="image/png, image/jpeg"
             placeholder="photo" /> -->
         </ion-item>
-
-
         <ion-item lines="full">
           <ion-label>
             <ion-icon name="information"></ion-icon>
