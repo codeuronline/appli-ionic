@@ -27,7 +27,7 @@ export class LostlistPage implements OnInit {
   constructor(public http: HttpClient, private navCtrl: NavController,private toastController:ToastController,private userService:UserService) {
     this.ngOnInit;
   }
-
+//fonction affichant le status de la selection de la barre de recheerche
   showStatusSearch() {
     var aStatus = "information";
     if (this.showCalendar == false && this.showLocation == false) {
@@ -43,7 +43,7 @@ export class LostlistPage implements OnInit {
     return aStatus; 
     }
   
-  
+  // fonction affichant l'etat de visibilité de la barre de recherche
   toggleSearch(): void {
     // console.log('ici');
     this.searchStatus = !this.searchStatus;
@@ -51,6 +51,7 @@ export class LostlistPage implements OnInit {
     (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
 
   }
+  // fonction  affichant l'etat de recherche pour location
   toggleLocation(): void {
     this.showLocation = !this.showLocation;
     if (this.showLocation== true){
@@ -59,7 +60,7 @@ export class LostlistPage implements OnInit {
     console.log("location", this.showLocation);    
 
   }
-
+// fonction  affichant l'etat de recherche pour calendar
   toggleCalendar(): void {
     this.showCalendar = !this.showCalendar;
     if (this.showCalendar == true) {
@@ -69,6 +70,7 @@ export class LostlistPage implements OnInit {
     console.log("Calendar", this.showCalendar);    
 
   }
+  // fonction  affichant l'etat de recherche pour description
   toggleDescription(): void{
     this.showDescription = !this.showDescription;
     if (this.showLocation == true) {
@@ -78,7 +80,7 @@ export class LostlistPage implements OnInit {
     console.log("description", this.showDescription);    
 
   }
-   
+   // fonction affichant l'invite du "placeholder"
   selectPlaceholder(){
     let placeHolder = "";
     (this.showDescription == true) ? placeHolder = "Filtrer par description" : null;
@@ -87,6 +89,7 @@ export class LostlistPage implements OnInit {
     return placeHolder;
   }
 
+  // fonction filtrant selon le choix de recherche les élements
   filter(ev): void{
     // this.entryData.values
 
@@ -105,15 +108,6 @@ export class LostlistPage implements OnInit {
     console.log(this.entryDataSearch);    
     }
 
-  
-  // change($event1) {
-  //   console.log(this.searchStatus);
-  //   this.searchStatus = !this.searchStatus;
-  //   console.log(this.searchStatus);
-  //   const element = document.getElementById("searchOptions");
-  //   (this.searchStatus == true) ? element.style.display = "visible" : element.style.display = "hidden";
-
-  // }
   ngOnInit() {
     console.log("searchStatus", this.searchStatus);
     this.user = sessionStorage.getItem("user");
@@ -125,13 +119,14 @@ export class LostlistPage implements OnInit {
     this.searchStatus = false;
   }
   
+  // fonction permettant de détruire l'utilisateur enregistré et ces variables associé
   destroyUser() {
     this.user = "";
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('user_id');
     this.navCtrl.navigateBack("authentificate");
   }
-
+// fonction permettant de recuperer les données dans les tables entryData et entryDataSearch
   getEntry() {
     this.readAPI(this.bdUrl).subscribe(data => {
       console.log(data);
@@ -161,7 +156,9 @@ export class LostlistPage implements OnInit {
   readAPI(URL: string) {
     return this.http.get(URL);
   }
+  // fonction permettant d'envoyer  un toast selon le message voulu
   async message(aValue) {
+    // tableau des valeurs recensés donnant lieu à nun Toast
     let info = [
       { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
       { "description": "treat", "message": "Traitement en cours", "color": "warning" }
