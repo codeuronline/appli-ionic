@@ -45,7 +45,7 @@ export class AuthentificatePage implements OnInit {
 
 
   ngOnInit() {
-    //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires  de verification
+    //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires de vérification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -53,7 +53,7 @@ export class AuthentificatePage implements OnInit {
 
       })
     } else {
-      //marche pas
+      // recover coché
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
@@ -69,7 +69,6 @@ export class AuthentificatePage implements OnInit {
   submitForm() {
     this.isSubmitted = true;
     //tester si showrecover est coché
-    //
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
