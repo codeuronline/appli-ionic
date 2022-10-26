@@ -13,7 +13,7 @@ export class LostlistPage implements OnInit {
   // URL du serveur backend
   bdUrl = "http://localhost/ionicserver/retrieve-data.php?key=lost";
   imgUrl = "http://localhost/ionicserver/upload/";
-  input = document.getElementById("search");
+  //input = document.getElementById("search");
   searchStatus = true;
   routerHref = "home";
   showDescription = true;
