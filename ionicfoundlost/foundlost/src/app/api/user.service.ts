@@ -25,9 +25,10 @@ export class UserService {
   }
   deleteObjet(number,user_id) {
     console.log(number)
+    // rajout d'un prarametre user_id pour verifier qu'il est propriétaire de la déclaration avant suppression
     return this.http.delete('http://localhost/ionicserver/manage-data.php?key=delete&user_id='+user_id+'&id_task='+number,{responseType: 'text' });
   }
-  
+    // 
   updateForm(data,number) {
     return this.http.put('http://localhost/ionicserver/manage-data.php?key=update&id_task=' + number, data, { responseType: 'text' });
   }

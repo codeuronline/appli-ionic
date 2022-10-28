@@ -42,8 +42,6 @@ export class AuthentificatePage implements OnInit {
     this.showRecover = !this.showRecover;
     this.ngOnInit();
   }
-
-
   ngOnInit() {
     //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires de vérification
     if (this.showRecover == false) {
@@ -62,9 +60,13 @@ export class AuthentificatePage implements OnInit {
       })
     }
   }
-  // recupere les erreurs du formulaire
+  // récupere les erreurs du formulaire
   get errorControl() {
     return this.ionicForm.controls;
+  }
+  // renvoie si 2 valeurs sont egales
+  controlPassword(valeur1, valeur2) {
+    return (valeur1 == valeur2) ? true : false;
   }
   submitForm() {
     this.isSubmitted = true;
@@ -76,28 +78,32 @@ export class AuthentificatePage implements OnInit {
     } else {
       console.log(this.ionicForm.value)
       if (this.showRecover == true) {
-        console.log("test", this.ionicForm.value)
-        this.email_user = this.ionicForm.get('email_user').value;
-        console.log(this.email_user)
-        this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
-          console.log(typeof (JSON.parse(res)));
-          console.log("SUCCES Recover ===", res);
-          console.log("email_user => ", this.email_user);
-          let value = JSON.parse(res);
-          //console.log(value.match(/^([0-9]){1,5}$/))
-          if (value.match(/^([0-9]){1,5}$/)) {
-            this.user_id = value;
-            console.log("email_user =>", this.email_user);
-            console.log("ValidateRegister");
-            this.message("validateRegister");
-            sessionStorage.setItem("user", this.email_user);
-            sessionStorage.setItem("user_id", this.user_id);
-            this.navCtrl.navigateForward("home");
-          } else {
-            console.log("error_mail");
-            this.message("error_mail");
-          }
-        })
+        if (this.controlPassword(this.ionicForm.get('password').value, this.ionicForm.get('passwordVerify').value)) {
+          console.log("test", this.ionicForm.value)
+          this.email_user = this.ionicForm.get('email_user').value;
+          console.log(this.email_user)
+          this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
+            console.log(typeof (JSON.parse(res)));
+            console.log("SUCCES Recover ===", res);
+            console.log("email_user => ", this.email_user);
+            let value = JSON.parse(res);
+            //console.log(value.match(/^([0-9]){1,5}$/))
+            // je vérifie si la valeur renvoyé est bien un entier correspondant à l'id_user un entier entre 1 et 11 digit
+            if (value.match(/^([0-9]){1,11}$/)) {
+              this.user_id = value;
+              console.log("email_user =>", this.email_user);
+              console.log("ValidateRegister");
+              this.message("validateRegister");
+              sessionStorage.setItem("user", this.email_user);
+              sessionStorage.setItem("user_id", this.user_id);
+              this.navCtrl.navigateForward("home");
+            } else {
+              // cas ou la reponse renvoyé est autre chose qu'un chiffre 
+              console.log("error_mail");
+              this.message("error_mail");
+            }
+          })
+        } else { this.message("recover_error_mdp") }
       } else {
         console.log("test ", this.ionicForm.value)
         this.email_user = this.ionicForm.get('email_user').value;
@@ -111,7 +117,7 @@ export class AuthentificatePage implements OnInit {
             console.log("error_mail");
             this.message("error_mail");
           } else {
-            if (JSON.parse(res).match(/^([0-9]){1,5}$/)) {
+            if (JSON.parse(res).match(/^([0-9]){1,11}$/)) {
               this.user_id = value;
               console.log("ValidateRegister");
               // console.log(this.ionicForm.get('email_user'));
@@ -135,9 +141,9 @@ export class AuthentificatePage implements OnInit {
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
       { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
       { "description": "no_conform", "message": "Identification non conforme", "color": "warning" },
-      //{ "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
-      { "description": "recover_error_mdp", "Message": "Erreur: Mot de passe non similaire", "color": "warning" },
-      { "description": "recover_error_email", "Message": "Erreur: Email non défini", "color": "warning" },
+      { "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
+      { "description": "recover_error_mdp", "message": "Erreur: Mot de passe non similaire", "color": "warning" },
+      { "description": "recover_error_email", "message": "Erreur: Email non défini", "color": "warning" },
     ]
 
     for (let index = 0; index < info.length; index++) {
@@ -157,9 +163,9 @@ export class AuthentificatePage implements OnInit {
       }
     }
   }
-  controlPassword(ev) {
-    if (this.password === ev.target.value) return true;
-  }
+  // controlPassword(ev) {
+  //   if (this.password === ev.target.value) return true;
+  // }
 
   control() {
     this.isSubmitted = true;

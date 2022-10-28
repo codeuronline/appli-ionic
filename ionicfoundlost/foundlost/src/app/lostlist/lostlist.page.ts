@@ -24,10 +24,10 @@ export class LostlistPage implements OnInit {
   user = sessionStorage.getItem("user");
   user_id = sessionStorage.getItem("user_id");
 
-  constructor(public http: HttpClient, private navCtrl: NavController,private toastController:ToastController,private userService:UserService) {
+constructor(public http: HttpClient, private navCtrl: NavController,private toastController:ToastController,private userService:UserService) {
     this.ngOnInit;
   }
-//fonction affichant le status de la selection de la barre de recheerche
+// fonction affichant le status de la selection de la barre de recheerche
   showStatusSearch() {
     var aStatus = "information";
     if (this.showCalendar == false && this.showLocation == false) {
@@ -94,17 +94,17 @@ export class LostlistPage implements OnInit {
     // this.entryData.values
 
     if (this.showCalendar == true) {
-      // date est une nouvelle date de l'element renvoye par le formulaire  qu'on sous une chaine de caractere en ISO et qu'on prélève la sous chaine commenant a l'indice 0 et se terminany a 10
+      // date est une nouvelle date de l'element est renvoyee par le formulaire au format ISO et on prélève la sous chaine commencant à l'indice 0 et se terminant a l'indice 10
       let date = new Date(ev.target.value).toISOString().substring(0, 10);
-      //filtre le tableau entryData en selectionnant la date et la correspondance des elements saisis
+      // filtre les entryData en selectionnant la date correspondant à l'element saisi
       this.entryDataSearch=this.entryData.filter((data)=>data.date.match(ev.target.value))
     }
     if (this.showDescription == true) {
-      //filtre le tableau entryData en selectionnant la description et la correspondance des elements saisis
+      //filtre le tableau entryData en selectionnant la description correspondant à l'element saisi
       this.entryDataSearch=this.entryData.filter((data)=>data.description.toLowerCase().match(ev.target.value.toLowerCase()))
     }
     if (this.showLocation == true) {
-      //filtre le tableau entryData en selectionnant la localisation et la correspondance des elements saisis
+      //filtre le tableau entryData en selectionnant la localisation correspondant à l'element saisi
       this.entryDataSearch=this.entryData.filter((data)=>data.location.toLowerCase().match(ev.target.value.toLowerCase()));
     }
     console.log(this.entryDataSearch);    
@@ -121,7 +121,7 @@ export class LostlistPage implements OnInit {
     this.searchStatus = false;
   }
   
-  // fonction permettant de détruire l'utilisateur enregistré et ces variables associé
+  // fonction permettant de détruire les variables de session de l'utilisateur enregistré 
   destroyUser() {
     this.user = "";
     sessionStorage.removeItem('user');
@@ -152,7 +152,8 @@ export class LostlistPage implements OnInit {
           "filenameWithUrl": this.imgUrl + data[i].filename,
           "user_id": data[i].user_id,
         }
-        // on copie entryData dans l'entryDataSearch afin de manipuler les données que dans EnrtyDataSearch et avoir une sauveagrde intact des EntryData de data
+        // on duplique entryData dans l'entryDataSearch afin de manipuler les données que dans EnrtyDataSearch
+        // et avoir une sauveagrde intact des EntryData de data
           this.entryDataSearch=this.entryData;
       }
       
@@ -166,7 +167,7 @@ export class LostlistPage implements OnInit {
   async message(aValue) {
     // tableau des valeurs recensées donnant lieu à un Toast
     let info = [
-      { "description": "confirm", "message": "suppression Confirmée", "color": "success" },
+      { "description": "confirm", "message": "Suppression Confirmée", "color": "success" },
       { "description": "treat", "message": "Traitement en cours", "color": "warning" }
     ]
     
