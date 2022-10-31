@@ -1,5 +1,6 @@
+$imagefond: url('../assets/bg-2.jpg');
 *{
-    background-image: url(../assets/bg.jpg);
+    background-image: $imagefond;
 }
 .toast-custom-class {
     --color:#ffffff;

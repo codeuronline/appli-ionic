@@ -24,7 +24,7 @@ export class AuthentificatePage implements OnInit {
   isSubmitted = false;
   showPassword = false;
   showRecover = false;
-  passwordToggleIcon = 'eye';
+  passwordToggleIcon = 'eye-off-outline';
 
   constructor(
     public apiService: UserService,
@@ -35,7 +35,7 @@ export class AuthentificatePage implements OnInit {
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
-    this.passwordToggleIcon = (this.showPassword) ? "eye-off-outline" : 'eye';
+    this.passwordToggleIcon = (this.showPassword) ? 'eye' : "eye-off-outline";
   }
 
   toggleRecover(): void {
@@ -46,16 +46,16 @@ export class AuthentificatePage implements OnInit {
     //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires de vérification
     if (this.showRecover == false) {
       this.ionicForm = this.formBuilder.group({
-        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$')]],
+        password: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
 
       })
     } else {
       // recover coché
       this.ionicForm = this.formBuilder.group({
-        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-        password: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
-        passwordVerify: ['', [Validators.required, Validators.pattern(/[A-Z]+.*[0-9]+.*[^\w]+|[A-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[A-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[A-Z]+|[^\w]+.*[A-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[A-Z]+/), Validators.minLength(8)]],
+        email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$')]],
+        password: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
+        passwordVerify: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
         captcha: ['', [Validators.required]],
       })
     }
@@ -87,20 +87,21 @@ export class AuthentificatePage implements OnInit {
             console.log("SUCCES Recover ===", res);
             console.log("email_user => ", this.email_user);
             let value = JSON.parse(res);
-            //console.log(value.match(/^([0-9]){1,5}$/))
+
+            console.log(value.match(/^([0-9]){1,5}$/))
             // je vérifie si la valeur renvoyé est bien un entier correspondant à l'id_user un entier entre 1 et 11 digit
-            if (value.match(/^([0-9]){1,11}$/)) {
+            if (value.match(/^([0-9]){1,5}$/)) {
               this.user_id = value;
               console.log("email_user =>", this.email_user);
-              console.log("ValidateRegister");
-              this.message("validateRegister");
+              console.log("valid_control_recover");
+              this.message("valid_control_recover");
               sessionStorage.setItem("user", this.email_user);
               sessionStorage.setItem("user_id", this.user_id);
               this.navCtrl.navigateForward("home");
             } else {
               // cas ou la reponse renvoyé est autre chose qu'un chiffre 
               console.log("error_mail");
-              this.message("error_mail");
+              this.message("recover_error_captcha");
             }
           })
         } else { this.message("recover_error_mdp") }
@@ -117,7 +118,8 @@ export class AuthentificatePage implements OnInit {
             console.log("error_mail");
             this.message("error_mail");
           } else {
-            if (JSON.parse(res).match(/^([0-9]){1,11}$/)) {
+            console.log(JSON.parse(res))
+            if (JSON.parse(res).match(/^([0-9]){1,5}$/)) {
               this.user_id = value;
               console.log("ValidateRegister");
               // console.log(this.ionicForm.get('email_user'));
@@ -137,11 +139,12 @@ export class AuthentificatePage implements OnInit {
   async message(aValue) {
     let info = [
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
+      { "description": "valid_control_recover", "message": "Réinscription effectuée avec succès", "color": "warning" },
       { "description": "valid_control", "message": "Identification réussie", "color": "success" },
       { "description": "error_mail", "message": "Adresse mail déjà existante", "color": "warning" },
       { "description": "failure", "message": "Erreur de mot de pass/login", "color": "warning" },
       { "description": "no_conform", "message": "Identification non conforme", "color": "warning" },
-      { "description": "recover_error_captcha", "Message": "Erreur: Erreur de Captcha ", "color": "warning" },
+      { "description": "recover_error_captcha", "message": "Erreur: Erreur de Captcha ", "color": "warning" },
       { "description": "recover_error_mdp", "message": "Erreur: Mot de passe non similaire", "color": "warning" },
       { "description": "recover_error_email", "message": "Erreur: Email non défini", "color": "warning" },
     ]

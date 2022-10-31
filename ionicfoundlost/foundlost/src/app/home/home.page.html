@@ -6,9 +6,6 @@
       </div>
     </ion-title>
     <ion-button (click)="destroyUser()" slot="end" color="#002239" class="color">
-        <!-- <img id="card" src="../../assets/se-deconnecter-on.png"
-          onmouseover="this.src='../../assets/se-deconnecter-off.png'"
-          onmouseout="this.src='../../assets/se-deconnecter-on.png'"> -->
         <ion-icon name="person"></ion-icon>&nbsp;
         {{user.substr(0, user.indexOf('@'))}}
     </ion-button>
@@ -34,7 +31,5 @@
         <ion-icon class="icon-color-happy" name="happy"></ion-icon> Trouvés
       </ion-button>
     </div>
-
-
   </div>
 </ion-content>

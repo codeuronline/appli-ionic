@@ -1,37 +1,34 @@
+$image:url('../../assets/logo-fl.png');
+$imagefond:url('../../assets/bg-2.jpg');
 .bg-img {
   padding: 1px;
   height: 100%;
   width: 100%;
-  background-image: url('../../assets/bg-2.jpg');
+  background-image: $imagefond;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .logo {
   background-color: transparent;
     padding: 0px;
     height: 250px;
     width: 100%;
     align-items: center;
-    background: no-repeat center/40% url('../../assets/logo-fl.png');
+    background: no-repeat center/40% $image;
     background-size: cover;
   }
-
 .add-button{
   background: transparent;
 }
-
-.color {
+.color{
     padding:0px;
     color: white;
     background-color: #5d61b9;
     text-transform: lowercase;
     border: 3px none #5d61b9;
-  
     font-size: small;
   }
   .color:hover{
-  color: white;
   background-color: #5d61b9;
   border: 3px solid white;
   }
@@ -40,7 +37,6 @@
   text-shadow: 2px 2px black;
   font-size:xx-large;
 }
-
 .containerDouble{
   background-color: transparent;
   display: flex;
@@ -62,9 +58,6 @@
   .icon-color-sad,.icon-color-happy{
     color:white;
   }
-    
-  // font-size: large;
- // border-radius: 15px;
 }
 
 

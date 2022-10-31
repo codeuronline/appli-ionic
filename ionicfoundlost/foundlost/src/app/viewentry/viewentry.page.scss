@@ -30,14 +30,14 @@ ion-toggle {
      //border-radius: 15px;
      color: white;
      font-size: x-small;
- 
+     .button-valid:hover{
+      background-color: white;
+      color: #022135;
+      font-size:x-small;
+  
+  }
  }
- .button-valid:hover{
-     background-color: white;
-     color: #022135;
-     font-size:x-small;
  
- }
  .color {
   padding:0px;
   color: white;
@@ -46,18 +46,27 @@ ion-toggle {
   border: 3px none #5d61b9;
  //border-radius: 15px;
   font-size: small;
+  .color:hover{
+    color: white;
+    background-color: #5d61b9;
+    border: 3px solid white;
+    }
 }
-.color:hover{
-color: white;
-background-color: #5d61b9;
-border: 3px solid white;
-}
+
 
 .text-icon{
   font-size:small;
 }
 .text-icon-user{
   font-size: x-small;
+}
+
+.image{
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  height: 150px;
+  width: 150px;
 }
 // .text{
 //   height: 4em;

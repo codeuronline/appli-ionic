@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
 const routes: Routes = [
- 
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
@@ -19,7 +17,6 @@ const routes: Routes = [
   {
     path: 'found',
     loadChildren: () => import('./found/found.module').then(m => m.FoundPageModule)
-
   },
   {
     path: 'lost',
@@ -41,10 +38,7 @@ const routes: Routes = [
      path: 'foundlist/viewentry/:id',
      loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
    },
- 
-
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
