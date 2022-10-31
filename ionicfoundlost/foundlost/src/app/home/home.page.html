@@ -4,10 +4,10 @@
       <div class="ion-text-center">
         Accueil
       </div>
-    </ion-title>
+    </ion-title><!--bouton de controle : se delogger -->
     <ion-button (click)="destroyUser()" slot="end" color="#002239" class="color">
         <ion-icon name="person"></ion-icon>&nbsp;
-        {{user.substr(0, user.indexOf('@'))}}
+        {{user.substr(0, user.indexOf('@'))}}<!--on selectionne que la chaine  se trouvant avant le @-->
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -15,18 +15,18 @@
   <div class="bg-img">
     <div class="logo">&nbsp;</div>
     <div class="ion-text-center ion-text-shadow">Faire une Déclaration</div>
-    <ion-card expand="block" class="add-button">
+    <ion-card expand="block" class="add-button"><!--redirige vers lost-->
       <ion-button expand="block" (click)="goTo('lost')" class="color-button" color="#002239"> J'ai perdu un objet</ion-button>
     </ion-card>
-    <ion-card expand="block" class="add-button">
+    <ion-card expand="block" class="add-button"><!--redirige vers found-->
       <ion-button expand="block" (click)="goTo('found')" class="color-button" color="#002239"> J'ai trouvé un objet
       </ion-button>
     </ion-card>
     <div class="ion-text-center ion-text-shadow"> Listes d'objets</div>
-    <div class="containerDouble">
+    <div class="containerDouble"><!--redirige vers lostfound-->
       <ion-button expand="block" class="color-button" routerLink="/lostlist" routerDirection="forward" color="#002239">
         <ion-icon class="icon-color-sad" name="sad"></ion-icon> Perdus
-      </ion-button>
+      </ion-button><!--redirige vers foundlost-->
       <ion-button expand="block" class="color-button" routerLink="/foundlist" routerDirection="forward" color="#002239">
         <ion-icon class="icon-color-happy" name="happy"></ion-icon> Trouvés
       </ion-button>

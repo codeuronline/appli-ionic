@@ -22,13 +22,13 @@ export class HomePage {
   }
   // détruit les variables de session 
   destroyUser() {
-    this.user = "";
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('user_id');
-    this.navCtrl.navigateBack("authentificate");
+    this.user = "";// efface la variable user
+    sessionStorage.removeItem('user'); //supprime la variable user de sessionstorage
+    sessionStorage.removeItem('user_id');//supprime la variable user_id de sessionstorage
+    this.navCtrl.navigateBack("authentificate");// redirection vers l'arrière
   }
   // redirige vers l'élement indiqué
   goTo(element) {
-    this.navCtrl.navigateForward(element);
+    this.navCtrl.navigateForward(element);//redirection vers l'avant
   }
 }

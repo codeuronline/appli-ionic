@@ -43,20 +43,22 @@ export class AuthentificatePage implements OnInit {
     this.ngOnInit();
   }
   ngOnInit() {
-    //en fonction de la checkbox activée ou non, on oriente sur l'un des formulaires de vérification
+    //en fonction de la checkbox pour recover est activée  on oriente sur l'un des formulaires de vérification
     if (this.showRecover == false) {
+      // la checkbox n'est pas activée
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$')]],
+        // controles:-> champ nécessaire & regex d'email
         password: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
-
+        //controles :-> champ nécessaire & regex de mot de passe & longueur minimum & maxmimum du champ
       })
     } else {
-      // recover coché
+      // la checkbox pour recover est activée
       this.ionicForm = this.formBuilder.group({
         email_user: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$')]],
         password: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
         passwordVerify: ['', [Validators.required, Validators.pattern(/[a-zA-Z]+.*[a-z0-9]+.*[^\w]+|[a-zA-Z]+.*[^\w]+.*[0-9]+|[0-9]+.*[a-zA-Z]+.*[^\w]+|[0-9]+.*[^\w]+.*[a-zA-Z]+|[^\w]+.*[a-zA-Z]+.*[0-9]+|[^\w]+.*[0-9]+.*[a-zA-Z]+/), Validators.minLength(8),Validators.maxLength(20)]],
-        captcha: ['', [Validators.required]],
+        captcha: ['', [Validators.required,Validators.pattern('[0-9]{1,5}$')]],// champ ->nécessaire & regex d'un entier entre 0 et 99999
       })
     }
   }
@@ -70,26 +72,25 @@ export class AuthentificatePage implements OnInit {
   }
   submitForm() {
     this.isSubmitted = true;
-    //tester si showrecover est coché
+    //tester si ionicForm n'est pas valide
     if (!this.ionicForm.valid) {
       console.log('Remplissez les champs requis')
       this.message('no_conform');
       return false;
     } else {
       console.log(this.ionicForm.value)
-      if (this.showRecover == true) {
-        if (this.controlPassword(this.ionicForm.get('password').value, this.ionicForm.get('passwordVerify').value)) {
+      if (this.showRecover == true) {//test si recover a été coché
+        if (this.controlPassword(this.ionicForm.get('password').value, this.ionicForm.get('passwordVerify').value)) {// test si les 2 mots de pass
           console.log("test", this.ionicForm.value)
           this.email_user = this.ionicForm.get('email_user').value;
           console.log(this.email_user)
-          this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {
+          this.apiService.recoverUser(this.ionicForm.value).subscribe((res) => {// on appelle la méthodr recoverUser de l'api
             console.log(typeof (JSON.parse(res)));
             console.log("SUCCES Recover ===", res);
             console.log("email_user => ", this.email_user);
             let value = JSON.parse(res);
-
             console.log(value.match(/^([0-9]){1,5}$/))
-            // je vérifie si la valeur renvoyé est bien un entier correspondant à l'id_user un entier entre 1 et 11 digit
+            // je vérifie si la valeur renvoyée est bien un entier correspondant à l'id_user un entier entre 1 et 5 digit
             if (value.match(/^([0-9]){1,5}$/)) {
               this.user_id = value;
               console.log("email_user =>", this.email_user);
@@ -99,8 +100,8 @@ export class AuthentificatePage implements OnInit {
               sessionStorage.setItem("user_id", this.user_id);
               this.navCtrl.navigateForward("home");
             } else {
-              // cas ou la reponse renvoyé est autre chose qu'un chiffre 
-              console.log("error_mail");
+              // cas ou la reponse renvoyée est autre chose qu'un chiffre 
+              console.log("recover_error_captcha");
               this.message("recover_error_captcha");
             }
           })
@@ -131,13 +132,13 @@ export class AuthentificatePage implements OnInit {
           }
         })
       }
-
       this.isSubmitted = false;
     }
     this.ionicForm.reset();
   }
-  async message(aValue) {
-    let info = [
+  
+  async message(aValue) { // methode du toast
+    let info = [// liste des messages d'erreur de la page sollicitant un Toast
       { "description": "validateRegister", "message": "Inscription effectuée avec succès", "color": "success" },
       { "description": "valid_control_recover", "message": "Réinscription effectuée avec succès", "color": "warning" },
       { "description": "valid_control", "message": "Identification réussie", "color": "success" },

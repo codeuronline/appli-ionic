@@ -22,19 +22,19 @@ const routes: Routes = [
     path: 'lost',
     loadChildren: () => import('./lost/lost.module').then(m => m.LostPageModule)
   },
-{
+{// route pour foundlist
     path: 'foundlist',
     loadChildren: () => import('./foundlist/foundlist.module').then(m => m.FoundlistPageModule)
   },
- {
+ {// route pour lostlist
     path: 'lostlist',
     loadChildren: () => import('./lostlist/lostlist.module').then(m => m.LostlistPageModule)
   },
-  {
+  {// route pour viewentry avec parametre id qui correspond à l'id de l'objet à partir de lostfound
     path: 'lostlist/viewentry/:id',
     loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
   },
-  {
+  {// route pour viewentry avec parametre id qui correspond à l'id de l'objet à partir de foundlist
      path: 'foundlist/viewentry/:id',
      loadChildren: () => import('./viewentry/viewentry.module').then(m => m.ViewentryPageModule),
    },

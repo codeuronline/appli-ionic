@@ -6,18 +6,18 @@
 <ion-content [fullscreen]="true">
   <div class="bg-img">
      <div class="logo">&nbsp;</div>
-    <ion-card>
+    <ion-card><!--formgroup conditionné par le formulaire ionicForm-->
       <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
         <ion-item lines="full">
           <ion-label>
             <ion-icon name="mail">
             </ion-icon>
-          </ion-label>
+          </ion-label><!--for-->
           <ion-input type="email" formControlName="email_user" placeholder="Taper votre e-mail"></ion-input>
-        </ion-item>
+        </ion-item><!--balise span est conditionnée par l'etat les variables isSubmitted & errorControl.email_user.errors?.required-->
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.required">
           E-mail requis.
-        </span>
+        </span><!-- la balise est condtionnée par l'état des variables isSubmitted et errorControl.email_user.errors?.pattern-->
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email_user.errors?.pattern">
           Format non valide.
         </span>
@@ -27,12 +27,12 @@
           </ion-label>
           <ion-input formControlName="password" [type]="showPassword ? 'text': 'password'"
             placeholder="Taper votre mot de passe">
-          </ion-input>
+          </ion-input><!--la directive name est conditionnée par passordToggleIcon-->
           <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
-        </ion-item>
+        </ion-item><!-- la balise est conditionnée par l'état des variables isSubmitted et errorControl.password.errors.required-->
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
           Mot de passe requis.
-        </span>
+        </span><!-- la balise est conditionnée par l'état des variables isSubmitted et errorControl.password.errors.pattern-->
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.pattern">
           le mot de passe doit comporter au minimum 8 caractères dont
           - 1 majuscule au minimum<br>
@@ -79,7 +79,10 @@
           <ion-input formControlName="captcha" type="number" placeholder="Recopier le Captcha">
             <img class="icone" src="../../assets/captcha.png" alt="">
           </ion-input>
-          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.passwordVerify.errors?.required">
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.captcha.errors?.pattern">
+            Captacha non valide.
+          </span>
+          <span class="error ion-padding" *ngIf="isSubmitted && errorControl.captcha.errors?.required">
             Captacha non retapé
           </span>
           <ion-input formControlName="passwordVerify" [type]="showPassword ? 'text' : 'password'"
